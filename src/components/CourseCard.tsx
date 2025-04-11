@@ -1,7 +1,10 @@
 
-import React from 'react';
-import { Star, Clock, Users } from 'lucide-react';
+import React, { useState } from 'react';
+import { Star, User, Bookmark } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { motion } from 'framer-motion';
 
 interface CourseCardProps {
   image: string;
@@ -9,8 +12,11 @@ interface CourseCardProps {
   category: string;
   rating: number;
   students: number;
-  duration: string;
-  price: string;
+  instructorName: string;
+  instructorAvatar?: string;
+  price?: string;
+  isFeatured?: boolean;
+  reviewCount?: number;
 }
 
 const CourseCard: React.FC<CourseCardProps> = ({
@@ -19,43 +25,110 @@ const CourseCard: React.FC<CourseCardProps> = ({
   category,
   rating,
   students,
-  duration,
-  price
+  instructorName,
+  instructorAvatar,
+  price,
+  isFeatured = false,
+  reviewCount
 }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(false);
+
+  // Generate rating stars
+  const renderStars = () => {
+    return Array(5).fill(0).map((_, i) => (
+      <Star 
+        key={i} 
+        className={`h-4 w-4 ${i < rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}`} 
+      />
+    ));
+  };
+
   return (
-    <div className="bg-white rounded-lg overflow-hidden shadow-course card-hover">
-      <div className="h-48 overflow-hidden">
-        <img src={image} alt={title} className="w-full h-full object-cover" />
-      </div>
-      <div className="p-5">
-        <div className="flex justify-between items-start mb-2">
-          <span className="text-xs font-medium bg-blue-100 text-blue-800 px-2 py-1 rounded">
+    <motion.div
+      className="h-full"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      whileHover={{ y: -5 }}
+    >
+      <Card 
+        className={`overflow-hidden h-full border border-gray-200 hover:border-primary/50 transition-all duration-300 ${
+          isHovered ? 'shadow-lg' : 'shadow-sm'
+        }`}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <div className="relative">
+          <div className="h-48 overflow-hidden">
+            <img 
+              src={image} 
+              alt={title} 
+              className={`w-full h-full object-cover transition-transform duration-700 ${
+                isHovered ? 'scale-110' : 'scale-100'
+              }`}
+            />
+          </div>
+          <button 
+            className="absolute top-3 right-3 p-1.5 bg-white rounded-full shadow-md hover:bg-gray-100 transition-colors"
+            onClick={() => setIsBookmarked(!isBookmarked)}
+            aria-label={isBookmarked ? "Remove bookmark" : "Add bookmark"}
+          >
+            <Bookmark 
+              className={`h-4 w-4 ${isBookmarked ? 'text-primary fill-primary' : 'text-gray-500'}`} 
+            />
+          </button>
+          {isFeatured && (
+            <Badge 
+              variant="default" 
+              className="absolute bottom-3 left-3 bg-primary text-white px-2 py-1"
+            >
+              Featured
+            </Badge>
+          )}
+        </div>
+
+        <CardContent className="p-5">
+          <div className="flex items-center gap-1 mb-2">
+            {renderStars()}
+            {reviewCount && (
+              <span className="text-xs text-gray-500 ml-1">({reviewCount})</span>
+            )}
+          </div>
+          
+          <Badge variant="outline" className="mb-2 text-xs font-normal bg-gray-50">
             {category}
-          </span>
-          <div className="flex items-center">
-            <Star className="h-4 w-4 text-yellow-500 fill-yellow-500" />
-            <span className="text-sm ml-1">{rating}</span>
+          </Badge>
+          
+          <h3 className="font-semibold text-lg mb-3 line-clamp-2 h-14 text-navy-dark">
+            {title}
+          </h3>
+          
+          <div className="flex items-center gap-2 mt-4">
+            <div className="flex-shrink-0 h-8 w-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-semibold">
+              {instructorAvatar ? (
+                <img src={instructorAvatar} alt={instructorName} className="h-8 w-8 rounded-full" />
+              ) : (
+                instructorName.charAt(0)
+              )}
+            </div>
+            <div className="flex flex-col">
+              <span className="text-sm font-medium">By {instructorName}</span>
+              <span className="text-xs text-gray-500">{students} students</span>
+            </div>
           </div>
-        </div>
-        <h3 className="font-semibold text-lg mb-2 line-clamp-2 h-14">{title}</h3>
-        <div className="flex justify-between items-center text-gray-500 text-sm mb-4">
-          <div className="flex items-center">
-            <Users className="h-4 w-4 mr-1" />
-            <span>{students} students</span>
-          </div>
-          <div className="flex items-center">
-            <Clock className="h-4 w-4 mr-1" />
-            <span>{duration}</span>
-          </div>
-        </div>
-        <div className="flex justify-between items-center">
-          <span className="font-bold text-lg text-navy-dark">{price}</span>
-          <Button variant="outline" className="text-orange-DEFAULT border-orange-DEFAULT hover:bg-orange-DEFAULT/10">
-            Details
+        </CardContent>
+
+        <CardFooter className="px-5 py-4 border-t border-gray-100">
+          <Button 
+            className="w-full bg-white text-primary border-primary hover:bg-primary/5 transition-colors"
+            variant="outline"
+          >
+            {price ? `Enroll Course - ${price}` : 'Enroll Course'}
           </Button>
-        </div>
-      </div>
-    </div>
+        </CardFooter>
+      </Card>
+    </motion.div>
   );
 };
 
