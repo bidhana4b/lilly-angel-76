@@ -24,59 +24,71 @@ const PopularCourses = () => {
     {
       id: 1,
       image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
-      title: "B1 SELT | GESE GRADE 5 | ENGLISH TEST FOR BRITISH CITIZENSHIP",
-      category: "English",
-      rating: 5,
-      students: 1240,
+      title: "Business Management & Leadership Skills for 2024",
+      category: "Business",
+      rating: 4.6,
+      students: 4532,
       instructorName: "Kafi",
+      price: "99.99",
+      duration: "10 weeks",
       isFeatured: true,
     },
     {
       id: 2,
       image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
-      title: "B1 ENGLISH TEST INTEGRATED SKILLS IN ENGLISH (ISE I)",
+      title: "B1 ENGLISH TEST INTEGRATED SKILLS (ISE I)",
       category: "English",
-      rating: 5,
+      rating: 4.8,
       students: 978,
-      instructorName: "Kafi",
+      instructorName: "Sarah Johnson",
+      price: "89.99",
+      duration: "8 weeks",
     },
     {
       id: 3,
       image: "https://images.unsplash.com/photo-1540563341684-995b61dbb925?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
-      title: "A1 SELT | GESE GRADE 2 | ENGLISH TEST FOR FAMILY PARTNER & FAMILY PARENT",
+      title: "A1 SELT | GESE GRADE 2 | ENGLISH TEST FOR FAMILY",
       category: "English",
-      rating: 5,
+      rating: 4.7,
       students: 821,
-      instructorName: "Kafi",
+      instructorName: "John Smith",
+      price: "79.99",
+      duration: "6 weeks",
     },
     {
       id: 4,
       image: "https://images.unsplash.com/photo-1519677751400-f2aa896a161e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
       title: "LIFE IN THE UK PREPARATION COURSE",
       category: "British Culture",
-      rating: 5,
+      rating: 4.9,
       students: 1120,
-      instructorName: "Kafi",
+      instructorName: "Emily Wilson",
+      price: "129.99",
+      duration: "12 weeks",
     },
     {
       id: 5,
       image: "https://images.unsplash.com/photo-1603354350317-6f7aaa5911c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
       title: "A1, A2, B1 ENGLISH LANGUAGE PREPARATION COURSES",
       category: "English",
-      rating: 5,
-      reviewCount: 1,
+      rating: 4.5,
+      reviewCount: 156,
       students: 2340,
-      instructorName: "Kafi",
+      instructorName: "David Thompson",
+      price: "109.99",
+      duration: "15 weeks",
       isFeatured: true,
     },
     {
       id: 6,
       image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
-      title: "FUNCTIONAL SKILLS IN ENGLISH AND MATH FOR PRACTICAL APPLICATIONS",
+      title: "FUNCTIONAL SKILLS IN ENGLISH AND MATH",
       category: "Skills",
-      rating: 5,
+      rating: 4.7,
       students: 1587,
-      instructorName: "Kafi",
+      instructorName: "Michael Brown",
+      price: "119.99",
+      duration: "9 weeks",
     }
   ];
 
@@ -120,6 +132,8 @@ const PopularCourses = () => {
               instructorName={course.instructorName}
               isFeatured={course.isFeatured}
               reviewCount={course.reviewCount}
+              price={course.price}
+              duration={course.duration}
             />
           ))}
         </div>
@@ -155,6 +169,8 @@ const PopularCourses = () => {
                     instructorName={course.instructorName}
                     isFeatured={course.isFeatured}
                     reviewCount={course.reviewCount}
+                    price={course.price}
+                    duration={course.duration}
                   />
                 </CarouselItem>
               ))}

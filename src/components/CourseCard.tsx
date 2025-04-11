@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Star, User, Bookmark } from 'lucide-react';
+import { Star, User, Clock, Bookmark } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
@@ -17,6 +17,7 @@ interface CourseCardProps {
   price?: string;
   isFeatured?: boolean;
   reviewCount?: number;
+  duration?: string;
 }
 
 const CourseCard: React.FC<CourseCardProps> = ({
@@ -29,7 +30,8 @@ const CourseCard: React.FC<CourseCardProps> = ({
   instructorAvatar,
   price,
   isFeatured = false,
-  reviewCount
+  reviewCount,
+  duration
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -39,9 +41,14 @@ const CourseCard: React.FC<CourseCardProps> = ({
     return Array(5).fill(0).map((_, i) => (
       <Star 
         key={i} 
-        className={`h-4 w-4 ${i < rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}`} 
+        className={`h-4 w-4 ${i < Math.floor(rating) ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}`} 
       />
     ));
+  };
+
+  // Fallback image handler
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    e.currentTarget.src = 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80';
   };
 
   return (
@@ -60,13 +67,14 @@ const CourseCard: React.FC<CourseCardProps> = ({
         onMouseLeave={() => setIsHovered(false)}
       >
         <div className="relative">
-          <div className="h-48 overflow-hidden">
+          <div className="h-48 overflow-hidden bg-gray-100">
             <img 
               src={image} 
               alt={title} 
               className={`w-full h-full object-cover transition-transform duration-700 ${
                 isHovered ? 'scale-110' : 'scale-100'
               }`}
+              onError={handleImageError}
             />
           </div>
           <button 
@@ -89,42 +97,48 @@ const CourseCard: React.FC<CourseCardProps> = ({
         </div>
 
         <CardContent className="p-5">
+          <Badge variant="outline" className="mb-3 text-xs font-normal bg-gray-50 text-blue-600">
+            {category}
+          </Badge>
+          
           <div className="flex items-center gap-1 mb-2">
             {renderStars()}
+            <span className="ml-1 font-semibold text-yellow-500">{rating.toFixed(1)}</span>
             {reviewCount && (
               <span className="text-xs text-gray-500 ml-1">({reviewCount})</span>
             )}
           </div>
           
-          <Badge variant="outline" className="mb-2 text-xs font-normal bg-gray-50">
-            {category}
-          </Badge>
-          
-          <h3 className="font-semibold text-lg mb-3 line-clamp-2 h-14 text-navy-dark">
+          <h3 className="font-semibold text-lg mb-4 line-clamp-2 h-14 text-navy-dark hover:text-primary transition-colors">
             {title}
           </h3>
           
-          <div className="flex items-center gap-2 mt-4">
-            <div className="flex-shrink-0 h-8 w-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-semibold">
-              {instructorAvatar ? (
-                <img src={instructorAvatar} alt={instructorName} className="h-8 w-8 rounded-full" />
-              ) : (
-                instructorName.charAt(0)
-              )}
+          <div className="flex flex-col space-y-3 mt-3">
+            <div className="flex items-center text-gray-600 text-sm">
+              <User className="h-4 w-4 mr-2 text-gray-500" />
+              <span>{students} students</span>
             </div>
-            <div className="flex flex-col">
-              <span className="text-sm font-medium">By {instructorName}</span>
-              <span className="text-xs text-gray-500">{students} students</span>
-            </div>
+            
+            {duration && (
+              <div className="flex items-center text-gray-600 text-sm">
+                <Clock className="h-4 w-4 mr-2 text-gray-500" />
+                <span>{duration}</span>
+              </div>
+            )}
           </div>
+          
+          {price && (
+            <div className="mt-4 text-2xl font-bold text-navy-dark">
+              ${price}
+            </div>
+          )}
         </CardContent>
 
         <CardFooter className="px-5 py-4 border-t border-gray-100">
           <Button 
-            className="w-full bg-white text-primary border-primary hover:bg-primary/5 transition-colors"
-            variant="outline"
+            className="w-full bg-primary text-white hover:bg-primary/90 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 font-medium"
           >
-            {price ? `Enroll Course - ${price}` : 'Enroll Course'}
+            {price ? `Enroll Now` : 'View Details'}
           </Button>
         </CardFooter>
       </Card>
