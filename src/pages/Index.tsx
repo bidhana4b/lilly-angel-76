@@ -7,8 +7,8 @@ import Features from '@/components/Features';
 import PopularCourses from '@/components/PopularCourses';
 import CareerSection from '@/components/CareerSection';
 import Tutors from '@/components/Tutors';
-import Testimonials from '@/components/Testimonials';
 import TeamTraining from '@/components/TeamTraining';
+import Testimonials from '@/components/Testimonials';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 
@@ -23,8 +23,8 @@ const Index = () => {
         <PopularCourses />
         <CareerSection />
         <Tutors />
-        <Testimonials />
         <TeamTraining />
+        <Testimonials />
         <Contact />
       </main>
       <Footer />
