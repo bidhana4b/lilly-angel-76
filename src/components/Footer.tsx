@@ -74,6 +74,22 @@ const Footer = () => {
             </div>
           </div>
           
+          {partners.length > 0 && (
+            <div className="mt-8 pt-8 border-t border-gray-700">
+              <h4 className="text-center text-gray-300 mb-4">Our Trusted Partners</h4>
+              <div className="flex justify-center space-x-8">
+                {partners.map((partner, index) => (
+                  <img 
+                    key={index}
+                    src={partner}
+                    alt={`Partner ${index + 1}`}
+                    className="h-12 object-contain"
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+          
           <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
             <p>&copy; {new Date().getFullYear()} Lilly-Angel. All rights reserved.</p>
           </div>

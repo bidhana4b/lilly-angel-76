@@ -25,7 +25,7 @@ const TeamTraining = () => {
           className="text-center mb-8"
         >
           <h2 className="text-2xl md:text-3xl font-bold text-navy-dark mb-4">
-            Advance Your Team With Lilly-Angel Instructors
+            Take Your Total Team Escort to Lilly-Angel Top Instructors
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Level up your entire organization with tailored training from our top instructors
