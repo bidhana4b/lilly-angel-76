@@ -28,7 +28,13 @@ const Footer = () => {
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div>
-              <h3 className="text-xl font-bold mb-4">EduHub</h3>
+              <div className="flex items-center mb-4">
+                <img 
+                  src="/lovable-uploads/1a43599f-f4e1-4ada-9439-efad90c5a949.png" 
+                  alt="Lilly-Angel Logo" 
+                  className="h-10 bg-white rounded-md p-1"
+                />
+              </div>
               <p className="text-gray-300 mb-4">
                 Providing quality education accessible to everyone, everywhere.
               </p>
@@ -86,7 +92,7 @@ const Footer = () => {
           </div>
           
           <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; {new Date().getFullYear()} EduHub. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} Lilly-Angel. All rights reserved.</p>
           </div>
         </div>
       </div>

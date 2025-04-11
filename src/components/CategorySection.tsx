@@ -16,7 +16,7 @@ interface Category {
 const categories: Category[] = [{
   id: 'health-safety',
   name: 'Health and Safety',
-  description: '#1 Most popular topic on Hurak',
+  description: '#1 Most popular topic on Lilly-Angel',
   tagline: 'With over 100,000 customers, from individuals to some of the most respected global brands',
   cta: 'Explore Health And Safety Courses',
   image: '/lovable-uploads/b6830540-4fd4-4909-8e65-53d63367223e.png'
@@ -76,8 +76,8 @@ const CategorySection = () => {
       <div className="container mx-auto px-4">
         <div className="mb-12 max-w-3xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-navy-dark mb-4 relative inline-block">
-            <span className="relative z-10">Lilly Angel Training Courses & Qualifications</span>
-            <span className="absolute bottom-0 left-0 w-full h-3 bg-orange-DEFAULT/20 -z-10 transform -rotate-1"></span>
+            <span className="relative z-10">Lilly-Angel Training Courses & Qualifications</span>
+            <span className="absolute bottom-0 left-0 w-full h-3 bg-blue-200/30 -z-10 transform -rotate-1"></span>
           </h2>
           <p className="text-gray-600 text-lg mt-4 max-w-2xl mx-auto">
             {activeItem.tagline}
@@ -91,8 +91,8 @@ const CategorySection = () => {
                 key={category.id}
                 className={`px-5 py-3 text-lg font-medium transition-all duration-300 rounded-full ${
                   activeCategory === category.id
-                    ? 'bg-navy-dark text-white shadow-lg transform -translate-y-1'
-                    : 'text-gray-600 hover:bg-gray-100 hover:text-navy-dark'
+                    ? 'bg-blue-700 text-white shadow-lg transform -translate-y-1'
+                    : 'text-gray-600 hover:bg-gray-100 hover:text-blue-700'
                 }`}
                 onClick={() => setActiveCategory(category.id)}
               >
@@ -110,7 +110,7 @@ const CategorySection = () => {
           >
             <div className="relative grid grid-cols-1 md:grid-cols-2 gap-0">
               <div className="p-8 md:p-12 flex flex-col justify-center order-2 md:order-1">
-                <span className="bg-orange-DEFAULT/10 text-orange-DEFAULT font-medium px-4 py-1 rounded-full text-sm mb-6 w-fit">
+                <span className="bg-blue-100 text-blue-700 font-medium px-4 py-1 rounded-full text-sm mb-6 w-fit">
                   {activeItem.description}
                 </span>
                 <h3 className="text-3xl font-bold text-navy-dark mb-4">
@@ -120,7 +120,7 @@ const CategorySection = () => {
                   {activeItem.tagline}
                 </p>
                 <Button 
-                  className="bg-navy-dark hover:bg-navy-light text-white px-6 py-6 mt-4 w-fit group transition-all duration-300"
+                  className="bg-blue-700 hover:bg-blue-800 text-white px-6 py-6 mt-4 w-fit group transition-all duration-300"
                 >
                   <span>{activeItem.cta}</span>
                   <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
@@ -151,7 +151,7 @@ const CategorySection = () => {
                   onClick={() => setActiveCategory(category.id)}
                   className={`w-2 h-2 rounded-full transition-all duration-300 ${
                     activeCategory === category.id 
-                      ? 'bg-orange-DEFAULT w-6' 
+                      ? 'bg-blue-600 w-6' 
                       : 'bg-gray-300 hover:bg-gray-400'
                   }`}
                   aria-label={`Go to ${category.name}`}

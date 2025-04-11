@@ -25,7 +25,7 @@ const TeamTraining = () => {
           className="text-center mb-8"
         >
           <h2 className="text-2xl md:text-3xl font-bold text-navy-dark mb-4">
-            Advance Your Team With Our Instructors
+            Advance Your Team With Lilly-Angel Instructors
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Level up your entire organization with tailored training from our top instructors
@@ -61,7 +61,7 @@ const TeamTraining = () => {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
             >
-              <Button className="bg-orange-DEFAULT hover:bg-orange-dark text-white">
+              <Button className="bg-blue-600 hover:bg-blue-700 text-white">
                 Request Team Training
               </Button>
             </motion.div>
@@ -80,14 +80,14 @@ const TeamTraining = () => {
               className="rounded-lg shadow-lg"
             />
             <motion.div 
-              className="absolute -bottom-6 -left-6 bg-navy-light text-white p-4 rounded-lg shadow-lg hidden md:block"
+              className="absolute -bottom-6 -left-6 bg-blue-900 text-white p-4 rounded-lg shadow-lg hidden md:block"
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.6 }}
               viewport={{ once: true }}
             >
               <div className="flex items-center">
-                <Trophy className="h-8 w-8 text-orange-DEFAULT mr-3" />
+                <Trophy className="h-8 w-8 text-blue-300 mr-3" />
                 <div>
                   <span className="text-lg font-bold block">98%</span>
                   <span className="text-sm">Completion Rate</span>
