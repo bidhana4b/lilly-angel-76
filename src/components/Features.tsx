@@ -1,49 +1,105 @@
 
 import React from 'react';
-import { Trophy, BookOpen, Users } from 'lucide-react';
+import { BadgeDollarSign, MapPin, Rocket } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Card, CardContent } from '@/components/ui/card';
 
 const Features = () => {
   const features = [
     {
-      icon: <Trophy className="h-10 w-10 text-orange-DEFAULT" />,
-      title: "Flexibility & Expertise",
-      description: "Learn from industry professionals with flexible scheduling options",
-      stats: "96% Success Rate"
+      icon: <BadgeDollarSign className="h-8 w-8 text-teal-500" />,
+      title: "Price Match Guarantee",
+      description: "Browse with confidence we'll meet or beat any of our competitor's prices",
+      bgColor: "bg-teal-50",
+      iconBg: "bg-teal-100"
     },
     {
-      icon: <BookOpen className="h-10 w-10 text-orange-DEFAULT" />,
-      title: "Customized Curriculum",
-      description: "Personalized learning path designed to match your goals",
-      stats: "200+ Courses Available"
+      icon: <MapPin className="h-8 w-8 text-indigo-500" />,
+      title: "Nationwide Coverage",
+      description: "Local and nationwide coverage so that you can get trained no matter where you are",
+      bgColor: "bg-indigo-50",
+      iconBg: "bg-indigo-100"
     },
     {
-      icon: <Users className="h-10 w-10 text-orange-DEFAULT" />,
-      title: "Mentoring",
-      description: "One-on-one guidance from experienced mentors in your field",
-      stats: "24/7 Support"
+      icon: <Rocket className="h-8 w-8 text-sky-500" />,
+      title: "Same Day Results",
+      description: "Benefit from instant results for most of our courses",
+      bgColor: "bg-sky-50",
+      iconBg: "bg-sky-100"
     }
   ];
 
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    },
+    hover: {
+      y: -10,
+      boxShadow: "0 10px 25px rgba(0, 0, 0, 0.08)",
+      transition: {
+        duration: 0.3
+      }
+    }
+  };
+
   return (
-    <section className="py-16 bg-gray-50">
-      <div className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <section className="py-20 bg-gradient-to-b from-white to-gray-50">
+      <div className="container mx-auto px-4">
+        <motion.div 
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-navy-dark relative inline-block">
+            <span className="relative z-10">Why Choose Us</span>
+            <span className="absolute bottom-0 left-0 w-full h-3 bg-orange-DEFAULT/20 -z-10 transform -rotate-1"></span>
+          </h2>
+          <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
+            We offer comprehensive training solutions with these key benefits
+          </p>
+        </motion.div>
+
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           {features.map((feature, index) => (
-            <div 
-              key={index} 
-              className="bg-white p-6 rounded-lg shadow-md text-center flex flex-col items-center card-hover"
+            <motion.div 
+              key={index}
+              variants={cardVariants}
+              whileHover="hover"
+              className="h-full"
             >
-              <div className="mb-4">
-                {feature.icon}
-              </div>
-              <h3 className="text-xl font-semibold mb-2 text-navy-dark">{feature.title}</h3>
-              <p className="text-gray-600 mb-4">{feature.description}</p>
-              <span className="text-sm font-medium bg-orange-light/10 text-orange-dark px-3 py-1 rounded-full">
-                {feature.stats}
-              </span>
-            </div>
+              <Card className={`h-full border-none shadow-lg ${feature.bgColor} overflow-hidden transition-all duration-300`}>
+                <CardContent className="p-8 flex flex-col h-full">
+                  <div className={`rounded-full ${feature.iconBg} p-4 w-16 h-16 flex items-center justify-center mb-6`}>
+                    {feature.icon}
+                  </div>
+                  <h3 className="text-xl font-bold mb-3 text-gray-800">{feature.title}</h3>
+                  <p className="text-gray-600">{feature.description}</p>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
