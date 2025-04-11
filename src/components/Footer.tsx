@@ -1,40 +1,15 @@
-
 import React from 'react';
 import { Facebook, Twitter, Instagram, Linkedin, Youtube } from 'lucide-react';
-
 const Footer = () => {
-  const partners = [
-    "/lovable-uploads/0d38ad80-069f-4181-94dc-8c0553640c31.png"
-  ];
-
-  return (
-    <footer>
-      <div className="bg-gray-100 py-8">
-        <div className="container mx-auto">
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
-            {partners.map((partner, index) => (
-              <img 
-                key={index} 
-                src={partner} 
-                alt="Partner Logo" 
-                className="h-10 opacity-70 grayscale hover:grayscale-0 hover:opacity-100 transition-all"
-              />
-            ))}
-          </div>
-        </div>
-      </div>
+  const partners = ["/lovable-uploads/0d38ad80-069f-4181-94dc-8c0553640c31.png"];
+  return <footer>
+      
       
       <div className="bg-navy-dark text-white py-12">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div>
-              <div className="flex items-center mb-4">
-                <img 
-                  src="/lovable-uploads/1a43599f-f4e1-4ada-9439-efad90c5a949.png" 
-                  alt="Lilly-Angel Logo" 
-                  className="h-10 bg-white rounded-md p-1"
-                />
-              </div>
+              <h3 className="text-xl font-bold mb-4">EduHub</h3>
               <p className="text-gray-300 mb-4">
                 Providing quality education accessible to everyone, everywhere.
               </p>
@@ -92,12 +67,10 @@ const Footer = () => {
           </div>
           
           <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; {new Date().getFullYear()} Lilly-Angel. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} EduHub. All rights reserved.</p>
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
