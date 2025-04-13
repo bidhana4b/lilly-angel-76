@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Facebook, Twitter, Instagram, Linkedin, Youtube } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const partners = ["/lovable-uploads/0d38ad80-069f-4181-94dc-8c0553640c31.png"];
@@ -43,33 +44,33 @@ const Footer = () => {
             <div>
               <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
               <ul className="space-y-2">
-                <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Home</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-white transition-colors">About Us</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Courses</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Contact</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-white transition-colors">FAQs</a></li>
+                <li><Link to="/" className="text-gray-300 hover:text-white transition-colors">Home</Link></li>
+                <li><Link to="/about" className="text-gray-300 hover:text-white transition-colors">About Us</Link></li>
+                <li><Link to="/courses" className="text-gray-300 hover:text-white transition-colors">Courses</Link></li>
+                <li><Link to="/contact" className="text-gray-300 hover:text-white transition-colors">Contact</Link></li>
+                <li><Link to="/faq" className="text-gray-300 hover:text-white transition-colors">FAQs</Link></li>
               </ul>
             </div>
             
             <div>
               <h3 className="text-lg font-semibold mb-4">Courses</h3>
               <ul className="space-y-2">
-                <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Health and Safety</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-white transition-colors">First Aid</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Security Training</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Hospitality</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Teaching & Academics</a></li>
+                <li><Link to="/courses?category=health" className="text-gray-300 hover:text-white transition-colors">Health and Safety</Link></li>
+                <li><Link to="/courses?category=first-aid" className="text-gray-300 hover:text-white transition-colors">First Aid</Link></li>
+                <li><Link to="/courses?category=security" className="text-gray-300 hover:text-white transition-colors">Security Training</Link></li>
+                <li><Link to="/courses?category=hospitality" className="text-gray-300 hover:text-white transition-colors">Hospitality</Link></li>
+                <li><Link to="/courses?category=teaching" className="text-gray-300 hover:text-white transition-colors">Teaching & Academics</Link></li>
               </ul>
             </div>
             
             <div>
               <h3 className="text-lg font-semibold mb-4">Support</h3>
               <ul className="space-y-2">
-                <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Help Center</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Terms of Service</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Cookie Policy</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Accessibility</a></li>
+                <li><Link to="/faq" className="text-gray-300 hover:text-white transition-colors">Help Center</Link></li>
+                <li><Link to="/terms" className="text-gray-300 hover:text-white transition-colors">Terms of Service</Link></li>
+                <li><Link to="/privacy" className="text-gray-300 hover:text-white transition-colors">Privacy Policy</Link></li>
+                <li><Link to="/cookies" className="text-gray-300 hover:text-white transition-colors">Cookie Policy</Link></li>
+                <li><Link to="/accessibility" className="text-gray-300 hover:text-white transition-colors">Accessibility</Link></li>
               </ul>
             </div>
           </div>
