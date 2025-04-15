@@ -234,6 +234,27 @@ const Testimonials = () => {
       date: "Wed, 22 Dec 2021"
     }
   }];
+
+  // Accreditation logos array with the uploaded images
+  const accreditationLogos = [
+    {
+      src: "/lovable-uploads/96eb7f13-7556-4733-b55a-bd22819c7c1b.png",
+      alt: "Qualifi Accreditation"
+    },
+    {
+      src: "/lovable-uploads/037bb644-3467-481a-b305-7a5df795979e.png",
+      alt: "Trinity College London Approved Service Provider"
+    },
+    {
+      src: "/lovable-uploads/40ed436a-388d-4100-8e48-f80c20087c33.png",
+      alt: "Highfield Approved Centre"
+    },
+    {
+      src: "/lovable-uploads/215e04a5-4c14-41fc-a522-94884c5f505f.png",
+      alt: "In partnership with CalmMinds-UK"
+    }
+  ];
+  
   return <div>
       {/* Testimonials Section */}
       <section className="py-20 bg-gray-50">
@@ -359,6 +380,66 @@ const Testimonials = () => {
         </div>
       </section>
 
+      {/* Accreditation Section */}
+      <section className="py-20 bg-gradient-to-r from-slate-800 to-slate-900">
+        <div className="container mx-auto px-4">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-white relative inline-block">
+              <span className="relative z-10">Our Accreditations</span>
+              <span className="absolute bottom-0 left-0 w-full h-3 bg-orange-DEFAULT/20 -z-10 transform -rotate-1"></span>
+            </h2>
+            <p className="text-gray-300 mt-4 max-w-2xl mx-auto">
+              We are proud to be accredited by these prestigious organizations, ensuring the highest standards in education and training.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
+            {accreditationLogos.map((logo, index) => (
+              <motion.div 
+                key={index}
+                className="bg-white/10 backdrop-blur-sm rounded-lg p-6 flex items-center justify-center h-48 shadow-lg border border-white/10"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ 
+                  scale: 1.05, 
+                  boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.2)", 
+                  backgroundColor: "rgba(255, 255, 255, 0.15)" 
+                }}
+              >
+                <img 
+                  src={logo.src} 
+                  alt={logo.alt} 
+                  className="max-h-full max-w-full object-contain filter brightness-110" 
+                />
+              </motion.div>
+            ))}
+          </div>
+          
+          <motion.div 
+            className="mt-12 text-center"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <p className="text-gray-300 mb-8">
+              Our accreditations reflect our commitment to delivering high-quality education and maintaining industry standards.
+            </p>
+            <Button className="bg-orange-DEFAULT hover:bg-orange-dark text-white px-8 py-6 rounded-md transition-all hover:scale-105">
+              Learn More About Our Standards
+            </Button>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Call to Action Section */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
@@ -409,4 +490,5 @@ const Testimonials = () => {
       </section>
     </div>;
 };
+
 export default Testimonials;
