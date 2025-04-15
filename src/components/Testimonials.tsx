@@ -431,9 +431,7 @@ const Testimonials = () => {
             <p className="text-gray-300 mb-8">
               Our accreditations reflect our commitment to delivering high-quality education and maintaining industry standards.
             </p>
-            <Button className="bg-orange-DEFAULT hover:bg-orange-dark text-white px-8 py-6 rounded-md transition-all hover:scale-105">
-              Learn More About Our Standards
-            </Button>
+            
           </motion.div>
         </div>
       </section>
