@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Phone, Mail, MapPin, Clock, Calendar } from 'lucide-react';
 import { Input } from '@/components/ui/input';
@@ -106,21 +105,38 @@ const Contact = () => {
           viewport={{ once: true }}
           className="mt-12 pt-10 border-t border-gray-700"
         >
-          <h3 className="text-xl font-bold mb-6 text-white">Contact Information</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="flex items-start space-x-3 group">
-              <MapPin className="h-5 w-5 text-orange-DEFAULT mt-1 flex-shrink-0 group-hover:scale-110 transition-transform" />
-              <p className="text-gray-300 group-hover:text-white transition-colors">
-                1st floor, The welcome hub, 35 Vicarage lane East Ham E6 6DQ
-              </p>
+          <h3 className="text-2xl font-bold mb-8 text-white text-center">Contact Us</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            <div className="flex items-center space-x-4 bg-navy-light/30 p-4 rounded-lg backdrop-blur-sm border border-white/10 shadow-lg group">
+              <MapPin className="h-8 w-8 text-orange-DEFAULT flex-shrink-0 group-hover:scale-110 transition-transform" />
+              <div>
+                <h4 className="text-white font-semibold mb-1">Address</h4>
+                <p className="text-gray-300 text-sm group-hover:text-white transition-colors">
+                  1st floor, The welcome hub,<br />
+                  35 Vicarage lane East Ham<br />
+                  E6 6DQ
+                </p>
+              </div>
             </div>
-            <div className="flex items-start space-x-3 group">
-              <Phone className="h-5 w-5 text-orange-DEFAULT mt-1 flex-shrink-0 group-hover:scale-110 transition-transform" />
-              <p className="text-gray-300 group-hover:text-white transition-colors">+44 02031962855</p>
+            
+            <div className="flex items-center space-x-4 bg-navy-light/30 p-4 rounded-lg backdrop-blur-sm border border-white/10 shadow-lg group">
+              <Phone className="h-8 w-8 text-orange-DEFAULT flex-shrink-0 group-hover:scale-110 transition-transform" />
+              <div>
+                <h4 className="text-white font-semibold mb-1">Phone</h4>
+                <p className="text-gray-300 text-sm group-hover:text-white transition-colors">
+                  +44 02031962855
+                </p>
+              </div>
             </div>
-            <div className="flex items-start space-x-3 group">
-              <Mail className="h-5 w-5 text-orange-DEFAULT mt-1 flex-shrink-0 group-hover:scale-110 transition-transform" />
-              <p className="text-gray-300 group-hover:text-white transition-colors">info@lilly-angel.co.uk</p>
+            
+            <div className="flex items-center space-x-4 bg-navy-light/30 p-4 rounded-lg backdrop-blur-sm border border-white/10 shadow-lg group">
+              <Mail className="h-8 w-8 text-orange-DEFAULT flex-shrink-0 group-hover:scale-110 transition-transform" />
+              <div>
+                <h4 className="text-white font-semibold mb-1">Email</h4>
+                <p className="text-gray-300 text-sm group-hover:text-white transition-colors">
+                  info@lilly-angel.co.uk
+                </p>
+              </div>
             </div>
           </div>
         </motion.div>
