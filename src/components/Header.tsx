@@ -164,6 +164,7 @@ const Header = () => {
                 <li><Link to="/tutors" className="block text-gray-600 hover:text-blue-600 transition-colors py-2" onClick={toggleMenu}>Tutors</Link></li>
                 <li><Link to="/contact" className="block text-gray-600 hover:text-blue-600 transition-colors py-2" onClick={toggleMenu}>Contact</Link></li>
                 <li><Link to="/faq" className="block text-gray-600 hover:text-blue-600 transition-colors py-2" onClick={toggleMenu}>FAQ</Link></li>
+                <li><Link to="/login" className="block text-gray-600 hover:text-blue-600 transition-colors py-2" onClick={toggleMenu}>Log In</Link></li>
               </ul>
             </nav>
           </div>
@@ -178,7 +179,9 @@ const Header = () => {
               className="pl-8 pr-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-400 w-40 lg:w-60"
             />
           </div>
-          <Button variant="outline" className="hidden md:inline-flex">Log In</Button>
+          <Link to="/login">
+            <Button variant="outline" className="hidden md:inline-flex">Log In</Button>
+          </Link>
           <Button className="bg-blue-600 hover:bg-blue-700">Sign Up</Button>
         </div>
       </div>
