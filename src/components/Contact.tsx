@@ -4,10 +4,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
-
 const Contact = () => {
-  return (
-    <section className="py-16 bg-gradient-to-r from-navy-dark to-navy-light relative overflow-hidden">
+  return <section className="py-16 bg-gradient-to-r from-navy-dark to-navy-light relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-10 left-10 w-40 h-40 rounded-full bg-orange-light animate-pulse"></div>
@@ -16,21 +14,30 @@ const Contact = () => {
       </div>
       
       <div className="container mx-auto relative z-10">
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-12"
-        >
+        <motion.div initial={{
+        opacity: 0,
+        y: 30
+      }} whileInView={{
+        opacity: 1,
+        y: 0
+      }} transition={{
+        duration: 0.5
+      }} viewport={{
+        once: true
+      }} className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Column 1: Company Description */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            viewport={{ once: true }}
-            className="bg-navy-light/30 p-6 rounded-lg backdrop-blur-sm border border-white/10 shadow-lg"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          x: -30
+        }} whileInView={{
+          opacity: 1,
+          x: 0
+        }} transition={{
+          duration: 0.5,
+          delay: 0.1
+        }} viewport={{
+          once: true
+        }} className="bg-navy-light/30 p-6 rounded-lg backdrop-blur-sm border border-white/10 shadow-lg">
             <h3 className="text-xl font-bold mb-6 text-white">About Us</h3>
             <p className="text-gray-300 mb-6">
               Lilly-Angel is a premier education provider committed to delivering high-quality training and development services. Our expert instructors bring years of experience to help you achieve your learning goals.
@@ -42,13 +49,18 @@ const Contact = () => {
           </motion.div>
           
           {/* Column 2: Quick Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="bg-navy-light/30 p-6 rounded-lg backdrop-blur-sm border border-white/10 shadow-lg"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 30
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.5,
+          delay: 0.2
+        }} viewport={{
+          once: true
+        }} className="bg-navy-light/30 p-6 rounded-lg backdrop-blur-sm border border-white/10 shadow-lg">
             <h3 className="text-xl font-bold mb-6 text-white">Contact Form</h3>
             <form className="space-y-4">
               <div>
@@ -70,20 +82,25 @@ const Contact = () => {
           </motion.div>
           
           {/* Column 3: Opening Hours & Contact */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            viewport={{ once: true }}
-            className="bg-navy-light/30 p-6 rounded-lg backdrop-blur-sm border border-white/10 shadow-lg"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          x: 30
+        }} whileInView={{
+          opacity: 1,
+          x: 0
+        }} transition={{
+          duration: 0.5,
+          delay: 0.3
+        }} viewport={{
+          once: true
+        }} className="bg-navy-light/30 p-6 rounded-lg backdrop-blur-sm border border-white/10 shadow-lg">
             <h3 className="text-xl font-bold mb-6 text-white">Opening Hours</h3>
             <div className="flex items-start space-x-3 mb-4">
-              <Clock className="h-5 w-5 text-orange-DEFAULT mt-0.5" />
+              <Clock className="h-5 w-5 text-orange-DEFAULT mt-0.5 bg-orange-dark" />
               <p className="text-gray-300">09 AM - 05 PM</p>
             </div>
             <div className="flex items-start space-x-3 mb-6">
-              <Calendar className="h-5 w-5 text-orange-DEFAULT mt-0.5" />
+              <Calendar className="h-5 w-5 text-orange-DEFAULT mt-0.5 bg-orange-dark" />
               <p className="text-gray-300">Monday - Saturday</p>
             </div>
             
@@ -98,13 +115,18 @@ const Contact = () => {
         </motion.div>
         
         {/* Contact Information Row */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="mt-12 pt-10 border-t border-gray-700"
-        >
+        <motion.div initial={{
+        opacity: 0,
+        y: 30
+      }} whileInView={{
+        opacity: 1,
+        y: 0
+      }} transition={{
+        duration: 0.5,
+        delay: 0.4
+      }} viewport={{
+        once: true
+      }} className="mt-12 pt-10 border-t border-gray-700">
           <h3 className="text-2xl font-bold mb-8 text-white text-center">Contact Us</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             <div className="flex items-center space-x-4 bg-navy-light/30 p-4 rounded-lg backdrop-blur-sm border border-white/10 shadow-lg group">
@@ -141,8 +163,6 @@ const Contact = () => {
           </div>
         </motion.div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Contact;
