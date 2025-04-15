@@ -108,7 +108,7 @@ const Contact = () => {
           <h3 className="text-2xl font-bold mb-8 text-white text-center">Contact Us</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             <div className="flex items-center space-x-4 bg-navy-light/30 p-4 rounded-lg backdrop-blur-sm border border-white/10 shadow-lg group">
-              <MapPin className="h-8 w-8 text-orange-DEFAULT flex-shrink-0 group-hover:scale-110 transition-transform" />
+              <MapPin className="h-8 w-8 text-[#f75722] flex-shrink-0 group-hover:scale-110 transition-transform" />
               <div>
                 <h4 className="text-white font-semibold mb-1">Address</h4>
                 <p className="text-gray-300 text-sm group-hover:text-white transition-colors">
@@ -120,7 +120,7 @@ const Contact = () => {
             </div>
             
             <div className="flex items-center space-x-4 bg-navy-light/30 p-4 rounded-lg backdrop-blur-sm border border-white/10 shadow-lg group">
-              <Phone className="h-8 w-8 text-orange-DEFAULT flex-shrink-0 group-hover:scale-110 transition-transform" />
+              <Phone className="h-8 w-8 text-[#f75722] flex-shrink-0 group-hover:scale-110 transition-transform" />
               <div>
                 <h4 className="text-white font-semibold mb-1">Phone</h4>
                 <p className="text-gray-300 text-sm group-hover:text-white transition-colors">
@@ -130,7 +130,7 @@ const Contact = () => {
             </div>
             
             <div className="flex items-center space-x-4 bg-navy-light/30 p-4 rounded-lg backdrop-blur-sm border border-white/10 shadow-lg group">
-              <Mail className="h-8 w-8 text-orange-DEFAULT flex-shrink-0 group-hover:scale-110 transition-transform" />
+              <Mail className="h-8 w-8 text-[#f75722] flex-shrink-0 group-hover:scale-110 transition-transform" />
               <div>
                 <h4 className="text-white font-semibold mb-1">Email</h4>
                 <p className="text-gray-300 text-sm group-hover:text-white transition-colors">
