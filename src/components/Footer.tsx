@@ -22,28 +22,7 @@ const Footer = () => {
   }];
   return <footer>
       {/* Partners Section with Slideshow */}
-      <div className="bg-[#8DD8F8] py-12">
-        <div className="container mx-auto">
-          <div className="border-t border-b border-gray-300 py-8">
-            <Carousel opts={{
-            align: "start",
-            loop: true
-          }} className="w-full">
-              <CarouselContent className="-ml-2 md:-ml-4">
-                {partnerLogos.map((logo, index) => <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/4 lg:basis-1/5">
-                    <div className="p-2 flex items-center justify-center h-24">
-                      <img src={logo.src} alt={logo.alt} className="h-16 md:h-20 object-contain transition-all hover:scale-110 duration-300" />
-                    </div>
-                  </CarouselItem>)}
-              </CarouselContent>
-              <div className="flex justify-center mt-4">
-                <CarouselPrevious className="static translate-y-0 mx-2" />
-                <CarouselNext className="static translate-y-0 mx-2" />
-              </div>
-            </Carousel>
-          </div>
-        </div>
-      </div>
+      
 
       {/* Main Footer */}
       <div className="bg-navy-dark text-white py-12">
