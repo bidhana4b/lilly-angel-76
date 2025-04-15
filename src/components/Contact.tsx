@@ -42,7 +42,7 @@ const Contact = () => {
             <p className="text-gray-300 mb-6">
               Lilly-Angel is a premier education provider committed to delivering high-quality training and development services. Our expert instructors bring years of experience to help you achieve your learning goals.
             </p>
-            <div className="flex flex-col space-y-4">
+            <div className="flex flex-col space-y-4 bg-zinc-50">
               <a href="#courses" className="text-orange-DEFAULT hover:text-orange-light transition-colors">Learn more about our approach →</a>
               <a href="#team" className="text-orange-DEFAULT hover:text-orange-light transition-colors">Meet our expert team →</a>
             </div>
