@@ -1,34 +1,17 @@
-
 import React from 'react';
 import { Phone, Mail, MapPin, Clock, Calendar } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
-
 const Contact = () => {
-  return (
-    <section className="py-16 bg-navy-dark text-white">
+  return <section className="py-16 bg-navy-dark text-white">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Column 1: Company Description */}
-          <div>
-            <h3 className="text-xl font-bold mb-6">Our Intuition</h3>
-            <p className="text-gray-300">
-              Our intuition prides in being a successful provider of further Education in London. Our mentors are passionate about delivering a high-quality service, which ultimately has a positive impact on the lives of individuals.
-            </p>
-          </div>
+          
           
           {/* Column 2: Quick Links */}
-          <div>
-            <h3 className="text-xl font-bold mb-6">Quick Links</h3>
-            <ul className="space-y-3">
-              <li><a href="/" className="text-gray-300 hover:text-white transition-colors">Home</a></li>
-              <li><a href="/about" className="text-gray-300 hover:text-white transition-colors">About Us</a></li>
-              <li><a href="/blog" className="text-gray-300 hover:text-white transition-colors">Blog</a></li>
-              <li><a href="/contact" className="text-gray-300 hover:text-white transition-colors">Contact</a></li>
-              <li><a href="/privacy" className="text-gray-300 hover:text-white transition-colors">Privacy Policy</a></li>
-            </ul>
-          </div>
+          
           
           {/* Column 3: Opening Hours & Contact */}
           <div>
@@ -73,8 +56,6 @@ const Contact = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Contact;
