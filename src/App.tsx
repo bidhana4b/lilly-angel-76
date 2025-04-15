@@ -50,45 +50,33 @@ const App = () => (
             <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
               <Route 
                 path="/dashboard/admin/*" 
-                element={
-                  <DashboardLayout sidebarContent={<AdminSidebar />}>
-                    <Routes>
-                      <Route path="/" element={<AdminDashboard />} />
-                      <Route path="*" element={<div className="text-center py-10">Admin page not implemented yet</div>} />
-                    </Routes>
-                  </DashboardLayout>
-                } 
-              />
+                element={<DashboardLayout sidebarContent={<AdminSidebar />} />}
+              >
+                <Route path="/" element={<AdminDashboard />} />
+                <Route path="*" element={<div className="text-center py-10">Admin page not implemented yet</div>} />
+              </Route>
             </Route>
             
             {/* Teacher Routes */}
             <Route element={<ProtectedRoute allowedRoles={["teacher"]} />}>
               <Route 
                 path="/dashboard/teacher/*" 
-                element={
-                  <DashboardLayout sidebarContent={<TeacherSidebar />}>
-                    <Routes>
-                      <Route path="/" element={<TeacherDashboard />} />
-                      <Route path="*" element={<div className="text-center py-10">Teacher page not implemented yet</div>} />
-                    </Routes>
-                  </DashboardLayout>
-                } 
-              />
+                element={<DashboardLayout sidebarContent={<TeacherSidebar />} />}
+              >
+                <Route path="/" element={<TeacherDashboard />} />
+                <Route path="*" element={<div className="text-center py-10">Teacher page not implemented yet</div>} />
+              </Route>
             </Route>
             
             {/* Student Routes */}
             <Route element={<ProtectedRoute allowedRoles={["student"]} />}>
               <Route 
                 path="/dashboard/student/*" 
-                element={
-                  <DashboardLayout sidebarContent={<StudentSidebar />}>
-                    <Routes>
-                      <Route path="/" element={<StudentDashboard />} />
-                      <Route path="*" element={<div className="text-center py-10">Student page not implemented yet</div>} />
-                    </Routes>
-                  </DashboardLayout>
-                } 
-              />
+                element={<DashboardLayout sidebarContent={<StudentSidebar />} />}
+              >
+                <Route path="/" element={<StudentDashboard />} />
+                <Route path="*" element={<div className="text-center py-10">Student page not implemented yet</div>} />
+              </Route>
             </Route>
             
             {/* Redirect /dashboard to appropriate dashboard based on role (handled by ProtectedRoute) */}
