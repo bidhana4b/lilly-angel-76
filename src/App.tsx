@@ -49,10 +49,10 @@ const App = () => (
             {/* Admin Routes */}
             <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
               <Route 
-                path="/dashboard/admin/*" 
+                path="/dashboard/admin" 
                 element={<DashboardLayout sidebarContent={<AdminSidebar />} />}
               >
-                <Route path="/" element={<AdminDashboard />} />
+                <Route index element={<AdminDashboard />} />
                 <Route path="*" element={<div className="text-center py-10">Admin page not implemented yet</div>} />
               </Route>
             </Route>
@@ -60,10 +60,10 @@ const App = () => (
             {/* Teacher Routes */}
             <Route element={<ProtectedRoute allowedRoles={["teacher"]} />}>
               <Route 
-                path="/dashboard/teacher/*" 
+                path="/dashboard/teacher" 
                 element={<DashboardLayout sidebarContent={<TeacherSidebar />} />}
               >
-                <Route path="/" element={<TeacherDashboard />} />
+                <Route index element={<TeacherDashboard />} />
                 <Route path="*" element={<div className="text-center py-10">Teacher page not implemented yet</div>} />
               </Route>
             </Route>
@@ -71,10 +71,10 @@ const App = () => (
             {/* Student Routes */}
             <Route element={<ProtectedRoute allowedRoles={["student"]} />}>
               <Route 
-                path="/dashboard/student/*" 
+                path="/dashboard/student" 
                 element={<DashboardLayout sidebarContent={<StudentSidebar />} />}
               >
-                <Route path="/" element={<StudentDashboard />} />
+                <Route index element={<StudentDashboard />} />
                 <Route path="*" element={<div className="text-center py-10">Student page not implemented yet</div>} />
               </Route>
             </Route>
