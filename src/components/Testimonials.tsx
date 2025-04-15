@@ -236,25 +236,19 @@ const Testimonials = () => {
   }];
 
   // Accreditation logos array with the uploaded images
-  const accreditationLogos = [
-    {
-      src: "/lovable-uploads/96eb7f13-7556-4733-b55a-bd22819c7c1b.png",
-      alt: "Qualifi Accreditation"
-    },
-    {
-      src: "/lovable-uploads/037bb644-3467-481a-b305-7a5df795979e.png",
-      alt: "Trinity College London Approved Service Provider"
-    },
-    {
-      src: "/lovable-uploads/40ed436a-388d-4100-8e48-f80c20087c33.png",
-      alt: "Highfield Approved Centre"
-    },
-    {
-      src: "/lovable-uploads/215e04a5-4c14-41fc-a522-94884c5f505f.png",
-      alt: "In partnership with CalmMinds-UK"
-    }
-  ];
-  
+  const accreditationLogos = [{
+    src: "/lovable-uploads/96eb7f13-7556-4733-b55a-bd22819c7c1b.png",
+    alt: "Qualifi Accreditation"
+  }, {
+    src: "/lovable-uploads/037bb644-3467-481a-b305-7a5df795979e.png",
+    alt: "Trinity College London Approved Service Provider"
+  }, {
+    src: "/lovable-uploads/40ed436a-388d-4100-8e48-f80c20087c33.png",
+    alt: "Highfield Approved Centre"
+  }, {
+    src: "/lovable-uploads/215e04a5-4c14-41fc-a522-94884c5f505f.png",
+    alt: "In partnership with CalmMinds-UK"
+  }];
   return <div>
       {/* Testimonials Section */}
       <section className="py-20 bg-gray-50">
@@ -383,13 +377,17 @@ const Testimonials = () => {
       {/* Accreditation Section */}
       <section className="py-20 bg-gradient-to-r from-slate-800 to-slate-900">
         <div className="container mx-auto px-4">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.5
+        }} viewport={{
+          once: true
+        }} className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-white relative inline-block">
               <span className="relative z-10">Our Accreditations</span>
               <span className="absolute bottom-0 left-0 w-full h-3 bg-orange-DEFAULT/20 -z-10 transform -rotate-1"></span>
@@ -400,36 +398,36 @@ const Testimonials = () => {
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
-            {accreditationLogos.map((logo, index) => (
-              <motion.div 
-                key={index}
-                className="bg-white/10 backdrop-blur-sm rounded-lg p-6 flex items-center justify-center h-48 shadow-lg border border-white/10"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ 
-                  scale: 1.05, 
-                  boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.2)", 
-                  backgroundColor: "rgba(255, 255, 255, 0.15)" 
-                }}
-              >
-                <img 
-                  src={logo.src} 
-                  alt={logo.alt} 
-                  className="max-h-full max-w-full object-contain filter brightness-110" 
-                />
-              </motion.div>
-            ))}
+            {accreditationLogos.map((logo, index) => <motion.div key={index} className="bg-white/10 backdrop-blur-sm rounded-lg p-6 flex items-center justify-center h-48 shadow-lg border border-white/10" initial={{
+            opacity: 0,
+            y: 20
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.5,
+            delay: index * 0.1
+          }} viewport={{
+            once: true
+          }} whileHover={{
+            scale: 1.05,
+            boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.2)",
+            backgroundColor: "rgba(255, 255, 255, 0.15)"
+          }}>
+                <img src={logo.src} alt={logo.alt} className="max-h-full max-w-full object-contain filter brightness-110" />
+              </motion.div>)}
           </div>
           
-          <motion.div 
-            className="mt-12 text-center"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            viewport={{ once: true }}
-          >
+          <motion.div className="mt-12 text-center" initial={{
+          opacity: 0
+        }} whileInView={{
+          opacity: 1
+        }} transition={{
+          duration: 0.5,
+          delay: 0.6
+        }} viewport={{
+          once: true
+        }}>
             <p className="text-gray-300 mb-8">
               Our accreditations reflect our commitment to delivering high-quality education and maintaining industry standards.
             </p>
@@ -441,54 +439,7 @@ const Testimonials = () => {
       </section>
 
       {/* Call to Action Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <motion.div className="bg-purple-600 rounded-2xl p-8 text-white overflow-hidden relative" initial={{
-            opacity: 0,
-            x: -30
-          }} whileInView={{
-            opacity: 1,
-            x: 0
-          }} transition={{
-            duration: 0.5
-          }} viewport={{
-            once: true
-          }}>
-              <div className="max-w-md relative z-10">
-                <h3 className="text-2xl font-bold mb-4">Join now to start learning</h3>
-                <p className="mb-6">Learn from our quality instructors!</p>
-                <Button variant="outline" className="bg-white text-purple-700 hover:bg-gray-100 border-none">
-                  Get started
-                </Button>
-              </div>
-              <img src="https://images.unsplash.com/photo-1613618822854-0d33a1bf351e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="Student" className="absolute right-0 bottom-0 h-full max-w-none object-cover opacity-90" />
-            </motion.div>
-            
-            <motion.div className="bg-indigo-600 rounded-2xl p-8 text-white overflow-hidden relative" initial={{
-            opacity: 0,
-            x: 30
-          }} whileInView={{
-            opacity: 1,
-            x: 0
-          }} transition={{
-            duration: 0.5
-          }} viewport={{
-            once: true
-          }}>
-              <div className="max-w-md relative z-10">
-                <h3 className="text-2xl font-bold mb-4">Become a new instructor</h3>
-                <p className="mb-6">Teach thousands of students and earn money!</p>
-                <Button variant="outline" className="bg-white text-indigo-700 hover:bg-gray-100 border-none">
-                  Join now
-                </Button>
-              </div>
-              <img src="https://images.unsplash.com/photo-1590650153855-d9e808231d41?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="Instructor" className="absolute right-0 bottom-0 h-full max-w-none object-cover opacity-90" />
-            </motion.div>
-          </div>
-        </div>
-      </section>
+      
     </div>;
 };
-
 export default Testimonials;
