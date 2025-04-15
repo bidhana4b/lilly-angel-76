@@ -1,101 +1,26 @@
-
 import React, { useEffect } from 'react';
 import { Facebook, Twitter, Instagram, Linkedin, Youtube } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 import { motion } from "framer-motion";
-
 const Footer = () => {
   // Partner logos array with the uploaded images
-  const partnerLogos = [
-    {
-      src: "/lovable-uploads/b3d9ea52-4905-417d-9403-6d23cd3e8499.png",
-      alt: "Qualifi Logo"
-    },
-    {
-      src: "/lovable-uploads/18f4bf6f-6b3d-4e94-a279-58efe83fa447.png",
-      alt: "Trinity College London Logo"
-    },
-    {
-      src: "/lovable-uploads/028b546c-a59b-47a0-a299-35ae799b0d5d.png",
-      alt: "Highfield Approved Centre Logo"
-    },
-    {
-      src: "/lovable-uploads/95611343-7f51-4cf9-85a9-6a1b59554def.png",
-      alt: "CalmMinds-UK Partnership Logo"
-    },
-  ];
-
-  return (
-    <footer>
+  const partnerLogos = [{
+    src: "/lovable-uploads/b3d9ea52-4905-417d-9403-6d23cd3e8499.png",
+    alt: "Qualifi Logo"
+  }, {
+    src: "/lovable-uploads/18f4bf6f-6b3d-4e94-a279-58efe83fa447.png",
+    alt: "Trinity College London Logo"
+  }, {
+    src: "/lovable-uploads/028b546c-a59b-47a0-a299-35ae799b0d5d.png",
+    alt: "Highfield Approved Centre Logo"
+  }, {
+    src: "/lovable-uploads/95611343-7f51-4cf9-85a9-6a1b59554def.png",
+    alt: "CalmMinds-UK Partnership Logo"
+  }];
+  return <footer>
       {/* Partners Section with Carousel */}
-      <section className="py-16 bg-white border-t">
-        <div className="container mx-auto px-4">
-          <motion.div 
-            className="text-center mb-10"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-navy-dark">
-              Our Trusted Partners
-            </h2>
-            <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
-              We proudly work with industry leaders to deliver high-quality education and certification
-            </p>
-          </motion.div>
-
-          <Carousel 
-            className="w-full max-w-5xl mx-auto"
-            opts={{
-              align: "start",
-              loop: true,
-            }}
-          >
-            <CarouselContent>
-              {partnerLogos.map((logo, index) => (
-                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/4 pl-4">
-                  <motion.div 
-                    className="p-4 h-32 flex items-center justify-center bg-white rounded-lg"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    whileHover={{ 
-                      y: -5,
-                      boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)",
-                      transition: { duration: 0.2 }
-                    }}
-                  >
-                    <img 
-                      src={logo.src} 
-                      alt={logo.alt} 
-                      className="max-h-full max-w-full object-contain" 
-                    />
-                  </motion.div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <div className="flex justify-center mt-6">
-              <CarouselPrevious className="static transform-none mx-2" />
-              <CarouselNext className="static transform-none mx-2" />
-            </div>
-          </Carousel>
-          
-          <motion.div 
-            className="text-center mt-10"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            viewport={{ once: true }}
-          >
-            <p className="text-navy-dark font-medium">
-              Certified and approved by leading industry organizations
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      
 
       {/* Main Footer */}
       <div className="bg-navy-dark text-white py-12">
@@ -172,8 +97,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
