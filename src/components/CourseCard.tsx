@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { motion } from 'framer-motion';
+import { useLazyImage } from '@/hooks/use-lazy-image';
 
 interface CourseCardProps {
   image: string;
@@ -35,6 +36,10 @@ const CourseCard: React.FC<CourseCardProps> = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const { imageSrc, imageLoaded } = useLazyImage({ 
+    src: image,
+    placeholderSrc: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjMyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4='
+  });
 
   // Generate rating stars
   const renderStars = () => {
@@ -46,18 +51,13 @@ const CourseCard: React.FC<CourseCardProps> = ({
     ));
   };
 
-  // Fallback image handler
-  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
-    e.currentTarget.src = 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80';
-  };
-
   return (
     <motion.div
       className="h-full"
       initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
+      whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      whileHover={{ y: -5 }}
+      viewport={{ once: true }}
     >
       <Card 
         className={`overflow-hidden h-full border border-gray-200 hover:border-primary/50 transition-all duration-300 ${
@@ -69,12 +69,18 @@ const CourseCard: React.FC<CourseCardProps> = ({
         <div className="relative">
           <div className="h-48 overflow-hidden bg-gray-100">
             <img 
-              src={image} 
+              src={imageSrc}
               alt={title} 
               className={`w-full h-full object-cover transition-transform duration-700 ${
                 isHovered ? 'scale-110' : 'scale-100'
-              }`}
-              onError={handleImageError}
+              } ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+              style={{ 
+                opacity: imageLoaded ? 1 : 0,
+                transition: 'opacity 0.3s ease-in-out'
+              }}
+              loading="lazy"
+              width="400"
+              height="225"
             />
           </div>
           <button 

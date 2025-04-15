@@ -12,6 +12,7 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { cn } from '@/lib/utils';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,6 +31,10 @@ const Header = () => {
                 src="/lovable-uploads/1a43599f-f4e1-4ada-9439-efad90c5a949.png" 
                 alt="Lilly-Angel Logo" 
                 className="h-12 mr-2"
+                width="114" 
+                height="48"
+                loading="eager"
+                fetchPriority="high"
               />
             </Link>
           </div>
@@ -148,27 +153,28 @@ const Header = () => {
         
         {/* Mobile menu button */}
         <div className="md:hidden">
-          <Button variant="ghost" size="icon" onClick={toggleMenu}>
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </Button>
+          <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon">
+                <Menu className="h-6 w-6" />
+                <span className="sr-only">Toggle menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-[85%] sm:w-[350px] pt-10">
+              <nav>
+                <ul className="space-y-3">
+                  <li><Link to="/" className="block text-gray-600 hover:text-blue-600 transition-colors py-2" onClick={() => setIsMenuOpen(false)}>Home</Link></li>
+                  <li><Link to="/courses" className="block text-gray-600 hover:text-blue-600 transition-colors py-2" onClick={() => setIsMenuOpen(false)}>Courses</Link></li>
+                  <li><Link to="/about" className="block text-gray-600 hover:text-blue-600 transition-colors py-2" onClick={() => setIsMenuOpen(false)}>About Us</Link></li>
+                  <li><Link to="/tutors" className="block text-gray-600 hover:text-blue-600 transition-colors py-2" onClick={() => setIsMenuOpen(false)}>Tutors</Link></li>
+                  <li><Link to="/contact" className="block text-gray-600 hover:text-blue-600 transition-colors py-2" onClick={() => setIsMenuOpen(false)}>Contact</Link></li>
+                  <li><Link to="/faq" className="block text-gray-600 hover:text-blue-600 transition-colors py-2" onClick={() => setIsMenuOpen(false)}>FAQ</Link></li>
+                  <li><Link to="/login" className="block text-gray-600 hover:text-blue-600 transition-colors py-2" onClick={() => setIsMenuOpen(false)}>Log In</Link></li>
+                </ul>
+              </nav>
+            </SheetContent>
+          </Sheet>
         </div>
-        
-        {/* Mobile menu */}
-        {isMenuOpen && (
-          <div className="absolute top-16 left-0 right-0 bg-white shadow-md z-50 md:hidden">
-            <nav className="container mx-auto py-4">
-              <ul className="space-y-3">
-                <li><Link to="/" className="block text-gray-600 hover:text-blue-600 transition-colors py-2" onClick={toggleMenu}>Home</Link></li>
-                <li><Link to="/courses" className="block text-gray-600 hover:text-blue-600 transition-colors py-2" onClick={toggleMenu}>Courses</Link></li>
-                <li><Link to="/about" className="block text-gray-600 hover:text-blue-600 transition-colors py-2" onClick={toggleMenu}>About Us</Link></li>
-                <li><Link to="/tutors" className="block text-gray-600 hover:text-blue-600 transition-colors py-2" onClick={toggleMenu}>Tutors</Link></li>
-                <li><Link to="/contact" className="block text-gray-600 hover:text-blue-600 transition-colors py-2" onClick={toggleMenu}>Contact</Link></li>
-                <li><Link to="/faq" className="block text-gray-600 hover:text-blue-600 transition-colors py-2" onClick={toggleMenu}>FAQ</Link></li>
-                <li><Link to="/login" className="block text-gray-600 hover:text-blue-600 transition-colors py-2" onClick={toggleMenu}>Log In</Link></li>
-              </ul>
-            </nav>
-          </div>
-        )}
         
         <div className="hidden md:flex items-center space-x-4">
           <div className="relative">
@@ -177,6 +183,7 @@ const Header = () => {
               type="text" 
               placeholder="Search courses..." 
               className="pl-8 pr-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-400 w-40 lg:w-60"
+              aria-label="Search courses"
             />
           </div>
           <Link to="/login">

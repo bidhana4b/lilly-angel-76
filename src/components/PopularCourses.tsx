@@ -1,6 +1,5 @@
 
-import React, { useState } from 'react';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import React from 'react';
 import CourseCard from './CourseCard';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
@@ -72,7 +71,8 @@ const PopularCourses = () => {
     duration: "9 weeks"
   }];
 
-  return <section className="py-20 bg-gradient-to-b from-white to-gray-50">
+  return (
+    <section className="py-20 bg-gradient-to-b from-white to-gray-50">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-navy-dark relative">
@@ -96,16 +96,18 @@ const PopularCourses = () => {
         
         <motion.div 
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          whileInView={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {coursesData.map((course, index) => (
             <motion.div
               key={course.id}
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
+              viewport={{ once: true, margin: "-100px" }}
             >
               <CourseCard 
                 image={course.image} 
@@ -123,7 +125,8 @@ const PopularCourses = () => {
           ))}
         </motion.div>
       </div>
-    </section>;
+    </section>
+  );
 };
 
 export default PopularCourses;
