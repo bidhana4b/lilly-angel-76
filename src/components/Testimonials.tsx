@@ -119,10 +119,12 @@ const MotivationalStep = ({
 };
 const FAQItem = ({
   question,
+  answer,
   isOpen,
   onClick
 }: {
   question: string;
+  answer: string;
   isOpen: boolean;
   onClick: () => void;
 }) => {
@@ -133,6 +135,11 @@ const FAQItem = ({
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
       </button>
+      {isOpen && (
+        <div className="mt-3 text-gray-600">
+          <p>{answer}</p>
+        </div>
+      )}
     </div>;
 };
 const Testimonials = () => {
@@ -183,17 +190,17 @@ const Testimonials = () => {
     image: "https://images.unsplash.com/photo-1492681290082-e932832941e6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80"
   }];
   const faqs = [{
-    question: "What is a Learning Management System (LMS)?",
-    answer: "A Learning Management System (LMS) is a software application for the administration, documentation, tracking, reporting, automation, and delivery of educational courses, training programs, or learning and development programs."
+    question: "What is Business Management & Leadership Skills for 2024?",
+    answer: "This comprehensive 10-week course provides essential skills for modern business leaders. Covering strategic management, leadership techniques, and organizational behavior, it's designed for professionals looking to advance their careers. With over 4,500 students enrolled, this highly-rated course (4.6/5) taught by instructor Kafi has become our most popular business offering."
   }, {
-    question: "What are the key features of an LMS?",
-    answer: "Key features of an LMS typically include course management, content creation and management, assessment tools, progress tracking, reporting and analytics, mobile compatibility, social learning features, gamification, and integration capabilities."
+    question: "Tell me about the B1 ENGLISH TEST INTEGRATED SKILLS (ISE I) course",
+    answer: "This 8-week English language course prepares students specifically for the B1 English Test with integrated skills approach (ISE I). The curriculum focuses on all four language skills - reading, writing, listening and speaking - taught in an integrated manner. With a stellar 4.8 rating and taught by Sarah Johnson, this course has helped nearly 1,000 students achieve their language certification goals."
   }, {
-    question: "How can an LMS benefit educational institutions and organizations?",
-    answer: "An LMS can benefit educational institutions and organizations by centralizing learning content, reducing training costs, enabling consistent training delivery, providing detailed progress tracking, supporting remote learning, facilitating compliance management, and enabling self-paced learning."
+    question: "What does the A1 SELT | GESE GRADE 2 | ENGLISH TEST FOR FAMILY cover?",
+    answer: "This 6-week course is specifically designed for family visa applicants needing to pass the A1 SELT (Secure English Language Test) or GESE Grade 2 examination. The course covers essential vocabulary, basic conversation skills, and test preparation strategies. Instructor John Smith has helped over 820 students with a course rated 4.7/5 for its effective, focused approach to family visa language requirements."
   }, {
-    question: "Is an LMS suitable for both academic and corporate settings?",
-    answer: "Yes, an LMS is suitable for both academic and corporate settings. In academic settings, it supports course delivery, student engagement, and assessment. In corporate settings, it facilitates employee onboarding, professional development, compliance training, and performance tracking."
+    question: "What's included in the LIFE IN THE UK PREPARATION COURSE?",
+    answer: "Our 12-week Life in the UK preparation course thoroughly covers all topics required to pass the official Life in the UK test for citizenship or settlement. The curriculum includes British history, culture, laws, and modern life essentials. This comprehensive course has our highest rating (4.9/5) and has helped over 1,100 students successfully prepare for their citizenship journey under Emily Wilson's expert guidance."
   }];
   const toggleFAQ = (index: number) => {
     setOpenFAQ(openFAQ === index ? null : index);
@@ -288,7 +295,60 @@ const Testimonials = () => {
       </section>
 
       {/* FAQ Section */}
-      
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <motion.div className="text-center mb-12" initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.5
+        }} viewport={{
+          once: true
+        }}>
+            <h2 className="text-3xl md:text-4xl font-bold text-navy-dark relative inline-block">
+              <span className="relative z-10">Course Information</span>
+              <span className="absolute bottom-0 left-0 w-full h-3 bg-orange-DEFAULT/20 -z-10 transform -rotate-1"></span>
+            </h2>
+            <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
+              Learn more about our most popular training courses and qualifications
+            </p>
+          </motion.div>
+
+          <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+            {faqs.map((faq, index) => (
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <FAQItem
+                  question={faq.question}
+                  answer={faq.answer}
+                  isOpen={openFAQ === index}
+                  onClick={() => toggleFAQ(index)}
+                />
+              </motion.div>
+            ))}
+          </div>
+          
+          <div className="mt-10 text-center">
+            <motion.div 
+              whileHover={{ scale: 1.05 }} 
+              whileTap={{ scale: 0.95 }}
+              className="inline-block"
+            >
+              <Button className="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-8 py-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+                Explore All Courses
+              </Button>
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
       {/* Blog Section */}
       <section className="py-20 bg-white">
@@ -404,4 +464,5 @@ const Testimonials = () => {
       </section>
     </div>;
 };
+
 export default Testimonials;
