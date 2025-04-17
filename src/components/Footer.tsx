@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react';
+
+import React from 'react';
 import { Facebook, Twitter, Instagram, Linkedin, Youtube } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 import { motion } from "framer-motion";
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
+
 const Footer = () => {
   // Partner logos array with the uploaded images
   const partnerLogos = [{
@@ -18,17 +20,40 @@ const Footer = () => {
     src: "/lovable-uploads/95611343-7f51-4cf9-85a9-6a1b59554def.png",
     alt: "CalmMinds-UK Partnership Logo"
   }];
+  
   return <footer>
       {/* Partners Section with Carousel */}
-      
+      <div className="bg-gray-100 py-10">
+        <div className="container mx-auto">
+          <h3 className="text-center text-xl font-semibold mb-8">Our Trusted Partners</h3>
+          <Carousel
+            opts={{
+              align: "center",
+              loop: true,
+            }}
+            className="w-full max-w-5xl mx-auto"
+          >
+            <CarouselContent>
+              {partnerLogos.map((logo, index) => (
+                <CarouselItem key={index} className="md:basis-1/3 lg:basis-1/4 flex items-center justify-center p-4">
+                  <img src={logo.src} alt={logo.alt} className="h-24 object-contain" />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="flex justify-center mt-4">
+              <CarouselPrevious />
+              <CarouselNext />
+            </div>
+          </Carousel>
+        </div>
+      </div>
 
       {/* Main Footer */}
       <div className="bg-navy-dark text-white py-12">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div>
-              
-              <p className="text-gray-300 mb-4">Our intuition prides in being a successful provider of further Education in London. Our mentors are passionate about delivering a high-quality service, which ultimately has a positive impact on the lives of individuals</p>
+              <p className="text-gray-300 mb-4">Our institution prides itself in being a successful provider of further Education in London. Our mentors are passionate about delivering a high-quality service, which ultimately has a positive impact on the lives of individuals</p>
               <div className="flex space-x-4">
                 <a href="#" className="text-gray-300 hover:text-white transition-colors">
                   <Facebook className="h-5 w-5" />
@@ -54,8 +79,10 @@ const Footer = () => {
                 <li><Link to="/" className="text-gray-300 hover:text-white transition-colors">Home</Link></li>
                 <li><Link to="/about" className="text-gray-300 hover:text-white transition-colors">About Us</Link></li>
                 <li><Link to="/courses" className="text-gray-300 hover:text-white transition-colors">Courses</Link></li>
+                <li><Link to="/tutors" className="text-gray-300 hover:text-white transition-colors">Tutors</Link></li>
+                <li><Link to="/career" className="text-gray-300 hover:text-white transition-colors">Career</Link></li>
+                <li><Link to="/social-responsibility" className="text-gray-300 hover:text-white transition-colors">Social Responsibility</Link></li>
                 <li><Link to="/contact" className="text-gray-300 hover:text-white transition-colors">Contact</Link></li>
-                <li><Link to="/faq" className="text-gray-300 hover:text-white transition-colors">FAQs</Link></li>
               </ul>
             </div>
             
@@ -99,4 +126,5 @@ const Footer = () => {
       </div>
     </footer>;
 };
+
 export default Footer;

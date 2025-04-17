@@ -19,6 +19,8 @@ import Courses from "./pages/Courses";
 import About from "./pages/About";
 import TeamPage from "./pages/TeamPage";
 import Contact from "./pages/Contact";
+import Career from "./pages/Career";
+import SocialResponsibility from "./pages/SocialResponsibility";
 import Faq from "./pages/Faq";
 import NotFound from "./pages/NotFound";
 
@@ -44,6 +46,8 @@ const App = () => (
             <Route path="/about" element={<About />} />
             <Route path="/about/team" element={<TeamPage />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/career" element={<Career />} />
+            <Route path="/social-responsibility" element={<SocialResponsibility />} />
             <Route path="/faq" element={<Faq />} />
             
             {/* Admin Routes */}
