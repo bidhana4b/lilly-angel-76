@@ -189,7 +189,7 @@ const Hero = () => {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-3 w-3 bg-orange-500"></span>
                 </span>
-                <span className="font-medium text-gray-800">1000+ Live Classes</span>
+                <span className="font-medium text-gray-800">100+ Classes</span>
               </motion.div>
               
               <motion.div className="absolute top-5 -right-5 bg-white py-2 px-4 rounded-lg shadow-lg border border-gray-100" animate={{
