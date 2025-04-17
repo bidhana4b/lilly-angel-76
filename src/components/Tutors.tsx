@@ -3,6 +3,7 @@ import React from 'react';
 import { Star, Facebook, Twitter, Linkedin } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 interface TutorProps {
   image: string;
