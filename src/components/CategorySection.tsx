@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Shield, Languages, Clock, Heart, Award } from 'lucide-react';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -13,56 +13,54 @@ interface Category {
   cta: string;
   image: string;
   backupImage: string;
+  icon: React.ReactNode;
 }
 
 const categories: Category[] = [{
+  id: 'security',
+  name: 'Security Courses',
+  description: 'Professional security training',
+  tagline: 'Comprehensive security courses designed for individuals and organizations seeking professional certification and expertise',
+  cta: 'Explore Security Courses',
+  image: 'https://images.unsplash.com/photo-1553522911-d0ba7b3ee935?q=80&w=1470&auto=format&fit=crop',
+  backupImage: 'https://images.unsplash.com/photo-1553522911-d0ba7b3ee935?q=80&w=1470&auto=format&fit=crop',
+  icon: <Shield className="h-4 w-4" />
+}, {
+  id: 'english',
+  name: 'English Language',
+  description: 'Master the English language',
+  tagline: 'From beginners to advanced levels, our English language courses help you communicate confidently in any situation',
+  cta: 'Explore English Courses',
+  image: 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=1471&auto=format&fit=crop',
+  backupImage: 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=1471&auto=format&fit=crop',
+  icon: <Languages className="h-4 w-4" />
+}, {
+  id: 'short-courses',
+  name: 'Short Courses',
+  description: 'Quick learning for busy professionals',
+  tagline: 'Intensive, focused training designed for quick skill acquisition and immediate application in your career',
+  cta: 'Explore Short Courses',
+  image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=1480&auto=format&fit=crop',
+  backupImage: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=1480&auto=format&fit=crop',
+  icon: <Clock className="h-4 w-4" />
+}, {
   id: 'health-safety',
-  name: 'Health and Safety',
+  name: 'Health & Safety',
   description: '#1 Most popular topic on Lilly-Angel',
   tagline: 'With over 100,000 customers, from individuals to some of the most respected global brands',
   cta: 'Explore Health And Safety Courses',
   image: '/lovable-uploads/b6830540-4fd4-4909-8e65-53d63367223e.png',
-  backupImage: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1470&auto=format&fit=crop'
+  backupImage: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1470&auto=format&fit=crop',
+  icon: <Heart className="h-4 w-4" />
 }, {
-  id: 'first-aid',
-  name: 'First Aid',
-  description: 'Essential life-saving skills',
-  tagline: 'Learn how to respond effectively in emergency situations with our certified courses',
-  cta: 'Explore First Aid Courses',
-  image: 'https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?q=80&w=1470&auto=format&fit=crop',
-  backupImage: 'https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?q=80&w=1470&auto=format&fit=crop'
-}, {
-  id: 'security',
-  name: 'Security',
-  description: 'Professional security training',
-  tagline: 'Comprehensive security courses designed for individuals and organizations',
-  cta: 'Explore Security Courses',
-  image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1531&auto=format&fit=crop',
-  backupImage: 'https://images.unsplash.com/photo-1553522911-d0ba7b3ee935?q=80&w=1470&auto=format&fit=crop'
-}, {
-  id: 'hospitality',
-  name: 'Hospitality',
-  description: 'Excellence in service',
-  tagline: 'Develop the skills needed to excel in the competitive hospitality industry',
-  cta: 'Explore Hospitality Courses',
-  image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1470&auto=format&fit=crop',
-  backupImage: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1470&auto=format&fit=crop'
-}, {
-  id: 'teaching-academics',
-  name: 'Teaching & Academics',
-  description: 'Elevate your teaching career',
-  tagline: 'Professional development courses for educators at all levels',
-  cta: 'Explore Teaching & Academic Courses',
-  image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1632&auto=format&fit=crop',
-  backupImage: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1632&auto=format&fit=crop'
-}, {
-  id: 'construction',
-  name: 'Construction',
-  description: 'Build your expertise',
-  tagline: 'Industry-recognized qualifications for construction professionals',
-  cta: 'Explore Construction Courses',
-  image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1531&auto=format&fit=crop',
-  backupImage: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=1469&auto=format&fit=crop'
+  id: 'level-7',
+  name: 'Level 7 Courses',
+  description: 'Advanced professional qualifications',
+  tagline: 'High-level qualifications designed for career advancement and deep industry expertise',
+  cta: 'Explore Level 7 Courses',
+  image: 'https://images.unsplash.com/photo-1460574283810-2aab119d8511?q=80&w=1470&auto=format&fit=crop',
+  backupImage: 'https://images.unsplash.com/photo-1460574283810-2aab119d8511?q=80&w=1470&auto=format&fit=crop',
+  icon: <Award className="h-4 w-4" />
 }];
 
 const CategorySection = () => {
@@ -110,18 +108,26 @@ const CategorySection = () => {
               {categories.map((category, index) => (
                 <motion.button
                   key={category.id}
-                  className={`px-5 py-3 text-sm md:text-base font-medium transition-all duration-300 rounded-full ${
+                  className={`px-5 py-3 text-sm md:text-base font-medium rounded-full flex items-center gap-2 shadow-sm transition-all duration-300 ${
                     activeCategory === category.id
-                      ? 'bg-blue-600 text-white shadow-lg transform -translate-y-1'
-                      : 'text-gray-600 hover:bg-gray-100 hover:text-blue-600'
+                      ? 'bg-gradient-to-r from-orange-400 to-orange-600 text-white shadow-lg transform -translate-y-1 scale-105'
+                      : 'bg-white text-gray-700 hover:bg-gray-50 hover:text-orange-500 border border-gray-100'
                   }`}
                   onClick={() => setActiveCategory(category.id)}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.05 }}
+                  transition={{ 
+                    delay: index * 0.05,
+                    type: "spring",
+                    stiffness: 400,
+                    damping: 25
+                  }}
                 >
+                  <span className={`${activeCategory === category.id ? 'text-white' : 'text-orange-500'}`}>
+                    {category.icon}
+                  </span>
                   {category.name}
                 </motion.button>
               ))}
@@ -142,7 +148,7 @@ const CategorySection = () => {
               <div className="relative grid grid-cols-1 md:grid-cols-2 gap-0">
                 <div className="p-8 md:p-12 flex flex-col justify-center order-2 md:order-1">
                   <motion.span 
-                    className="bg-blue-100 text-blue-600 font-medium px-4 py-1 rounded-full text-sm mb-6 w-fit"
+                    className="bg-orange-100 text-orange-600 font-medium px-4 py-1 rounded-full text-sm mb-6 w-fit"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.2 }}
@@ -171,7 +177,7 @@ const CategorySection = () => {
                     transition={{ delay: 0.5 }}
                   >
                     <Button 
-                      className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-6 mt-4 rounded-lg w-fit group transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1"
+                      className="bg-gradient-to-r from-orange-400 to-orange-600 hover:from-orange-500 hover:to-orange-700 text-white px-6 py-6 mt-4 rounded-lg w-fit group transition-all duration-300 shadow-md hover:shadow-xl transform hover:-translate-y-1"
                     >
                       <span>{activeItem.cta}</span>
                       <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
@@ -182,10 +188,13 @@ const CategorySection = () => {
                 <div className="order-1 md:order-2 h-64 md:h-auto overflow-hidden">
                   <div className="h-full w-full">
                     <AspectRatio ratio={16/9} className="h-full">
-                      <img 
+                      <motion.img 
                         src={activeItem.image} 
                         alt={activeItem.name} 
-                        className="w-full h-full object-cover object-center transition-all duration-700 transform hover:scale-110"
+                        className="w-full h-full object-cover object-center"
+                        initial={{ scale: 1.1, opacity: 0.8 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ duration: 0.5 }}
                         onError={(e) => {
                           e.currentTarget.src = activeItem.backupImage;
                         }}
@@ -205,7 +214,7 @@ const CategorySection = () => {
                   onClick={() => setActiveCategory(category.id)}
                   className={`w-2 h-2 rounded-full transition-all duration-300 ${
                     activeCategory === category.id 
-                      ? 'bg-blue-600 w-6' 
+                      ? 'bg-orange-500 w-8' 
                       : 'bg-gray-300 hover:bg-gray-400'
                   }`}
                   aria-label={`Go to ${category.name}`}
