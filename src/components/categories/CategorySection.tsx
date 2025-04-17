@@ -1,6 +1,6 @@
 
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { Shield, Languages, Clock, Heart, Award, Sparkles } from 'lucide-react';
 import { categories } from './types';
 import CategoryTabs from './CategoryTabs';
@@ -10,6 +10,36 @@ import CategoryIndicators from './CategoryIndicators';
 const CategorySection = () => {
   const [activeCategory, setActiveCategory] = useState<string>(categories[0].id);
   const [isAnimating, setIsAnimating] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  // Mouse position motion values for parallax effect
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // Transform mouse position into parallax movement values with different intensities
+  const layer1X = useTransform(mouseX, [-500, 500], [15, -15]);
+  const layer1Y = useTransform(mouseY, [-500, 500], [15, -15]);
+  const layer2X = useTransform(mouseX, [-500, 500], [-10, 10]);
+  const layer2Y = useTransform(mouseY, [-500, 500], [-10, 10]);
+  
+  // Track mouse position relative to the container
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      
+      // Calculate distance from center
+      mouseX.set(e.clientX - centerX);
+      mouseY.set(e.clientY - centerY);
+    }
+  };
+
+  // Reset mouse position when mouse leaves
+  const handleMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+  };
   
   // Add icons to categories
   const categoriesWithIcons = categories.map(category => {
@@ -49,18 +79,27 @@ const CategorySection = () => {
     <section className="py-16 md:py-24 bg-gradient-to-b from-white to-gray-50">
       <div className="container mx-auto px-4">
         <motion.div 
-          className="mb-12 max-w-3xl mx-auto text-center relative z-10"
+          ref={containerRef}
+          className="mb-12 max-w-3xl mx-auto text-center relative z-10 perspective-500"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
         >
-          {/* Decorative elements to enhance visibility */}
+          {/* Decorative elements with parallax effect */}
           <motion.div 
             className="absolute -z-10 w-full h-full top-0 left-0 bg-orange-50 rounded-xl -rotate-1 scale-110"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
+            style={{ 
+              x: layer1X, 
+              y: layer1Y,
+              rotateX: useTransform(mouseY, [-500, 500], [2, -2]),
+              rotateY: useTransform(mouseX, [-500, 500], [-2, 2])
+            }}
           />
           
           <motion.div 
@@ -68,6 +107,12 @@ const CategorySection = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
+            style={{ 
+              x: layer2X, 
+              y: layer2Y,
+              rotateX: useTransform(mouseY, [-500, 500], [-1, 1]),
+              rotateY: useTransform(mouseX, [-500, 500], [1, -1])
+            }}
           />
           
           <div className="p-6">
