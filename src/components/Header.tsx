@@ -1,41 +1,21 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Search, Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
+import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
 import { cn } from '@/lib/utils';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
-  return (
-    <header className="w-full bg-white py-4 shadow-sm">
+  return <header className="w-full bg-white py-4 shadow-sm">
       <div className="container mx-auto flex items-center justify-between">
         <div className="flex items-center">
           <div className="flex items-center">
             <Link to="/">
-              <img 
-                src="/lovable-uploads/1a43599f-f4e1-4ada-9439-efad90c5a949.png" 
-                alt="Lilly-Angel Logo" 
-                className="h-12 mr-2"
-                width="114" 
-                height="48"
-                loading="eager"
-                fetchPriority="high"
-              />
+              <img src="/lovable-uploads/1a43599f-f4e1-4ada-9439-efad90c5a949.png" alt="Lilly-Angel Logo" className="h-12 mr-2" width="114" height="48" loading="eager" fetchPriority="high" />
             </Link>
           </div>
           
@@ -54,10 +34,7 @@ const Header = () => {
                     <ul className="grid w-[300px] p-4 lg:w-[400px] lg:grid-cols-1 gap-3">
                       <li>
                         <NavigationMenuLink asChild>
-                          <Link
-                            to="/courses"
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                          >
+                          <Link to="/courses" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
                             <div className="text-sm font-medium leading-none">All Courses</div>
                             <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                               Browse our complete course catalog
@@ -67,10 +44,7 @@ const Header = () => {
                       </li>
                       <li>
                         <NavigationMenuLink asChild>
-                          <Link
-                            to="/courses?category=health"
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                          >
+                          <Link to="/courses?category=health" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
                             <div className="text-sm font-medium leading-none">Health & Safety</div>
                             <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                               Courses for health and safety compliance
@@ -80,10 +54,7 @@ const Header = () => {
                       </li>
                       <li>
                         <NavigationMenuLink asChild>
-                          <Link
-                            to="/courses?category=security"
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                          >
+                          <Link to="/courses?category=security" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
                             <div className="text-sm font-medium leading-none">Security Training</div>
                             <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                               Professional security certification courses
@@ -101,10 +72,7 @@ const Header = () => {
                     <ul className="grid w-[300px] p-4 lg:w-[400px] lg:grid-cols-1 gap-3">
                       <li>
                         <NavigationMenuLink asChild>
-                          <Link
-                            to="/about"
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                          >
+                          <Link to="/about" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
                             <div className="text-sm font-medium leading-none">Our Vision & Mission</div>
                             <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                               Learn about our company's vision and mission
@@ -114,10 +82,7 @@ const Header = () => {
                       </li>
                       <li>
                         <NavigationMenuLink asChild>
-                          <Link
-                            to="/about/team"
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                          >
+                          <Link to="/about/team" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
                             <div className="text-sm font-medium leading-none">Our Team</div>
                             <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                               Meet the people behind Lilly-Angel
@@ -179,21 +144,14 @@ const Header = () => {
         <div className="hidden md:flex items-center space-x-4">
           <div className="relative">
             <Search className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
-            <input 
-              type="text" 
-              placeholder="Search courses..." 
-              className="pl-8 pr-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-400 w-40 lg:w-60"
-              aria-label="Search courses"
-            />
+            <input type="text" placeholder="Search courses..." className="pl-8 pr-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-400 w-40 lg:w-60" aria-label="Search courses" />
           </div>
           <Link to="/login">
             <Button variant="outline" className="hidden md:inline-flex">Log In</Button>
           </Link>
-          <Button className="bg-blue-600 hover:bg-blue-700">Sign Up</Button>
+          <Button className="bg-blue-600 hover:bg-blue-700">Online Registration</Button>
         </div>
       </div>
-    </header>
-  );
+    </header>;
 };
-
 export default Header;
