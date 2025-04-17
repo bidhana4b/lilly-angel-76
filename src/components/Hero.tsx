@@ -22,9 +22,7 @@ const Hero = () => {
             <Button className="bg-orange-DEFAULT hover:bg-orange-dark text-white px-6 py-2">
               Find Your Courses
             </Button>
-            <Button variant="outline" className="bg-transparent border-white text-white hover:bg-white/10">
-              Student Consultation <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
+            
           </div>
         </div>
       </div>
