@@ -1,154 +1,90 @@
 
-import React, { useState } from 'react';
-import { Star, User, Clock, Bookmark } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import React from 'react';
+import { Star, Clock, Users } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardFooter } from '@/components/ui/card';
-import { motion } from 'framer-motion';
-import { useLazyImage } from '@/hooks/use-lazy-image';
+import { Card, CardContent } from '@/components/ui/card';
+import OptimizedImage from './ui/optimized-image';
 
 interface CourseCardProps {
   image: string;
   title: string;
   category: string;
   rating: number;
+  reviewCount?: number;
   students: number;
   instructorName: string;
-  instructorAvatar?: string;
-  price?: string;
   isFeatured?: boolean;
-  reviewCount?: number;
-  duration?: string;
+  price: string;
+  duration: string;
 }
 
-const CourseCard: React.FC<CourseCardProps> = ({
-  image,
-  title,
-  category,
-  rating,
-  students,
-  instructorName,
-  instructorAvatar,
-  price,
+const CourseCard = ({ 
+  image, 
+  title, 
+  category, 
+  rating, 
+  reviewCount = 0, 
+  students, 
+  instructorName, 
   isFeatured = false,
-  reviewCount,
+  price,
   duration
-}) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [isBookmarked, setIsBookmarked] = useState(false);
-  const { imageSrc, imageLoaded } = useLazyImage({ 
-    src: image,
-    placeholderSrc: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjMyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4='
-  });
-
-  // Generate rating stars
-  const renderStars = () => {
-    return Array(5).fill(0).map((_, i) => (
-      <Star 
-        key={i} 
-        className={`h-4 w-4 ${i < Math.floor(rating) ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}`} 
-      />
-    ));
-  };
-
+}: CourseCardProps) => {
   return (
-    <motion.div
-      className="h-full"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      viewport={{ once: true }}
-    >
-      <Card 
-        className={`overflow-hidden h-full border border-gray-200 hover:border-primary/50 transition-all duration-300 ${
-          isHovered ? 'shadow-lg' : 'shadow-sm'
-        }`}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        <div className="relative">
-          <div className="h-48 overflow-hidden bg-gray-100">
-            <img 
-              src={imageSrc}
-              alt={title} 
-              className={`w-full h-full object-cover transition-transform duration-700 ${
-                isHovered ? 'scale-110' : 'scale-100'
-              } ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
-              style={{ 
-                opacity: imageLoaded ? 1 : 0,
-                transition: 'opacity 0.3s ease-in-out'
-              }}
-              loading="lazy"
-              width="400"
-              height="225"
-            />
-          </div>
-          <button 
-            className="absolute top-3 right-3 p-1.5 bg-white rounded-full shadow-md hover:bg-gray-100 transition-colors"
-            onClick={() => setIsBookmarked(!isBookmarked)}
-            aria-label={isBookmarked ? "Remove bookmark" : "Add bookmark"}
-          >
-            <Bookmark 
-              className={`h-4 w-4 ${isBookmarked ? 'text-primary fill-primary' : 'text-gray-500'}`} 
-            />
-          </button>
-          {isFeatured && (
-            <Badge 
-              variant="default" 
-              className="absolute bottom-3 left-3 bg-primary text-white px-2 py-1"
-            >
-              Featured
-            </Badge>
-          )}
+    <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg card-hover h-full border-none shadow-md">
+      <div className="relative">
+        <OptimizedImage 
+          src={image} 
+          alt={title}
+          aspectRatio="aspect-[16/9]"
+          className="w-full object-cover"
+          placeholderSrc="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2YxZjVmOSIgLz48dGV4dCB4PSIzMDAiIHk9IjIwMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjMwIiBmaWxsPSIjOTRhM2I4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBhbGlnbm1lbnQtYmFzZWxpbmU9Im1pZGRsZSI+SW1hZ2UgbG9hZGluZy4uLjwvdGV4dD48L3N2Zz4="
+        />
+        {isFeatured && (
+          <Badge className="absolute top-3 left-3 bg-gradient-to-r from-orange-400 to-orange-600 hover:from-orange-500 hover:to-orange-700">
+            Featured
+          </Badge>
+        )}
+        <div className="absolute top-3 right-3 bg-black/60 text-white text-xs font-semibold py-1 px-2 rounded backdrop-blur-sm flex items-center">
+          <Clock className="w-3 h-3 mr-1" />
+          {duration}
         </div>
-
-        <CardContent className="p-5">
-          <Badge variant="outline" className="mb-3 text-xs font-normal bg-gray-50 text-blue-600">
+      </div>
+      
+      <CardContent className="p-5">
+        <div className="flex justify-between items-start mb-2">
+          <Badge variant="outline" className="bg-blue-50 hover:bg-blue-100 text-blue-700 hover:text-blue-800">
             {category}
           </Badge>
-          
-          <div className="flex items-center gap-1 mb-2">
-            {renderStars()}
-            <span className="ml-1 font-semibold text-yellow-500">{rating.toFixed(1)}</span>
-            {reviewCount && (
-              <span className="text-xs text-gray-500 ml-1">({reviewCount})</span>
-            )}
+          <div className="flex items-center">
+            <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+            <span className="text-sm font-semibold ml-1">{rating}</span>
+            {reviewCount > 0 && <span className="text-xs text-gray-500 ml-1">({reviewCount})</span>}
           </div>
-          
-          <h3 className="font-semibold text-lg mb-4 line-clamp-2 h-14 text-navy-dark hover:text-primary transition-colors">
-            {title}
-          </h3>
-          
-          <div className="flex flex-col space-y-3 mt-3">
-            <div className="flex items-center text-gray-600 text-sm">
-              <User className="h-4 w-4 mr-2 text-gray-500" />
-              <span>{students} students</span>
-            </div>
-            
-            {duration && (
-              <div className="flex items-center text-gray-600 text-sm">
-                <Clock className="h-4 w-4 mr-2 text-gray-500" />
-                <span>{duration}</span>
-              </div>
-            )}
+        </div>
+        
+        <h3 className="font-semibold text-lg mb-2 line-clamp-2 h-14">{title}</h3>
+        
+        <div className="flex items-center text-sm text-gray-500 mb-3">
+          <Users className="h-4 w-4 mr-1" />
+          <span>{students.toLocaleString()} students</span>
+        </div>
+        
+        <div className="flex items-center text-sm mb-4">
+          <span className="text-gray-700">By</span>
+          <span className="font-medium ml-1 text-navy-dark">{instructorName}</span>
+        </div>
+        
+        <div className="border-t border-gray-100 pt-3 flex justify-between items-center">
+          <div className="text-gray-900 font-bold">
+            ${price}
           </div>
-          
-          {price && (
-            <div className="mt-4 text-2xl font-bold text-navy-dark">
-              ${price}
-            </div>
-          )}
-        </CardContent>
-
-        <CardFooter className="px-5 py-4 border-t border-gray-100">
-          <Button 
-            className="w-full bg-primary text-white hover:bg-primary/90 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 font-medium"
-          >
-            {price ? `Enroll Now` : 'View Details'}
-          </Button>
-        </CardFooter>
-      </Card>
-    </motion.div>
+          <button className="bg-orange-500 hover:bg-orange-600 text-white py-1.5 px-4 rounded-md text-sm font-medium transition-colors">
+            Enroll Now
+          </button>
+        </div>
+      </CardContent>
+    </Card>
   );
 };
 

@@ -18,14 +18,16 @@ const Index = () => {
       <Header />
       <main className="flex-grow">
         <Hero />
-        <CategorySection />
-        <Features />
-        <PopularCourses />
-        <CareerSection />
-        <Tutors />
-        <TeamTraining />
-        <Testimonials />
-        <Contact />
+        <div className="space-y-12 md:space-y-16"> {/* Consistent spacing between sections */}
+          <CategorySection />
+          <Features />
+          <PopularCourses />
+          <CareerSection />
+          <Tutors />
+          <TeamTraining />
+          <Testimonials />
+          <Contact />
+        </div>
       </main>
       <Footer />
     </div>

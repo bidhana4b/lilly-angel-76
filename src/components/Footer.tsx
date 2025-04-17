@@ -2,29 +2,16 @@ import React from 'react';
 import { Facebook, Twitter, Instagram, Linkedin, Youtube } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from "framer-motion";
-import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
+import PartnerLogos from './PartnerLogos';
+
 const Footer = () => {
-  // Partner logos array with the uploaded images
-  const partnerLogos = [{
-    src: "/lovable-uploads/b3d9ea52-4905-417d-9403-6d23cd3e8499.png",
-    alt: "Qualifi Logo"
-  }, {
-    src: "/lovable-uploads/18f4bf6f-6b3d-4e94-a279-58efe83fa447.png",
-    alt: "Trinity College London Logo"
-  }, {
-    src: "/lovable-uploads/028b546c-a59b-47a0-a299-35ae799b0d5d.png",
-    alt: "Highfield Approved Centre Logo"
-  }, {
-    src: "/lovable-uploads/95611343-7f51-4cf9-85a9-6a1b59554def.png",
-    alt: "CalmMinds-UK Partnership Logo"
-  }];
   return <footer>
       {/* Partners Section with Carousel */}
-      
+      <PartnerLogos />
 
       {/* Main Footer */}
       <div className="bg-navy-dark text-white py-12">
-        <div className="container mx-auto">
+        <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div>
               <p className="text-gray-300 mb-4">Our institution prides itself in being a successful provider of further Education in London. Our mentors are passionate about delivering a high-quality service, which ultimately has a positive impact on the lives of individuals</p>

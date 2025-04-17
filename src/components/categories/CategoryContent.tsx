@@ -2,9 +2,10 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Shield } from 'lucide-react';
+import { ArrowRight, Shield, AlertTriangle } from 'lucide-react';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Category } from './types';
+import OptimizedImage from '../ui/optimized-image';
 
 interface CategoryContentProps {
   activeCategory: string;
@@ -70,20 +71,12 @@ const CategoryContent: React.FC<CategoryContentProps> = ({
           <div className="order-1 md:order-2 h-64 md:h-auto overflow-hidden">
             <div className="h-full w-full relative group">
               <AspectRatio ratio={16/9} className="h-full">
-                <motion.img 
+                <OptimizedImage 
                   src={activeItem.image} 
                   alt={activeItem.name} 
                   className="w-full h-full object-cover object-center transition-all duration-500"
-                  initial={{ scale: 1.1, opacity: 0.8 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.5 }}
-                  whileHover={{ 
-                    scale: 1.05,
-                    filter: "brightness(1.1)",
-                  }}
-                  onError={(e) => {
-                    e.currentTarget.src = activeItem.backupImage;
-                  }}
+                  placeholderSrc={activeItem.backupImage}
+                  aspectRatio="aspect-[16/9]"
                 />
               </AspectRatio>
               
