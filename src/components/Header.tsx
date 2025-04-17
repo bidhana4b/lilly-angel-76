@@ -49,90 +49,101 @@ const Header = () => {
                 </NavigationMenuItem>
                 
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="text-orange-500 font-medium">Student Advisory</NavigationMenuTrigger>
+                  <NavigationMenuTrigger>Courses</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <div className="flex min-w-[600px] bg-white">
-                      <div className="w-1/2 border-r">
-                        <ul className="p-4">
-                          <li className="mb-3">
-                            <NavigationMenuLink asChild>
-                              <Link
-                                to="/consultancy"
-                                className="block font-semibold text-gray-900 rounded-md p-2 hover:bg-gray-100"
-                              >
-                                Our Student Consultancy
-                              </Link>
-                            </NavigationMenuLink>
-                          </li>
-                          <li className="mb-3">
-                            <NavigationMenuLink asChild>
-                              <Link
-                                to="/countries"
-                                className="block font-semibold text-orange-500 rounded-md p-2 hover:bg-gray-100"
-                              >
-                                Country We Work With
-                              </Link>
-                            </NavigationMenuLink>
-                          </li>
-                          <li>
-                            <NavigationMenuLink asChild>
-                              <Link
-                                to="/online-admission"
-                                className="block font-semibold text-gray-900 rounded-md p-2 hover:bg-gray-100"
-                              >
-                                Online Admission Form
-                              </Link>
-                            </NavigationMenuLink>
-                          </li>
-                        </ul>
-                      </div>
-                      <div className="w-1/2 bg-gray-50">
-                        <ul className="p-4">
-                          <li className="mb-3">
-                            <NavigationMenuLink asChild>
-                              <Link
-                                to="/study-uk"
-                                className="block font-medium text-gray-900 rounded-md p-2 hover:bg-gray-100"
-                              >
-                                Study In UK
-                              </Link>
-                            </NavigationMenuLink>
-                          </li>
-                          <li className="mb-3">
-                            <NavigationMenuLink asChild>
-                              <Link
-                                to="/study-australia"
-                                className="block font-medium text-gray-900 rounded-md p-2 hover:bg-gray-100"
-                              >
-                                Study In Australia
-                              </Link>
-                            </NavigationMenuLink>
-                          </li>
-                          <li>
-                            <NavigationMenuLink asChild>
-                              <Link
-                                to="/study-canada"
-                                className="block font-medium text-gray-900 rounded-md p-2 hover:bg-gray-100"
-                              >
-                                Study In Canada
-                              </Link>
-                            </NavigationMenuLink>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
+                    <ul className="grid w-[300px] p-4 lg:w-[400px] lg:grid-cols-1 gap-3">
+                      <li>
+                        <NavigationMenuLink asChild>
+                          <Link
+                            to="/courses"
+                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                          >
+                            <div className="text-sm font-medium leading-none">All Courses</div>
+                            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                              Browse our complete course catalog
+                            </p>
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
+                      <li>
+                        <NavigationMenuLink asChild>
+                          <Link
+                            to="/courses?category=health"
+                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                          >
+                            <div className="text-sm font-medium leading-none">Health & Safety</div>
+                            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                              Courses for health and safety compliance
+                            </p>
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
+                      <li>
+                        <NavigationMenuLink asChild>
+                          <Link
+                            to="/courses?category=security"
+                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                          >
+                            <div className="text-sm font-medium leading-none">Security Training</div>
+                            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                              Professional security certification courses
+                            </p>
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
+                    </ul>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
                 
                 <NavigationMenuItem>
-                  <Link to="/blog" className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:text-blue-600 focus:outline-none px-4 py-2">
-                    Blog
+                  <NavigationMenuTrigger>About Us</NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <ul className="grid w-[300px] p-4 lg:w-[400px] lg:grid-cols-1 gap-3">
+                      <li>
+                        <NavigationMenuLink asChild>
+                          <Link
+                            to="/about"
+                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                          >
+                            <div className="text-sm font-medium leading-none">Our Vision & Mission</div>
+                            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                              Learn about our company's vision and mission
+                            </p>
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
+                      <li>
+                        <NavigationMenuLink asChild>
+                          <Link
+                            to="/about/team"
+                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                          >
+                            <div className="text-sm font-medium leading-none">Our Team</div>
+                            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                              Meet the people behind Lilly-Angel
+                            </p>
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
+                    </ul>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+                
+                <NavigationMenuItem>
+                  <Link to="/tutors" className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:text-blue-600 focus:outline-none px-4 py-2">
+                    Tutors
                   </Link>
                 </NavigationMenuItem>
                 
                 <NavigationMenuItem>
                   <Link to="/contact" className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:text-blue-600 focus:outline-none px-4 py-2">
                     Contact
+                  </Link>
+                </NavigationMenuItem>
+                
+                <NavigationMenuItem>
+                  <Link to="/faq" className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:text-blue-600 focus:outline-none px-4 py-2">
+                    FAQ
                   </Link>
                 </NavigationMenuItem>
               </NavigationMenuList>
@@ -153,21 +164,12 @@ const Header = () => {
               <nav>
                 <ul className="space-y-3">
                   <li><Link to="/" className="block text-gray-600 hover:text-blue-600 transition-colors py-2" onClick={() => setIsMenuOpen(false)}>Home</Link></li>
-                  <li>
-                    <div className="py-2">
-                      <p className="text-orange-500 font-medium mb-2">Student Advisory</p>
-                      <ul className="pl-4 space-y-2">
-                        <li><Link to="/consultancy" className="block text-gray-600 hover:text-blue-600 transition-colors" onClick={() => setIsMenuOpen(false)}>Our Student Consultancy</Link></li>
-                        <li><Link to="/countries" className="block text-orange-500 hover:text-orange-600 transition-colors" onClick={() => setIsMenuOpen(false)}>Country We Work With</Link></li>
-                        <li><Link to="/online-admission" className="block text-gray-600 hover:text-blue-600 transition-colors" onClick={() => setIsMenuOpen(false)}>Online Admission Form</Link></li>
-                        <li><Link to="/study-uk" className="block text-gray-600 hover:text-blue-600 transition-colors" onClick={() => setIsMenuOpen(false)}>Study In UK</Link></li>
-                        <li><Link to="/study-australia" className="block text-gray-600 hover:text-blue-600 transition-colors" onClick={() => setIsMenuOpen(false)}>Study In Australia</Link></li>
-                        <li><Link to="/study-canada" className="block text-gray-600 hover:text-blue-600 transition-colors" onClick={() => setIsMenuOpen(false)}>Study In Canada</Link></li>
-                      </ul>
-                    </div>
-                  </li>
-                  <li><Link to="/blog" className="block text-gray-600 hover:text-blue-600 transition-colors py-2" onClick={() => setIsMenuOpen(false)}>Blog</Link></li>
+                  <li><Link to="/courses" className="block text-gray-600 hover:text-blue-600 transition-colors py-2" onClick={() => setIsMenuOpen(false)}>Courses</Link></li>
+                  <li><Link to="/about" className="block text-gray-600 hover:text-blue-600 transition-colors py-2" onClick={() => setIsMenuOpen(false)}>About Us</Link></li>
+                  <li><Link to="/tutors" className="block text-gray-600 hover:text-blue-600 transition-colors py-2" onClick={() => setIsMenuOpen(false)}>Tutors</Link></li>
                   <li><Link to="/contact" className="block text-gray-600 hover:text-blue-600 transition-colors py-2" onClick={() => setIsMenuOpen(false)}>Contact</Link></li>
+                  <li><Link to="/faq" className="block text-gray-600 hover:text-blue-600 transition-colors py-2" onClick={() => setIsMenuOpen(false)}>FAQ</Link></li>
+                  <li><Link to="/login" className="block text-gray-600 hover:text-blue-600 transition-colors py-2" onClick={() => setIsMenuOpen(false)}>Log In</Link></li>
                 </ul>
               </nav>
             </SheetContent>
