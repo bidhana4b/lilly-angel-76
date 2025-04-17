@@ -1,9 +1,7 @@
-
 import React from 'react';
 import { Star, Facebook, Twitter, Linkedin } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Card, CardContent } from "@/components/ui/card";
-
 interface TutorProps {
   image: string;
   name: string;
@@ -13,7 +11,6 @@ interface TutorProps {
   bgColor: string;
   socialLinks?: boolean;
 }
-
 const TutorCard: React.FC<TutorProps> = ({
   image,
   name,
@@ -75,7 +72,6 @@ const TutorCard: React.FC<TutorProps> = ({
       <div className="absolute -bottom-2 -right-2 w-full h-full bg-gray-800 rounded-xl -z-10"></div>
     </motion.div>;
 };
-
 const Tutors = () => {
   const tutors = [{
     id: 1,
@@ -110,41 +106,6 @@ const Tutors = () => {
     rating: 4.9,
     courses: 10
   }];
-  
-  return (
-    <section id="tutors" className="py-16 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Meet Our Expert Tutors</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">Learn directly from industry professionals with years of experience in their respective fields. Our tutors are passionate about sharing their knowledge.</p>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {tutors.map(tutor => (
-            <TutorCard 
-              key={tutor.id}
-              image={tutor.image}
-              name={tutor.name} 
-              specialty={tutor.specialty}
-              rating={tutor.rating}
-              courses={tutor.courses}
-              bgColor={tutor.bgColor}
-            />
-          ))}
-        </div>
-        
-        <div className="mt-12 text-center">
-          <motion.button 
-            className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-md font-medium transition-colors"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            View All Tutors
-          </motion.button>
-        </div>
-      </div>
-    </section>
-  );
+  return;
 };
-
 export default Tutors;

@@ -1,10 +1,8 @@
-
 import React from 'react';
 import { Facebook, Twitter, Instagram, Linkedin, Youtube } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from "framer-motion";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
-
 const Footer = () => {
   // Partner logos array with the uploaded images
   const partnerLogos = [{
@@ -20,33 +18,9 @@ const Footer = () => {
     src: "/lovable-uploads/95611343-7f51-4cf9-85a9-6a1b59554def.png",
     alt: "CalmMinds-UK Partnership Logo"
   }];
-  
   return <footer>
       {/* Partners Section with Carousel */}
-      <div className="bg-gray-100 py-10">
-        <div className="container mx-auto">
-          <h3 className="text-center text-xl font-semibold mb-8">Our Trusted Partners</h3>
-          <Carousel
-            opts={{
-              align: "center",
-              loop: true,
-            }}
-            className="w-full max-w-5xl mx-auto"
-          >
-            <CarouselContent>
-              {partnerLogos.map((logo, index) => (
-                <CarouselItem key={index} className="md:basis-1/3 lg:basis-1/4 flex items-center justify-center p-4">
-                  <img src={logo.src} alt={logo.alt} className="h-24 object-contain" />
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <div className="flex justify-center mt-4">
-              <CarouselPrevious />
-              <CarouselNext />
-            </div>
-          </Carousel>
-        </div>
-      </div>
+      
 
       {/* Main Footer */}
       <div className="bg-navy-dark text-white py-12">
@@ -126,5 +100,4 @@ const Footer = () => {
       </div>
     </footer>;
 };
-
 export default Footer;
