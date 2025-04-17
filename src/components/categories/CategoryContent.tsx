@@ -68,20 +68,44 @@ const CategoryContent: React.FC<CategoryContentProps> = ({
           </div>
           
           <div className="order-1 md:order-2 h-64 md:h-auto overflow-hidden">
-            <div className="h-full w-full">
+            <div className="h-full w-full relative group">
               <AspectRatio ratio={16/9} className="h-full">
                 <motion.img 
                   src={activeItem.image} 
                   alt={activeItem.name} 
-                  className="w-full h-full object-cover object-center"
+                  className="w-full h-full object-cover object-center transition-all duration-500"
                   initial={{ scale: 1.1, opacity: 0.8 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 0.5 }}
+                  whileHover={{ 
+                    scale: 1.05,
+                    filter: "brightness(1.1)",
+                  }}
                   onError={(e) => {
                     e.currentTarget.src = activeItem.backupImage;
                   }}
                 />
               </AspectRatio>
+              
+              {/* Image overlay with info that appears on hover */}
+              <motion.div 
+                className="absolute inset-0 bg-gradient-to-t from-navy-dark/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 md:p-6"
+                initial={{ opacity: 0 }}
+                whileHover={{ opacity: 1 }}
+              >
+                <motion.div
+                  initial={{ y: 20, opacity: 0 }}
+                  whileHover={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <p className="text-white font-medium text-sm md:text-base">
+                    Explore {activeItem.name}
+                  </p>
+                  <p className="text-white/80 text-xs md:text-sm mt-1">
+                    Click for more details
+                  </p>
+                </motion.div>
+              </motion.div>
             </div>
           </div>
         </div>
