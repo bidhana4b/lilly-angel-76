@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Search, Menu, X } from 'lucide-react';
@@ -6,14 +5,11 @@ import { Link } from 'react-router-dom';
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
 import { cn } from '@/lib/utils';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-  
   return <header className="w-full bg-white py-4 shadow-sm">
       <div className="container mx-auto flex items-center justify-between">
         <div className="flex items-center">
@@ -175,7 +171,7 @@ const Header = () => {
         <div className="hidden md:flex items-center space-x-4">
           <div className="relative">
             <Search className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
-            <input type="text" placeholder="Search courses..." className="pl-8 pr-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-400 w-40 lg:w-60" aria-label="Search courses" />
+            
           </div>
           <Link to="/login">
             <Button variant="outline" className="hidden md:inline-flex">Log In</Button>
@@ -185,5 +181,4 @@ const Header = () => {
       </div>
     </header>;
 };
-
 export default Header;
