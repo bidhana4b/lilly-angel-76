@@ -19,7 +19,7 @@ const Hero = () => {
           </h1>
           <p className="text-gray-200 mb-8">Top-Quality &amp; Affordable Training</p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <Button className="bg-orange-DEFAULT hover:bg-orange-dark text-white px-6 py-2">
+            <Button className="bg-orange-DEFAULT hover:bg-orange-dark px-6 py-2 text-red-50">
               Find Your Courses
             </Button>
             
