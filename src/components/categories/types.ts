@@ -18,7 +18,7 @@ export const categories: Category[] = [{
   description: 'Professional security training',
   tagline: 'Comprehensive security courses designed for individuals and organizations seeking professional certification and expertise',
   cta: 'Explore Security Courses',
-  image: 'https://images.unsplash.com/photo-1553522911-d0ba7b3ee935?q=80&w=1470&auto=format&fit=crop',
+  image: '/lovable-uploads/b57c326a-08cb-4807-897a-e0fcb59200c5.png',
   backupImage: 'https://images.unsplash.com/photo-1553522911-d0ba7b3ee935?q=80&w=1470&auto=format&fit=crop',
   icon: null // Will be set in the parent component
 }, {

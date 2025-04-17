@@ -2,7 +2,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Shield } from 'lucide-react';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Category } from './types';
 
@@ -87,22 +87,29 @@ const CategoryContent: React.FC<CategoryContentProps> = ({
                 />
               </AspectRatio>
               
-              {/* Image overlay with info that appears on hover */}
+              {/* Enhanced image overlay with info that appears on hover */}
               <motion.div 
-                className="absolute inset-0 bg-gradient-to-t from-navy-dark/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 md:p-6"
+                className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-4 md:p-6 backdrop-blur-[2px] group-hover:backdrop-blur-none"
                 initial={{ opacity: 0 }}
                 whileHover={{ opacity: 1 }}
               >
                 <motion.div
+                  className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500"
                   initial={{ y: 20, opacity: 0 }}
                   whileHover={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <p className="text-white font-medium text-sm md:text-base">
+                  {activeItem.id === 'security' && (
+                    <div className="flex items-center mb-2">
+                      <Shield className="h-5 w-5 text-orange-500 mr-2" />
+                      <span className="text-orange-400 font-semibold">Certified Training</span>
+                    </div>
+                  )}
+                  <p className="text-white font-medium text-base md:text-lg mb-1">
                     Explore {activeItem.name}
                   </p>
-                  <p className="text-white/80 text-xs md:text-sm mt-1">
-                    Click for more details
+                  <p className="text-white/90 text-sm md:text-base border-l-2 border-orange-500 pl-2 mt-2">
+                    Click for complete course details & certification information
                   </p>
                 </motion.div>
               </motion.div>
