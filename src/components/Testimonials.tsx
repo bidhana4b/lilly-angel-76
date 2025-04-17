@@ -280,32 +280,7 @@ const Testimonials = () => {
       </section>
 
       {/* Motivational Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <motion.div className="text-center mb-16" initial={{
-          opacity: 0,
-          y: 20
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.5
-        }} viewport={{
-          once: true
-        }}>
-            <h2 className="text-3xl md:text-4xl font-bold text-navy-dark">
-              Think more clearly
-            </h2>
-            <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
-              Gather your thoughts, and make your decisions clearly
-            </p>
-          </motion.div>
-
-          <div className="max-w-5xl mx-auto">
-            {motivationalSteps.map((step, index) => <MotivationalStep key={index} number={step.number} title={step.title} description={step.description} image={step.image} reversed={index % 2 !== 0} />)}
-          </div>
-        </div>
-      </section>
+      
 
       {/* FAQ Section */}
       
