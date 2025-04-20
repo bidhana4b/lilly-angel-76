@@ -2,13 +2,9 @@ import React from 'react';
 import { Facebook, Twitter, Instagram, Linkedin, Youtube } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from "framer-motion";
-import PartnerLogos from './PartnerLogos';
 
 const Footer = () => {
   return <footer>
-      {/* Partners Section with Carousel */}
-      <PartnerLogos />
-
       {/* Main Footer */}
       <div className="bg-navy-dark text-white py-12">
         <div className="container mx-auto px-4">
