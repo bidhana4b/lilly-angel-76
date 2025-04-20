@@ -34,12 +34,13 @@ const mockTeachers: Teacher[] = [
   },
 ];
 
+// Properly typed column definition
 const teacherColumns = [
-  { header: "Name", accessorKey: "name" },
-  { header: "Email", accessorKey: "email" },
-  { header: "Subject", accessorKey: "subject" },
-  { header: "Status", accessorKey: "status" },
-  { header: "Joined", accessorKey: "joined" },
+  { header: "Name", accessorKey: "name" as keyof Teacher },
+  { header: "Email", accessorKey: "email" as keyof Teacher },
+  { header: "Subject", accessorKey: "subject" as keyof Teacher },
+  { header: "Status", accessorKey: "status" as keyof Teacher },
+  { header: "Joined", accessorKey: "joined" as keyof Teacher },
 ];
 
 const teacherFormFields = [

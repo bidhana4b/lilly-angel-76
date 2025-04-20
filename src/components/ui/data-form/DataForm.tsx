@@ -59,14 +59,17 @@ export function DataForm({
       }
       
       if (field.type === "number" && field.validation?.min !== undefined) {
+        // Type assertion to handle the specific number schema
         fieldSchema = (fieldSchema as z.ZodNumber).min(field.validation.min);
       }
       
       if (field.type === "number" && field.validation?.max !== undefined) {
+        // Type assertion to handle the specific number schema
         fieldSchema = (fieldSchema as z.ZodNumber).max(field.validation.max);
       }
       
       if (field.validation?.pattern && field.type !== "number") {
+        // Type assertion to handle the specific string schema
         fieldSchema = (fieldSchema as z.ZodString).regex(field.validation.pattern);
       }
       
