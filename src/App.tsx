@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -28,6 +27,7 @@ import NotFound from "./pages/NotFound";
 import AdminDashboard from "./pages/dashboards/AdminDashboard";
 import TeacherDashboard from "./pages/dashboards/TeacherDashboard";
 import StudentDashboard from "./pages/dashboards/StudentDashboard";
+import TeachersPage from "./pages/dashboards/admin/TeachersPage";
 
 const queryClient = new QueryClient();
 
@@ -57,6 +57,7 @@ const App = () => (
                 element={<DashboardLayout sidebarContent={<AdminSidebar />} />}
               >
                 <Route index element={<AdminDashboard />} />
+                <Route path="teachers" element={<TeachersPage />} />
                 <Route path="*" element={<div className="text-center py-10">Admin page not implemented yet</div>} />
               </Route>
             </Route>

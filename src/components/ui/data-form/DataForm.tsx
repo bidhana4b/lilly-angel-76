@@ -46,26 +46,28 @@ export function DataForm({
     const schemaObj: Record<string, any> = {};
     
     fields.forEach((field) => {
-      let fieldSchema = z.string();
+      let fieldSchema: z.ZodTypeAny = z.string();
       
       if (field.type === "number") {
-        fieldSchema = z.number();
+        fieldSchema = z.coerce.number();
+      } else if (field.type === "email") {
+        fieldSchema = z.string().email();
       }
       
       if (field.validation?.required) {
         fieldSchema = fieldSchema.min(1, "This field is required");
       }
       
-      if (field.validation?.min) {
-        fieldSchema = fieldSchema.min(field.validation.min);
+      if (field.type === "number" && field.validation?.min !== undefined) {
+        fieldSchema = (fieldSchema as z.ZodNumber).min(field.validation.min);
       }
       
-      if (field.validation?.max) {
-        fieldSchema = fieldSchema.max(field.validation.max);
+      if (field.type === "number" && field.validation?.max !== undefined) {
+        fieldSchema = (fieldSchema as z.ZodNumber).max(field.validation.max);
       }
       
-      if (field.validation?.pattern) {
-        fieldSchema = fieldSchema.regex(field.validation.pattern);
+      if (field.validation?.pattern && field.type !== "number") {
+        fieldSchema = (fieldSchema as z.ZodString).regex(field.validation.pattern);
       }
       
       schemaObj[field.name] = fieldSchema;
