@@ -2,7 +2,7 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { DataTable } from "@/components/ui/data-table/DataTable";
+import { DataTable, Column } from "@/components/ui/data-table/DataTable";
 import { Edit, Trash2, Users, Eye } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
@@ -46,55 +46,55 @@ const mockCourses: Course[] = [
   },
 ];
 
-const courseColumns = [
+const courseColumns: Column<Course>[] = [
   { 
     header: "Title", 
-    accessorKey: "title" as keyof Course,
-    cell: ({ row }) => (
+    accessorKey: "title",
+    cell: (row) => (
       <div>
-        <div className="font-medium">{row.original.title}</div>
-        <div className="text-sm text-muted-foreground">{row.original.category}</div>
+        <div className="font-medium">{row.title}</div>
+        <div className="text-sm text-muted-foreground">{row.category}</div>
       </div>
     )
   },
   { 
     header: "Duration", 
-    accessorKey: "duration" as keyof Course 
+    accessorKey: "duration"
   },
   { 
     header: "Teacher", 
-    accessorKey: "teacher" as keyof Course 
+    accessorKey: "teacher"
   },
   { 
     header: "Price", 
-    accessorKey: "price" as keyof Course,
-    cell: ({ row }) => (
-      <div>${row.original.price}</div>
+    accessorKey: "price",
+    cell: (row) => (
+      <div>${row.price}</div>
     )
   },
   { 
     header: "Students", 
-    accessorKey: "enrolledStudents" as keyof Course,
-    cell: ({ row }) => (
+    accessorKey: "enrolledStudents",
+    cell: (row) => (
       <div className="flex items-center">
         <Users className="h-4 w-4 mr-1 text-muted-foreground" />
-        {row.original.enrolledStudents}
+        {row.enrolledStudents}
       </div>
     )
   },
   {
     header: "Status",
-    accessorKey: "status" as keyof Course,
-    cell: ({ row }) => (
-      <Badge variant={row.original.status === "active" ? "success" : "secondary"}>
-        {row.original.status}
+    accessorKey: "status",
+    cell: (row) => (
+      <Badge variant={row.status === "active" ? "default" : "secondary"}>
+        {row.status}
       </Badge>
     )
   },
   {
     header: "Actions",
-    id: "actions",
-    cell: ({ row }) => (
+    accessorKey: "id",
+    cell: (row) => (
       <div className="flex gap-2">
         <Button variant="ghost" size="icon" title="View Students">
           <Eye className="h-4 w-4" />
