@@ -1,8 +1,10 @@
+
 import React from 'react';
 import { Star, Facebook, Twitter, Linkedin } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+
 interface TutorProps {
   image: string;
   name: string;
@@ -12,6 +14,7 @@ interface TutorProps {
   bgColor: string;
   socialLinks?: boolean;
 }
+
 const TutorCard: React.FC<TutorProps> = ({
   image,
   name,
@@ -73,6 +76,7 @@ const TutorCard: React.FC<TutorProps> = ({
       <div className="absolute -bottom-2 -right-2 w-full h-full bg-gray-800 rounded-xl -z-10"></div>
     </motion.div>;
 };
+
 const Tutors = () => {
   const tutors = [{
     id: 1,
@@ -107,6 +111,53 @@ const Tutors = () => {
     rating: 4.9,
     courses: 10
   }];
-  return;
+  
+  return (
+    <section className="py-16 bg-gray-50">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-12">
+          <motion.h2 
+            className="text-3xl md:text-4xl font-bold mb-4"
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            Our Expert <span className="text-blue-600">Tutors</span>
+          </motion.h2>
+          <motion.p 
+            className="text-gray-600 max-w-2xl mx-auto"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            Learn from industry professionals with years of real-world experience and a passion for teaching
+          </motion.p>
+        </div>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {tutors.map((tutor) => (
+            <TutorCard 
+              key={tutor.id}
+              image={tutor.image}
+              name={tutor.name}
+              specialty={tutor.specialty}
+              rating={tutor.rating}
+              courses={tutor.courses}
+              bgColor={tutor.bgColor}
+            />
+          ))}
+        </div>
+        
+        <div className="mt-12 text-center">
+          <Button variant="outline" size="lg" className="gap-2">
+            View All Tutors
+          </Button>
+        </div>
+      </div>
+    </section>
+  );
 };
+
 export default Tutors;
