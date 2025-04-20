@@ -1,17 +1,19 @@
 
 import React from "react";
-import { DataTable } from "@/components/ui/data-table/DataTable";
-import { DataForm } from "@/components/ui/data-form/DataForm";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Users, Plus } from "lucide-react";
+import { DataTable } from "@/components/ui/data-table/DataTable";
+import { DataForm } from "@/components/ui/data-form/DataForm";
+import { Plus, Users } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { useToast } from "@/hooks/use-toast";
 
 interface Teacher {
   id: string;
   name: string;
   email: string;
   subject: string;
-  status: string;
+  status: "active" | "inactive";
   joined: string;
 }
 
@@ -21,7 +23,7 @@ const mockTeachers: Teacher[] = [
     name: "John Smith",
     email: "john.smith@example.com",
     subject: "Mathematics",
-    status: "Active",
+    status: "active",
     joined: "2024-01-15",
   },
   {
@@ -29,17 +31,24 @@ const mockTeachers: Teacher[] = [
     name: "Emma Wilson",
     email: "emma.wilson@example.com",
     subject: "English",
-    status: "Active",
+    status: "active",
     joined: "2024-02-01",
   },
 ];
 
-// Properly typed column definition
 const teacherColumns = [
   { header: "Name", accessorKey: "name" as keyof Teacher },
   { header: "Email", accessorKey: "email" as keyof Teacher },
   { header: "Subject", accessorKey: "subject" as keyof Teacher },
-  { header: "Status", accessorKey: "status" as keyof Teacher },
+  {
+    header: "Status",
+    accessorKey: "status" as keyof Teacher,
+    cell: (row: Teacher) => (
+      <Badge variant={row.status === "active" ? "default" : "secondary"}>
+        {row.status}
+      </Badge>
+    ),
+  },
   { header: "Joined", accessorKey: "joined" as keyof Teacher },
 ];
 
@@ -51,9 +60,14 @@ const teacherFormFields = [
 
 export default function TeachersPage() {
   const [showForm, setShowForm] = React.useState(false);
+  const { toast } = useToast();
 
-  const handleSubmit = (data: any) => {
+  const handleSubmit = (data: Partial<Teacher>) => {
     console.log("New teacher data:", data);
+    toast({
+      title: "Success",
+      description: "Teacher added successfully",
+    });
     setShowForm(false);
   };
 
