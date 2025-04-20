@@ -1,29 +1,44 @@
 
 import React from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users, BookOpen, CreditCard, Clock } from "lucide-react";
+import { ChartContainer, ChartLegend, ChartTooltip } from "@/components/ui/chart";
+import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts";
+import { Users, BookOpen, CreditCard, Clock, LayoutDashboard, Bell, Calendar } from "lucide-react";
+
+const paymentData = [
+  { month: "Jan", amount: 4800 },
+  { month: "Feb", amount: 5200 },
+  { month: "Mar", amount: 4900 },
+  { month: "Apr", amount: 6100 },
+  { month: "May", amount: 5600 },
+  { month: "Jun", amount: 7200 },
+];
 
 const StatCard = ({ 
   title, 
   value, 
   description, 
-  icon: Icon 
+  icon: Icon,
+  trend,
 }: { 
   title: string; 
   value: string; 
   description: string; 
-  icon: React.ElementType 
+  icon: React.ElementType;
+  trend?: "up" | "down"; 
 }) => (
-  <Card className="transition-all duration-200 hover:shadow-md">
+  <Card className="transition-all duration-200 hover:shadow-md bg-white">
     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
       <CardTitle className="text-sm font-medium">{title}</CardTitle>
-      <div className="h-8 w-8 rounded-lg bg-primary/10 p-1.5 text-primary">
+      <div className={`h-8 w-8 rounded-lg p-1.5 ${trend === "up" ? "bg-green-100 text-green-600" : trend === "down" ? "bg-red-100 text-red-600" : "bg-primary/10 text-primary"}`}>
         <Icon className="h-full w-full" />
       </div>
     </CardHeader>
     <CardContent>
       <div className="text-2xl font-bold">{value}</div>
-      <p className="text-xs text-muted-foreground">{description}</p>
+      <p className={`text-xs ${trend === "up" ? "text-green-600" : trend === "down" ? "text-red-600" : "text-muted-foreground"}`}>
+        {description}
+      </p>
     </CardContent>
   </Card>
 );
@@ -32,9 +47,9 @@ const AdminDashboard: React.FC = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-3xl font-bold tracking-tight">Admin Dashboard</h2>
+        <h2 className="text-3xl font-bold tracking-tight">Welcome back, Admin</h2>
         <p className="text-muted-foreground">
-          Welcome to the admin dashboard. Here's an overview of your e-learning platform.
+          Here's an overview of your learning platform's performance
         </p>
       </div>
       
@@ -42,64 +57,89 @@ const AdminDashboard: React.FC = () => {
         <StatCard
           title="Total Students"
           value="2,483"
-          description="126 new this month"
+          description="↑ 126 new this month"
           icon={Users}
+          trend="up"
         />
         <StatCard
           title="Total Teachers"
           value="48"
-          description="12 new this month"
+          description="↑ 12 new this month"
           icon={Users}
+          trend="up"
         />
         <StatCard
-          title="Total Courses"
+          title="Active Courses"
           value="172"
-          description="18 added this month"
+          description="↓ 3 less this month"
           icon={BookOpen}
+          trend="down"
         />
         <StatCard
-          title="Revenue"
+          title="Monthly Revenue"
           value="$48,294"
-          description="23% from last month"
+          description="↑ 23% from last month"
           icon={CreditCard}
+          trend="up"
         />
       </div>
       
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {/* Revenue Chart */}
         <Card className="col-span-2 transition-all duration-200 hover:shadow-md">
           <CardHeader>
-            <CardTitle>Payment Summary</CardTitle>
-            <CardDescription>Revenue breakdown for the last 30 days</CardDescription>
+            <CardTitle>Revenue Overview</CardTitle>
+            <CardDescription>Monthly revenue breakdown for the last 6 months</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="h-[200px] flex items-center justify-center text-muted-foreground border rounded-md">
-              Payment chart will be displayed here
+            <div className="h-[300px]">
+              <ChartContainer
+                config={{
+                  revenue: {
+                    label: "Revenue",
+                    theme: {
+                      light: "#9b87f5",
+                      dark: "#9b87f5",
+                    },
+                  },
+                }}
+              >
+                <BarChart data={paymentData}>
+                  <XAxis dataKey="month" />
+                  <YAxis />
+                  <Tooltip />
+                  <Bar dataKey="amount" name="revenue" fill="var(--color-revenue)" radius={[4, 4, 0, 0]} />
+                </BarChart>
+              </ChartContainer>
             </div>
           </CardContent>
         </Card>
         
+        {/* Active Classes */}
         <Card className="transition-all duration-200 hover:shadow-md">
           <CardHeader>
-            <CardTitle>Active Assignments</CardTitle>
-            <CardDescription>Currently ongoing assignments</CardDescription>
+            <div className="flex items-center justify-between">
+              <CardTitle>Today's Classes</CardTitle>
+              <Calendar className="h-4 w-4 text-muted-foreground" />
+            </div>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               {[
-                { title: "JavaScript Basics", due: "Today", course: "Web Development" },
-                { title: "Data Structures", due: "Tomorrow", course: "Computer Science" },
-                { title: "UI/UX Principles", due: "In 3 days", course: "Design Fundamentals" },
-                { title: "Python Classes", due: "In 4 days", course: "Python Programming" },
-              ].map((assignment, i) => (
-                <div key={i} className="flex items-center gap-2 pb-3 border-b last:border-0 last:pb-0">
-                  <div className="h-8 w-8 rounded-lg bg-primary/10 p-1.5 text-primary">
-                    <Clock className="h-full w-full" />
-                  </div>
-                  <div>
-                    <p className="font-medium">{assignment.title}</p>
-                    <p className="text-sm text-muted-foreground">
-                      Due {assignment.due} • {assignment.course}
-                    </p>
+                { title: "Advanced JavaScript", time: "10:00 AM", attendees: 28 },
+                { title: "UI/UX Design", time: "1:30 PM", attendees: 24 },
+                { title: "React Fundamentals", time: "3:00 PM", attendees: 32 },
+              ].map((session, i) => (
+                <div key={i} className="flex items-center justify-between border-b last:border-0 pb-3 last:pb-0">
+                  <div className="space-y-1">
+                    <p className="font-medium">{session.title}</p>
+                    <div className="flex items-center text-sm text-muted-foreground">
+                      <Clock className="mr-1 h-3 w-3" />
+                      <span>{session.time}</span>
+                      <span className="mx-1">•</span>
+                      <Users className="mr-1 h-3 w-3" />
+                      <span>{session.attendees} students</span>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -107,28 +147,32 @@ const AdminDashboard: React.FC = () => {
           </CardContent>
         </Card>
         
+        {/* Recent Notifications */}
         <Card className="col-span-2 lg:col-span-3 transition-all duration-200 hover:shadow-md">
           <CardHeader>
-            <CardTitle>Upcoming Live Classes</CardTitle>
-            <CardDescription>Live sessions scheduled for the next 7 days</CardDescription>
+            <div className="flex items-center justify-between">
+              <CardTitle>Recent Notifications</CardTitle>
+              <Bell className="h-4 w-4 text-muted-foreground" />
+            </div>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
-                { title: "Advanced JavaScript", instructor: "Sarah Johnson", time: "Today, 4:00 PM", students: 28 },
-                { title: "UX Research Methods", instructor: "Michael Chen", time: "Tomorrow, 2:30 PM", students: 34 },
-                { title: "Python Data Analysis", instructor: "Alex Morgan", time: "Wed, 5:00 PM", students: 42 },
-                { title: "Responsive Design", instructor: "Lisa Taylor", time: "Thu, 3:15 PM", students: 19 },
-                { title: "Database Design", instructor: "Robert Smith", time: "Fri, 1:00 PM", students: 25 },
-                { title: "Machine Learning Basics", instructor: "Priya Sharma", time: "Sat, 10:00 AM", students: 31 },
-              ].map((session, i) => (
-                <Card key={i} className="bg-secondary/50">
+                { title: "New Course Published", description: "React Native Mobile Development course is now live", time: "5 minutes ago", icon: LayoutDashboard },
+                { title: "Assignment Due", description: "15 pending submissions for JavaScript Basics", time: "1 hour ago", icon: Clock },
+                { title: "Payment Received", description: "New payment received from John Doe", time: "2 hours ago", icon: CreditCard },
+              ].map((notification, i) => (
+                <Card key={i} className="bg-muted/50">
                   <CardContent className="p-4">
-                    <h4 className="font-semibold">{session.title}</h4>
-                    <p className="text-sm">{session.instructor}</p>
-                    <div className="flex items-center justify-between mt-2">
-                      <span className="text-sm text-muted-foreground">{session.time}</span>
-                      <span className="text-sm">{session.students} students</span>
+                    <div className="flex items-start space-x-3">
+                      <div className="mt-1 bg-primary/10 p-1.5 rounded-lg">
+                        <notification.icon className="h-4 w-4 text-primary" />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold">{notification.title}</h4>
+                        <p className="text-sm text-muted-foreground">{notification.description}</p>
+                        <p className="text-xs text-muted-foreground mt-1">{notification.time}</p>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
