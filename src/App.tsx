@@ -28,6 +28,7 @@ import AdminDashboard from "./pages/dashboards/AdminDashboard";
 import TeacherDashboard from "./pages/dashboards/TeacherDashboard";
 import StudentDashboard from "./pages/dashboards/StudentDashboard";
 import TeachersPage from "./pages/dashboards/admin/TeachersPage";
+import SyllabusPage from "./pages/dashboards/admin/SyllabusPage";
 
 const queryClient = new QueryClient();
 
@@ -58,6 +59,7 @@ const App = () => (
               >
                 <Route index element={<AdminDashboard />} />
                 <Route path="teachers" element={<TeachersPage />} />
+                <Route path="syllabus" element={<SyllabusPage />} />
                 <Route path="*" element={<div className="text-center py-10">Admin page not implemented yet</div>} />
               </Route>
             </Route>
