@@ -46,7 +46,7 @@ export function DataForm({
     const schemaObj: Record<string, any> = {};
     
     fields.forEach((field) => {
-      let fieldSchema: z.ZodTypeAny = z.string();
+      let fieldSchema: any = z.string();
       
       if (field.type === "number") {
         fieldSchema = z.coerce.number();
@@ -59,18 +59,21 @@ export function DataForm({
       }
       
       if (field.type === "number" && field.validation?.min !== undefined) {
-        // Type assertion to handle the specific number schema
-        fieldSchema = (fieldSchema as z.ZodNumber).min(field.validation.min);
+        // Ensure we're working with a ZodNumber type
+        const numberSchema = fieldSchema as z.ZodNumber;
+        fieldSchema = numberSchema.min(field.validation.min);
       }
       
       if (field.type === "number" && field.validation?.max !== undefined) {
-        // Type assertion to handle the specific number schema
-        fieldSchema = (fieldSchema as z.ZodNumber).max(field.validation.max);
+        // Ensure we're working with a ZodNumber type
+        const numberSchema = fieldSchema as z.ZodNumber;
+        fieldSchema = numberSchema.max(field.validation.max);
       }
       
       if (field.validation?.pattern && field.type !== "number") {
-        // Type assertion to handle the specific string schema
-        fieldSchema = (fieldSchema as z.ZodString).regex(field.validation.pattern);
+        // Ensure we're working with a ZodString type
+        const stringSchema = fieldSchema as z.ZodString;
+        fieldSchema = stringSchema.regex(field.validation.pattern);
       }
       
       schemaObj[field.name] = fieldSchema;
