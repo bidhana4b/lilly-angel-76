@@ -31,14 +31,14 @@ const StatCard = ({
 const TeacherDashboard: React.FC = () => {
   return (
     <div className="space-y-6">
-      <div>
+      <div className="dashboard-welcome">
         <h2 className="text-3xl font-bold tracking-tight">Teacher Dashboard</h2>
         <p className="text-muted-foreground">
           Welcome back! Here's an overview of your teaching activities.
         </p>
       </div>
       
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 teacher-stats">
         <StatCard
           title="My Courses"
           value="8"
@@ -66,7 +66,7 @@ const TeacherDashboard: React.FC = () => {
       </div>
       
       <div className="grid gap-4 md:grid-cols-2">
-        <Card className="transition-all duration-200 hover:shadow-md">
+        <Card className="transition-all duration-200 hover:shadow-md teacher-classes">
           <CardHeader>
             <CardTitle>Upcoming Classes</CardTitle>
             <CardDescription>Your scheduled sessions for the next 7 days</CardDescription>
@@ -96,7 +96,7 @@ const TeacherDashboard: React.FC = () => {
           </CardContent>
         </Card>
         
-        <Card className="transition-all duration-200 hover:shadow-md">
+        <Card className="transition-all duration-200 hover:shadow-md teacher-submissions">
           <CardHeader>
             <CardTitle>Pending Submissions</CardTitle>
             <CardDescription>Assignments awaiting your review</CardDescription>

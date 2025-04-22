@@ -8,14 +8,14 @@ import { Progress } from "@/components/ui/progress";
 const StudentDashboard: React.FC = () => {
   return (
     <div className="space-y-6">
-      <div>
+      <div className="dashboard-welcome">
         <h2 className="text-3xl font-bold tracking-tight">Student Dashboard</h2>
         <p className="text-muted-foreground">
           Welcome back! Here's an overview of your learning journey.
         </p>
       </div>
       
-      <Card className="transition-all duration-200 hover:shadow-md">
+      <Card className="transition-all duration-200 hover:shadow-md student-class">
         <CardHeader>
           <CardTitle>Today's Class</CardTitle>
           <CardDescription>Your upcoming live session</CardDescription>
@@ -40,7 +40,7 @@ const StudentDashboard: React.FC = () => {
       </Card>
       
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <Card className="transition-all duration-200 hover:shadow-md">
+        <Card className="transition-all duration-200 hover:shadow-md student-courses">
           <CardHeader>
             <CardTitle className="flex justify-between items-center">
               <span>My Courses</span>
@@ -67,7 +67,7 @@ const StudentDashboard: React.FC = () => {
           </CardContent>
         </Card>
         
-        <Card className="transition-all duration-200 hover:shadow-md">
+        <Card className="transition-all duration-200 hover:shadow-md student-assignments">
           <CardHeader>
             <CardTitle className="flex justify-between items-center">
               <span>Assignments Due</span>
@@ -98,7 +98,7 @@ const StudentDashboard: React.FC = () => {
           </CardContent>
         </Card>
         
-        <Card className="transition-all duration-200 hover:shadow-md">
+        <Card className="transition-all duration-200 hover:shadow-md student-payments">
           <CardHeader>
             <CardTitle className="flex justify-between items-center">
               <span>Payment Status</span>
@@ -134,7 +134,7 @@ const StudentDashboard: React.FC = () => {
           </CardContent>
         </Card>
         
-        <Card className="md:col-span-2 lg:col-span-3 transition-all duration-200 hover:shadow-md">
+        <Card className="md:col-span-2 lg:col-span-3 transition-all duration-200 hover:shadow-md student-recordings">
           <CardHeader>
             <CardTitle className="flex justify-between items-center">
               <span>Class Recordings</span>

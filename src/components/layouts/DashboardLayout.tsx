@@ -5,6 +5,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { SidebarProvider, Sidebar, SidebarHeader, SidebarContent, SidebarFooter, SidebarTrigger, SidebarRail } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import { LogOut, User, Bell } from "lucide-react";
+import { TourButton } from "@/components/tour/TourButton";
 
 interface DashboardLayoutProps {
   sidebarContent: React.ReactNode;
@@ -26,7 +27,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ sidebarContent
   return (
     <SidebarProvider>
       <div className="flex h-screen w-full overflow-hidden bg-background">
-        <Sidebar variant="inset" collapsible="offcanvas">
+        <Sidebar variant="inset" collapsible="offcanvas" className={user?.role + "-sidebar"}>
           <SidebarHeader className="flex flex-col gap-2">
             <div className="flex items-center px-4 py-3">
               <div className="flex items-center gap-2 font-semibold text-lg">
@@ -35,7 +36,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ sidebarContent
                 </span>
                 <div className="flex flex-col">
                   <span className="text-sm font-semibold">E-Learning</span>
-                  <span className="text-xs text-sidebar-foreground/70">Super Admin</span>
+                  <span className="text-xs text-sidebar-foreground/70 capitalize">{user?.role}</span>
                 </div>
               </div>
               <div className="ml-auto">
@@ -72,6 +73,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ sidebarContent
               <div className="font-semibold text-lg">{getPageTitle()}</div>
             </div>
             <div className="flex items-center gap-2">
+              <TourButton />
               <Button variant="ghost" size="icon" className="relative">
                 <Bell className="h-5 w-5" />
                 <span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-red-500"></span>

@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -5,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import { AuthProvider } from "./contexts/AuthContext";
+import { TourProvider } from "./components/tour/TourProvider";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { DashboardLayout } from "./components/layouts/DashboardLayout";
 import { AdminSidebar } from "./components/sidebars/AdminSidebar";
@@ -41,61 +43,63 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <AuthProvider>
-          <Routes>
-            {/* Public Routes */}
-            <Route path="/" element={<Index />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/courses" element={<Courses />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/about/team" element={<TeamPage />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/career" element={<Career />} />
-            <Route path="/social-responsibility" element={<SocialResponsibility />} />
-            <Route path="/faq" element={<Faq />} />
-            
-            {/* Admin Routes */}
-            <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
-              <Route 
-                path="/dashboard/admin" 
-                element={<DashboardLayout sidebarContent={<AdminSidebar />} />}
-              >
-                <Route index element={<AdminDashboard />} />
-                <Route path="teachers" element={<TeachersPage />} />
-                <Route path="students" element={<StudentsPage />} />
-                <Route path="courses/*" element={<CoursesPage />} />
-                <Route path="syllabus" element={<SyllabusPage />} />
-                <Route path="*" element={<div className="text-center py-10">Admin page not implemented yet</div>} />
+          <TourProvider>
+            <Routes>
+              {/* Public Routes */}
+              <Route path="/" element={<Index />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/courses" element={<Courses />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/about/team" element={<TeamPage />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/career" element={<Career />} />
+              <Route path="/social-responsibility" element={<SocialResponsibility />} />
+              <Route path="/faq" element={<Faq />} />
+              
+              {/* Admin Routes */}
+              <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
+                <Route 
+                  path="/dashboard/admin" 
+                  element={<DashboardLayout sidebarContent={<AdminSidebar />} />}
+                >
+                  <Route index element={<AdminDashboard />} />
+                  <Route path="teachers" element={<TeachersPage />} />
+                  <Route path="students" element={<StudentsPage />} />
+                  <Route path="courses/*" element={<CoursesPage />} />
+                  <Route path="syllabus" element={<SyllabusPage />} />
+                  <Route path="*" element={<div className="text-center py-10">Admin page not implemented yet</div>} />
+                </Route>
               </Route>
-            </Route>
-            
-            {/* Teacher Routes */}
-            <Route element={<ProtectedRoute allowedRoles={["teacher"]} />}>
-              <Route 
-                path="/dashboard/teacher" 
-                element={<DashboardLayout sidebarContent={<TeacherSidebar />} />}
-              >
-                <Route index element={<TeacherDashboard />} />
-                <Route path="*" element={<div className="text-center py-10">Teacher page not implemented yet</div>} />
+              
+              {/* Teacher Routes */}
+              <Route element={<ProtectedRoute allowedRoles={["teacher"]} />}>
+                <Route 
+                  path="/dashboard/teacher" 
+                  element={<DashboardLayout sidebarContent={<TeacherSidebar />} />}
+                >
+                  <Route index element={<TeacherDashboard />} />
+                  <Route path="*" element={<div className="text-center py-10">Teacher page not implemented yet</div>} />
+                </Route>
               </Route>
-            </Route>
-            
-            {/* Student Routes */}
-            <Route element={<ProtectedRoute allowedRoles={["student"]} />}>
-              <Route 
-                path="/dashboard/student" 
-                element={<DashboardLayout sidebarContent={<StudentSidebar />} />}
-              >
-                <Route index element={<StudentDashboard />} />
-                <Route path="*" element={<div className="text-center py-10">Student page not implemented yet</div>} />
+              
+              {/* Student Routes */}
+              <Route element={<ProtectedRoute allowedRoles={["student"]} />}>
+                <Route 
+                  path="/dashboard/student" 
+                  element={<DashboardLayout sidebarContent={<StudentSidebar />} />}
+                >
+                  <Route index element={<StudentDashboard />} />
+                  <Route path="*" element={<div className="text-center py-10">Student page not implemented yet</div>} />
+                </Route>
               </Route>
-            </Route>
-            
-            {/* Redirect /dashboard to appropriate dashboard based on role (handled by ProtectedRoute) */}
-            <Route path="/dashboard" element={<Navigate to="/login" replace />} />
-            
-            {/* Catch All for 404 */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+              
+              {/* Redirect /dashboard to appropriate dashboard based on role (handled by ProtectedRoute) */}
+              <Route path="/dashboard" element={<Navigate to="/login" replace />} />
+              
+              {/* Catch All for 404 */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </TourProvider>
         </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>

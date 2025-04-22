@@ -46,14 +46,14 @@ const StatCard = ({
 const AdminDashboard: React.FC = () => {
   return (
     <div className="space-y-6">
-      <div>
+      <div className="dashboard-welcome">
         <h2 className="text-3xl font-bold tracking-tight">Welcome back, Admin</h2>
         <p className="text-muted-foreground">
           Here's an overview of your learning platform's performance
         </p>
       </div>
       
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 admin-stats">
         <StatCard
           title="Total Students"
           value="2,483"

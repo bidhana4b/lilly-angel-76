@@ -9,6 +9,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { toast } from "@/hooks/use-toast";
 
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -32,7 +33,15 @@ const Login: React.FC = () => {
   const onSubmit = async (data: LoginFormValues) => {
     setIsLoading(true);
     try {
-      await login(data.email, data.password);
+      const success = await login(data.email, data.password);
+      if (success) {
+        // Show a welcome toast about the guided tour
+        toast({
+          title: "Welcome to the E-Learning Platform!",
+          description: "A guided tour will help you get familiar with the dashboard.",
+          duration: 6000,
+        });
+      }
     } finally {
       setIsLoading(false);
     }
