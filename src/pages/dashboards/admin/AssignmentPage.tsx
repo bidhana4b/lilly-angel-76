@@ -1,8 +1,7 @@
-
 import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { DataTable } from "@/components/ui/data-table/DataTable";
+import { DataTable, Column } from "@/components/ui/data-table/DataTable";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -140,23 +139,23 @@ const mockTeachers = [
   { id: "5", name: "Michael Brown" },
 ];
 
-const assignmentColumns = [
-  { header: "Title", accessorKey: "title" as keyof Assignment },
-  { header: "Course", accessorKey: "course" as keyof Assignment },
-  { header: "Teacher", accessorKey: "teacher" as keyof Assignment },
+const assignmentColumns: Column<Assignment>[] = [
+  { header: "Title", accessorKey: "title" },
+  { header: "Course", accessorKey: "course" },
+  { header: "Teacher", accessorKey: "teacher" },
   { 
     header: "Due Date", 
-    accessorKey: "dueDate" as keyof Assignment,
+    accessorKey: "dueDate",
     cell: (row: Assignment) => format(row.dueDate, "MMM d, yyyy") 
   },
   { 
     header: "Submissions", 
-    accessorKey: "submissionCount" as keyof Assignment,
+    accessorKey: "submissionCount",
     cell: (row: Assignment) => `${row.submissionCount}/${row.totalStudents}`
   },
   { 
     header: "Status", 
-    accessorKey: "status" as keyof Assignment,
+    accessorKey: "status",
     cell: (row: Assignment) => {
       const statusColors = {
         active: "bg-green-100 text-green-800",
@@ -178,7 +177,7 @@ const assignmentColumns = [
   },
   {
     header: "Actions",
-    accessorKey: "id",
+    accessorKey: "actions",
     cell: (row: Assignment) => (
       <Button variant="outline" size="sm">
         View Submissions
@@ -187,17 +186,17 @@ const assignmentColumns = [
   }
 ];
 
-const submissionColumns = [
-  { header: "Student", accessorKey: "studentName" as keyof Submission },
-  { header: "Student ID", accessorKey: "studentId" as keyof Submission },
+const submissionColumns: Column<Submission>[] = [
+  { header: "Student", accessorKey: "studentName" },
+  { header: "Student ID", accessorKey: "studentId" },
   { 
     header: "Submission Date", 
-    accessorKey: "submissionDate" as keyof Submission,
+    accessorKey: "submissionDate",
     cell: (row: Submission) => format(row.submissionDate, "MMM d, yyyy h:mm a") 
   },
   { 
     header: "Status", 
-    accessorKey: "gradingStatus" as keyof Submission,
+    accessorKey: "gradingStatus",
     cell: (row: Submission) => {
       const statusIcons = {
         graded: <CheckCircle className="h-4 w-4 text-green-500" />,
@@ -224,7 +223,7 @@ const submissionColumns = [
   },
   {
     header: "Actions",
-    accessorKey: "id",
+    accessorKey: "actions",
     cell: (row: Submission) => (
       <div className="flex gap-2">
         <Button variant="outline" size="sm" className="h-8 w-8 p-0">
@@ -278,7 +277,7 @@ export default function AssignmentPage() {
 
   // Override the action cell to add our custom handler
   const assignmentColumnsWithAction = assignmentColumns.map(col => 
-    col.accessorKey === "id" 
+    col.accessorKey === "actions" 
       ? { 
           ...col, 
           cell: (row: Assignment) => (

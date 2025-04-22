@@ -19,7 +19,7 @@ import {
 
 export interface Column<T> {
   header: string;
-  accessorKey: keyof T;
+  accessorKey: keyof T | string;
   cell?: (row: T) => React.ReactNode;
 }
 
@@ -58,7 +58,9 @@ export function DataTable<T>({
                   <TableCell key={String(column.accessorKey)}>
                     {column.cell
                       ? column.cell(row)
-                      : String(row[column.accessorKey])}
+                      : column.accessorKey in row
+                        ? String(row[column.accessorKey as keyof T])
+                        : ""}
                   </TableCell>
                 ))}
               </TableRow>

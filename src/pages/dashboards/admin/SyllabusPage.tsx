@@ -1,8 +1,7 @@
-
 import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { DataTable } from "@/components/ui/data-table/DataTable";
+import { DataTable, Column } from "@/components/ui/data-table/DataTable";
 import { DataForm } from "@/components/ui/data-form/DataForm";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
@@ -65,15 +64,15 @@ const mockSyllabus: Syllabus[] = [
   },
 ];
 
-const syllabusColumns = [
-  { header: "Title", accessorKey: "title" as keyof Syllabus },
-  { header: "Course", accessorKey: "course" as keyof Syllabus },
-  { header: "Subject", accessorKey: "subject" as keyof Syllabus },
-  { header: "Grade", accessorKey: "grade" as keyof Syllabus },
-  { header: "Last Updated", accessorKey: "lastUpdated" as keyof Syllabus },
+const syllabusColumns: Column<Syllabus>[] = [
+  { header: "Title", accessorKey: "title" },
+  { header: "Course", accessorKey: "course" },
+  { header: "Subject", accessorKey: "subject" },
+  { header: "Grade", accessorKey: "grade" },
+  { header: "Last Updated", accessorKey: "lastUpdated" },
   { 
     header: "Type", 
-    accessorKey: "uploadType" as keyof Syllabus,
+    accessorKey: "uploadType",
     cell: (row: Syllabus) => {
       const typeLabels = {
         file: "PDF File",
@@ -85,7 +84,7 @@ const syllabusColumns = [
   },
   {
     header: "Actions",
-    accessorKey: "id",
+    accessorKey: "actions",
     cell: (row: Syllabus) => (
       <div className="flex gap-2">
         <Button variant="outline" size="sm" className="h-8 w-8 p-0">
