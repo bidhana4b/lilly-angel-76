@@ -5,6 +5,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { getTourStepsForRole } from "./tourSteps";
 import TourContext from "./TourContext";
 import { TourProviderProps } from "./types";
+import { Step } from "react-joyride";
 
 export const TourProvider: React.FC<TourProviderProps> = ({ children }) => {
   const { user } = useAuth();
