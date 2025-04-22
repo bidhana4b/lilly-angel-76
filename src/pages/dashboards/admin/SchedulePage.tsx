@@ -105,8 +105,8 @@ const formSchema = z.object({
 export default function SchedulePage() {
   const [activeTab, setActiveTab] = useState("calendar");
   const [date, setDate] = useState<Date | undefined>(new Date());
-  const [filteredCourse, setFilteredCourse] = useState("");
-  const [filteredTeacher, setFilteredTeacher] = useState("");
+  const [filteredCourse, setFilteredCourse] = useState("all");
+  const [filteredTeacher, setFilteredTeacher] = useState("all");
   const [selectedClass, setSelectedClass] = useState<ClassEvent | null>(null);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -154,8 +154,8 @@ export default function SchedulePage() {
   // Filter classes by selected date, course, and teacher
   const filteredClasses = mockClasses.filter(cls => {
     const dateMatches = !date || cls.date.toDateString() === date.toDateString();
-    const courseMatches = !filteredCourse || cls.course === filteredCourse;
-    const teacherMatches = !filteredTeacher || cls.teacher === filteredTeacher;
+    const courseMatches = filteredCourse === "all" || cls.course === filteredCourse;
+    const teacherMatches = filteredTeacher === "all" || cls.teacher === filteredTeacher;
     return dateMatches && courseMatches && teacherMatches;
   });
 
@@ -203,7 +203,7 @@ export default function SchedulePage() {
                           <SelectValue placeholder="All Courses" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="">All Courses</SelectItem>
+                          <SelectItem value="all">All Courses</SelectItem>
                           {mockCourses.map((course) => (
                             <SelectItem key={course.id} value={course.name}>
                               {course.name}
@@ -219,7 +219,7 @@ export default function SchedulePage() {
                           <SelectValue placeholder="All Teachers" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="">All Teachers</SelectItem>
+                          <SelectItem value="all">All Teachers</SelectItem>
                           {mockTeachers.map((teacher) => (
                             <SelectItem key={teacher.id} value={teacher.name}>
                               {teacher.name}
@@ -233,8 +233,8 @@ export default function SchedulePage() {
                   <div>
                     <h3 className="font-medium mb-2">
                       {date ? format(date, "MMMM d, yyyy") : "All"} Classes 
-                      {filteredCourse && ` for ${filteredCourse}`}
-                      {filteredTeacher && ` with ${filteredTeacher}`}
+                      {filteredCourse !== "all" && ` for ${filteredCourse}`}
+                      {filteredTeacher !== "all" && ` with ${filteredTeacher}`}
                     </h3>
                     {filteredClasses.length > 0 ? (
                       <div className="space-y-3">
