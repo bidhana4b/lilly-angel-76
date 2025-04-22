@@ -5,7 +5,7 @@ import { SidebarGroup, SidebarGroupContent, SidebarMenu, SidebarMenuButton, Side
 import { 
   BarChart3, BookOpen, CalendarClock, Clock, GraduationCap, 
   Bell, FileText, Settings, Users, CreditCard, PlusCircle, 
-  LayoutDashboard, FileEdit, ClipboardList, User
+  LayoutDashboard, FileEdit, ClipboardList, User, Calendar
 } from "lucide-react";
 
 export const AdminSidebar: React.FC = () => {
@@ -28,7 +28,7 @@ export const AdminSidebar: React.FC = () => {
       items: [
         { icon: BookOpen, label: "Manage Courses", to: "/dashboard/admin/courses" },
         { icon: FileText, label: "Syllabus Manager", to: "/dashboard/admin/syllabus" },
-        { icon: CalendarClock, label: "Class Schedule", to: "/dashboard/admin/schedule" },
+        { icon: Calendar, label: "Class Schedule", to: "/dashboard/admin/schedule" },
         { icon: ClipboardList, label: "Assignments", to: "/dashboard/admin/assignments" }
       ]
     },
