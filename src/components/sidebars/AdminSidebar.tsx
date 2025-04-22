@@ -5,7 +5,7 @@ import { SidebarGroup, SidebarGroupContent, SidebarMenu, SidebarMenuButton, Side
 import { 
   BarChart3, BookOpen, CalendarClock, Clock, GraduationCap, 
   Bell, FileText, Settings, Users, CreditCard, PlusCircle, 
-  LayoutDashboard, FileEdit, ClipboardList
+  LayoutDashboard, FileEdit, ClipboardList, User
 } from "lucide-react";
 
 export const AdminSidebar: React.FC = () => {
