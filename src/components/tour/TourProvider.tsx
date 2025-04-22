@@ -1,6 +1,6 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
-import Joyride, { CallBackProps, Step } from "react-joyride";
+import Joyride, { CallBackProps, Step, STATUS } from "react-joyride";
 import { useAuth } from "@/contexts/AuthContext";
 
 // Define the Tour context type
@@ -44,7 +44,7 @@ export const TourProvider: React.FC<TourProviderProps> = ({ children }) => {
     const { status } = data;
     
     // When tour is finished or skipped
-    if (["FINISHED", "SKIPPED"].includes(status)) {
+    if (status === "finished" || status === "skipped") {
       setRun(false);
       // Mark the tour as completed for this role
       if (user) {
