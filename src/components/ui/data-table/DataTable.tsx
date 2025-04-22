@@ -17,13 +17,13 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-export interface Column<T> {
+export interface Column<T extends object> {
   header: string;
   accessorKey: keyof T | string;
   cell?: (row: T) => React.ReactNode;
 }
 
-interface DataTableProps<T> {
+interface DataTableProps<T extends object> {
   data: T[];
   columns: Column<T>[];
   pageSize?: number;
@@ -32,7 +32,7 @@ interface DataTableProps<T> {
   onPageChange?: (page: number) => void;
 }
 
-export function DataTable<T>({
+export function DataTable<T extends object>({
   data,
   columns,
   pageSize = 10,
