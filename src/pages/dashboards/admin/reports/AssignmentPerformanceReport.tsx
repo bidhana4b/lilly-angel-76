@@ -14,13 +14,13 @@ const COLORS = ['#4ade80', '#60a5fa', '#fcd34d', '#fb923c', '#f87171', '#e5e7eb'
 
 const AssignmentPerformanceReport: React.FC = () => {
   const [assignments, setAssignments] = useState<AssignmentPerformance[]>(mockAssignmentPerformance);
-  const [selectedAssignment, setSelectedAssignment] = useState<string>("");
+  const [selectedAssignment, setSelectedAssignment] = useState<string>("all");
   
-  const filteredAssignments = selectedAssignment 
+  const filteredAssignments = selectedAssignment !== "all"
     ? assignments.filter(a => a.assignmentId === selectedAssignment)
     : assignments;
   
-  const currentAssignment = selectedAssignment 
+  const currentAssignment = selectedAssignment !== "all"
     ? assignments.find(a => a.assignmentId === selectedAssignment)
     : null;
   
@@ -75,7 +75,7 @@ const AssignmentPerformanceReport: React.FC = () => {
                     <SelectValue placeholder="All Assignments" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">All Assignments</SelectItem>
+                    <SelectItem value="all">All Assignments</SelectItem>
                     {assignments.map(assignment => (
                       <SelectItem key={assignment.assignmentId} value={assignment.assignmentId}>
                         {assignment.title}

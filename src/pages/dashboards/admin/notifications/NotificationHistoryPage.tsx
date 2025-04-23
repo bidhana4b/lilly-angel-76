@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -16,8 +15,8 @@ import { mockNotifications } from "./mockData";
 const NotificationHistoryPage: React.FC = () => {
   const [notifications, setNotifications] = useState<Notification[]>(mockNotifications);
   const [searchTerm, setSearchTerm] = useState("");
-  const [statusFilter, setStatusFilter] = useState<string>("");
-  const [targetFilter, setTargetFilter] = useState<string>("");
+  const [statusFilter, setStatusFilter] = useState<string>("all");
+  const [targetFilter, setTargetFilter] = useState<string>("all");
   const [selectedNotification, setSelectedNotification] = useState<Notification | null>(null);
   const [viewDetails, setViewDetails] = useState(false);
   
@@ -33,10 +32,10 @@ const NotificationHistoryPage: React.FC = () => {
       notification.message.toLowerCase().includes(searchTerm.toLowerCase());
     
     // Status filter
-    const statusMatch = !statusFilter || notification.status === statusFilter;
+    const statusMatch = statusFilter === "all" || notification.status === statusFilter;
     
     // Target filter
-    const targetMatch = !targetFilter || notification.target === targetFilter;
+    const targetMatch = targetFilter === "all" || notification.target === targetFilter;
     
     return searchMatch && statusMatch && targetMatch;
   });
@@ -106,7 +105,7 @@ const NotificationHistoryPage: React.FC = () => {
     setSelectedNotification(notification);
     setViewDetails(true);
   };
-
+  
   return (
     <div className="space-y-6 animate-fade-in">
       <Card>
@@ -138,7 +137,7 @@ const NotificationHistoryPage: React.FC = () => {
                   <SelectValue placeholder="Filter by Status" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All Statuses</SelectItem>
+                  <SelectItem value="all">All Statuses</SelectItem>
                   <SelectItem value="sent">Sent</SelectItem>
                   <SelectItem value="scheduled">Scheduled</SelectItem>
                   <SelectItem value="draft">Draft</SelectItem>
@@ -151,8 +150,8 @@ const NotificationHistoryPage: React.FC = () => {
                   <SelectValue placeholder="Filter by Target" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All Recipients</SelectItem>
-                  <SelectItem value="all">All Users</SelectItem>
+                  <SelectItem value="all">All Recipients</SelectItem>
+                  <SelectItem value="all-users">All Users</SelectItem>
                   <SelectItem value="students">All Students</SelectItem>
                   <SelectItem value="teachers">All Teachers</SelectItem>
                   <SelectItem value="student">Specific Student</SelectItem>
