@@ -36,11 +36,21 @@ import CoursesPage from "./pages/dashboards/admin/courses/CoursesPage";
 import SchedulePage from "./pages/dashboards/admin/SchedulePage";
 import AssignmentPage from "./pages/dashboards/admin/AssignmentPage";
 
-// New pages
+// Admin pages
 import PaymentsPage from "./pages/dashboards/admin/payments/PaymentsPage";
 import ReportsPage from "./pages/dashboards/admin/reports/ReportsPage";
 import NotificationsPage from "./pages/dashboards/admin/notifications/NotificationsPage";
 import SettingsPage from "./pages/dashboards/admin/settings/SettingsPage";
+
+// Teacher pages
+import TeacherCoursesPage from "./pages/dashboards/teacher/CoursesPage";
+import TeacherSyllabusPage from "./pages/dashboards/teacher/SyllabusPage";
+import TeacherLiveClassPage from "./pages/dashboards/teacher/LiveClassPage";
+import TeacherAssignmentsPage from "./pages/dashboards/teacher/AssignmentsPage";
+import TeacherSubmissionsPage from "./pages/dashboards/teacher/SubmissionsPage";
+import TeacherStudentsPage from "./pages/dashboards/teacher/StudentsPage";
+import TeacherNotificationsPage from "./pages/dashboards/teacher/NotificationsPage";
+import TeacherSettingsPage from "./pages/dashboards/teacher/SettingsPage";
 
 const queryClient = new QueryClient();
 
@@ -95,6 +105,15 @@ const App = () => (
                   element={<DashboardLayout sidebarContent={<TeacherSidebar />} />}
                 >
                   <Route index element={<TeacherDashboard />} />
+                  <Route path="courses" element={<TeacherCoursesPage />} />
+                  <Route path="syllabus" element={<TeacherSyllabusPage />} />
+                  <Route path="live-class" element={<TeacherLiveClassPage />} />
+                  <Route path="assignments/*" element={<TeacherAssignmentsPage />} />
+                  <Route path="submissions" element={<TeacherSubmissionsPage />} />
+                  <Route path="students" element={<TeacherStudentsPage />} />
+                  <Route path="notifications" element={<TeacherNotificationsPage />} />
+                  <Route path="settings" element={<TeacherSettingsPage />} />
+                  
                   <Route path="*" element={<div className="text-center py-10">Teacher page not implemented yet</div>} />
                 </Route>
               </Route>

@@ -1,7 +1,9 @@
 
 import React from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users, BookOpen, VideoIcon, Clock, CheckCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Users, BookOpen, Video, Clock, CheckCircle, FileText, Bell } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const StatCard = ({ 
   title, 
@@ -29,8 +31,16 @@ const StatCard = ({
 );
 
 const TeacherDashboard: React.FC = () => {
+  const navigate = useNavigate();
+  
+  const quickActions = [
+    { label: "Create Assignment", icon: FileText, path: "/dashboard/teacher/assignments/create" },
+    { label: "Schedule Class", icon: Video, path: "/dashboard/teacher/live-class" },
+    { label: "Add Syllabus", icon: Upload, path: "/dashboard/teacher/syllabus" }
+  ];
+  
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 animate-fade-in">
       <div className="dashboard-welcome">
         <h2 className="text-3xl font-bold tracking-tight">Teacher Dashboard</h2>
         <p className="text-muted-foreground">
@@ -65,8 +75,8 @@ const TeacherDashboard: React.FC = () => {
         />
       </div>
       
-      <div className="grid gap-4 md:grid-cols-2">
-        <Card className="transition-all duration-200 hover:shadow-md teacher-classes">
+      <div className="grid gap-4 md:grid-cols-3">
+        <Card className="transition-all duration-200 hover:shadow-md md:col-span-2 teacher-classes">
           <CardHeader>
             <CardTitle>Upcoming Classes</CardTitle>
             <CardDescription>Your scheduled sessions for the next 7 days</CardDescription>
@@ -81,7 +91,7 @@ const TeacherDashboard: React.FC = () => {
               ].map((session, i) => (
                 <div key={i} className="flex items-center gap-3 pb-3 border-b last:border-0 last:pb-0">
                   <div className="h-8 w-8 rounded-lg bg-primary/10 p-1.5 text-primary">
-                    <VideoIcon className="h-full w-full" />
+                    <Video className="h-full w-full" />
                   </div>
                   <div className="flex-1">
                     <p className="font-medium">{session.title}</p>
@@ -89,10 +99,30 @@ const TeacherDashboard: React.FC = () => {
                       {session.time} • {session.students} students
                     </p>
                   </div>
-                  <button className="text-sm text-primary hover:underline">Start</button>
+                  <Button variant="outline" size="sm">Start</Button>
                 </div>
               ))}
             </div>
+          </CardContent>
+        </Card>
+        
+        <Card className="transition-all duration-200 hover:shadow-md teacher-actions">
+          <CardHeader>
+            <CardTitle>Quick Actions</CardTitle>
+            <CardDescription>Common tasks you can perform</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {quickActions.map((action, i) => (
+              <Button 
+                key={i}
+                variant="outline" 
+                className="w-full justify-start gap-2 text-left"
+                onClick={() => navigate(action.path)}
+              >
+                <action.icon className="h-4 w-4" />
+                {action.label}
+              </Button>
+            ))}
           </CardContent>
         </Card>
         
@@ -107,7 +137,6 @@ const TeacherDashboard: React.FC = () => {
                 { title: "JavaScript Functions", course: "Web Development", submissions: 18, due: "Today" },
                 { title: "CSS Layouts", course: "Web Design", submissions: 24, due: "Tomorrow" },
                 { title: "API Integration", course: "Advanced Web Dev", submissions: 15, due: "In 2 days" },
-                { title: "React Components", course: "React Fundamentals", submissions: 21, due: "In 3 days" },
               ].map((assignment, i) => (
                 <div key={i} className="flex items-center justify-between pb-3 border-b last:border-0 last:pb-0">
                   <div className="flex items-center gap-3">
@@ -120,7 +149,7 @@ const TeacherDashboard: React.FC = () => {
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="font-medium">{assignment.submissions} submissions</p>
+                    <p className="font-medium">{assignment.submissions}</p>
                     <p className="text-sm text-muted-foreground">Due {assignment.due}</p>
                   </div>
                 </div>
@@ -129,14 +158,33 @@ const TeacherDashboard: React.FC = () => {
           </CardContent>
         </Card>
         
-        <Card className="md:col-span-2 transition-all duration-200 hover:shadow-md">
+        <Card className="transition-all duration-200 hover:shadow-md md:col-span-2">
           <CardHeader>
-            <CardTitle>Class Engagement</CardTitle>
-            <CardDescription>Student participation across your courses</CardDescription>
+            <CardTitle>Recent Notifications</CardTitle>
+            <CardDescription>Latest updates and messages</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="h-[240px] flex items-center justify-center text-muted-foreground border rounded-md">
-              Engagement chart will be displayed here
+            <div className="space-y-4">
+              {[
+                { title: "New Student Enrolled", message: "John Doe has enrolled in Web Development course", time: "2 hours ago", type: "info" },
+                { title: "Assignment Deadline", message: "The deadline for JavaScript Basics has been extended", time: "1 day ago", type: "warning" },
+                { title: "Live Class Reminder", message: "You have a scheduled class tomorrow at 3:00 PM", time: "1 day ago", type: "reminder" },
+              ].map((notification, i) => (
+                <div key={i} className="flex items-center gap-3 pb-3 border-b last:border-0 last:pb-0">
+                  <div className={`h-8 w-8 rounded-lg p-1.5 ${
+                    notification.type === 'info' ? 'bg-blue-100 text-blue-500' : 
+                    notification.type === 'warning' ? 'bg-amber-100 text-amber-500' : 
+                    'bg-green-100 text-green-500'
+                  }`}>
+                    <Bell className="h-full w-full" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-medium">{notification.title}</p>
+                    <p className="text-sm text-muted-foreground">{notification.message}</p>
+                  </div>
+                  <div className="text-xs text-muted-foreground">{notification.time}</div>
+                </div>
+              ))}
             </div>
           </CardContent>
         </Card>
