@@ -2,7 +2,7 @@
 import React from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Users, BookOpen, Video, Clock, CheckCircle, FileText, Bell } from "lucide-react";
+import { Users, BookOpen, Video, Clock, CheckCircle, FileText, Bell, Upload } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const StatCard = ({ 
