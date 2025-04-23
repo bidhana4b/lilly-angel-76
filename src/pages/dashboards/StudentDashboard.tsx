@@ -2,7 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookOpen, Clock, Video, Award, CreditCard, ArrowRight } from "lucide-react";
+import { BookOpen, Clock, Video, Award, CreditCard, ArrowRight, Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
@@ -35,7 +35,9 @@ const StudentDashboard: React.FC = () => {
             </div>
             <div className="flex gap-2">
               <Button variant="outline">View Materials</Button>
-              <Button as={Link} to="/dashboard/student/live-class">Join Class</Button>
+              <Button asChild>
+                <Link to="/dashboard/student/live-class">Join Class</Link>
+              </Button>
             </div>
           </div>
         </CardContent>
@@ -65,8 +67,10 @@ const StudentDashboard: React.FC = () => {
                   <Progress value={course.progress} className="h-2" />
                 </div>
               ))}
-              <Button variant="ghost" size="sm" className="w-full" as={Link} to="/dashboard/student/courses">
-                View All Courses <ArrowRight className="ml-1 h-4 w-4" />
+              <Button variant="ghost" size="sm" className="w-full" asChild>
+                <Link to="/dashboard/student/courses">
+                  View All Courses <ArrowRight className="ml-1 h-4 w-4" />
+                </Link>
               </Button>
             </div>
           </CardContent>
@@ -99,8 +103,10 @@ const StudentDashboard: React.FC = () => {
                   </div>
                 </div>
               ))}
-              <Button variant="ghost" size="sm" className="w-full" as={Link} to="/dashboard/student/assignments">
-                View All Assignments <ArrowRight className="ml-1 h-4 w-4" />
+              <Button variant="ghost" size="sm" className="w-full" asChild>
+                <Link to="/dashboard/student/assignments">
+                  View All Assignments <ArrowRight className="ml-1 h-4 w-4" />
+                </Link>
               </Button>
             </div>
           </CardContent>
@@ -118,7 +124,9 @@ const StudentDashboard: React.FC = () => {
               <div className="bg-red-50 border border-red-100 p-3 rounded-md">
                 <h4 className="font-medium text-red-600">Payment Due: $299</h4>
                 <p className="text-sm text-red-500">Due by April 30, 2025</p>
-                <Button className="mt-2 w-full" variant="destructive" as={Link} to="/dashboard/student/payments">Make Payment</Button>
+                <Button className="mt-2 w-full" variant="destructive" asChild>
+                  <Link to="/dashboard/student/payments">Make Payment</Link>
+                </Button>
               </div>
               
               <div>
@@ -170,8 +178,10 @@ const StudentDashboard: React.FC = () => {
                   </Badge>
                 </div>
               ))}
-              <Button variant="ghost" size="sm" className="w-full" as={Link} to="/dashboard/student/notifications">
-                View All Notifications <ArrowRight className="ml-1 h-4 w-4" />
+              <Button variant="ghost" size="sm" className="w-full" asChild>
+                <Link to="/dashboard/student/notifications">
+                  View All Notifications <ArrowRight className="ml-1 h-4 w-4" />
+                </Link>
               </Button>
             </div>
           </CardContent>
@@ -186,21 +196,29 @@ const StudentDashboard: React.FC = () => {
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <Button className="w-full justify-start" as={Link} to="/dashboard/student/live-class">
-                <Video className="mr-2 h-4 w-4" />
-                Join Live Class
+              <Button className="w-full justify-start" asChild>
+                <Link to="/dashboard/student/live-class">
+                  <Video className="mr-2 h-4 w-4" />
+                  Join Live Class
+                </Link>
               </Button>
-              <Button className="w-full justify-start" as={Link} to="/dashboard/student/assignments">
-                <Clock className="mr-2 h-4 w-4" />
-                Submit Assignment
+              <Button className="w-full justify-start" asChild>
+                <Link to="/dashboard/student/assignments">
+                  <Clock className="mr-2 h-4 w-4" />
+                  Submit Assignment
+                </Link>
               </Button>
-              <Button className="w-full justify-start" as={Link} to="/dashboard/student/courses">
-                <BookOpen className="mr-2 h-4 w-4" />
-                View Materials
+              <Button className="w-full justify-start" asChild>
+                <Link to="/dashboard/student/courses">
+                  <BookOpen className="mr-2 h-4 w-4" />
+                  View Materials
+                </Link>
               </Button>
-              <Button className="w-full justify-start" as={Link} to="/dashboard/student/payments">
-                <CreditCard className="mr-2 h-4 w-4" />
-                Make Payment
+              <Button className="w-full justify-start" asChild>
+                <Link to="/dashboard/student/payments">
+                  <CreditCard className="mr-2 h-4 w-4" />
+                  Make Payment
+                </Link>
               </Button>
             </div>
           </CardContent>
@@ -241,8 +259,10 @@ const StudentDashboard: React.FC = () => {
             ))}
           </div>
           <div className="mt-4 text-center">
-            <Button variant="ghost" as={Link} to="/dashboard/student/live-class">
-              View All Recordings <ArrowRight className="ml-1 h-4 w-4" />
+            <Button variant="ghost" asChild>
+              <Link to="/dashboard/student/live-class">
+                View All Recordings <ArrowRight className="ml-1 h-4 w-4" />
+              </Link>
             </Button>
           </div>
         </CardContent>
