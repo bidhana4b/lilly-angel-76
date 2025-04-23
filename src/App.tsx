@@ -36,6 +36,12 @@ import CoursesPage from "./pages/dashboards/admin/courses/CoursesPage";
 import SchedulePage from "./pages/dashboards/admin/SchedulePage";
 import AssignmentPage from "./pages/dashboards/admin/AssignmentPage";
 
+// New pages
+import PaymentsPage from "./pages/dashboards/admin/payments/PaymentsPage";
+import ReportsPage from "./pages/dashboards/admin/reports/ReportsPage";
+import NotificationsPage from "./pages/dashboards/admin/notifications/NotificationsPage";
+import SettingsPage from "./pages/dashboards/admin/settings/SettingsPage";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -71,6 +77,13 @@ const App = () => (
                   <Route path="syllabus" element={<SyllabusPage />} />
                   <Route path="schedule" element={<SchedulePage />} />
                   <Route path="assignments" element={<AssignmentPage />} />
+                  
+                  {/* New Routes */}
+                  <Route path="payments/*" element={<PaymentsPage />} />
+                  <Route path="reports/*" element={<ReportsPage />} />
+                  <Route path="notifications/*" element={<NotificationsPage />} />
+                  <Route path="settings/*" element={<SettingsPage />} />
+                  
                   <Route path="*" element={<div className="text-center py-10">Admin page not implemented yet</div>} />
                 </Route>
               </Route>

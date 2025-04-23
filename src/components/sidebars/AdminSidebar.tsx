@@ -5,7 +5,8 @@ import { SidebarGroup, SidebarGroupContent, SidebarMenu, SidebarMenuButton, Side
 import { 
   BarChart3, BookOpen, CalendarClock, Clock, GraduationCap, 
   Bell, FileText, Settings, Users, CreditCard, PlusCircle, 
-  LayoutDashboard, FileEdit, ClipboardList, User, Calendar
+  LayoutDashboard, FileEdit, ClipboardList, User, Calendar,
+  FileUp, ChartBar
 } from "lucide-react";
 
 export const AdminSidebar: React.FC = () => {
@@ -36,7 +37,7 @@ export const AdminSidebar: React.FC = () => {
       title: "Finance",
       items: [
         { icon: CreditCard, label: "Payments", to: "/dashboard/admin/payments" },
-        { icon: BarChart3, label: "Reports", to: "/dashboard/admin/reports" }
+        { icon: ChartBar, label: "Reports", to: "/dashboard/admin/reports" }
       ]
     },
     {
