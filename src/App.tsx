@@ -52,6 +52,15 @@ import TeacherStudentsPage from "./pages/dashboards/teacher/StudentsPage";
 import TeacherNotificationsPage from "./pages/dashboards/teacher/NotificationsPage";
 import TeacherSettingsPage from "./pages/dashboards/teacher/SettingsPage";
 
+// Student pages
+import StudentCoursesPage from "./pages/dashboards/student/StudentCoursesPage";
+import StudentLiveClassPage from "./pages/dashboards/student/LiveClassPage";
+import StudentSyllabusPage from "./pages/dashboards/student/SyllabusPage";
+import StudentAssignmentsPage from "./pages/dashboards/student/AssignmentsPage";
+import StudentPaymentsPage from "./pages/dashboards/student/PaymentsPage";
+import StudentNotificationsPage from "./pages/dashboards/student/NotificationsPage";
+import StudentSettingsPage from "./pages/dashboards/student/SettingsPage";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -125,6 +134,14 @@ const App = () => (
                   element={<DashboardLayout sidebarContent={<StudentSidebar />} />}
                 >
                   <Route index element={<StudentDashboard />} />
+                  <Route path="courses" element={<StudentCoursesPage />} />
+                  <Route path="live-class" element={<StudentLiveClassPage />} />
+                  <Route path="syllabus" element={<StudentSyllabusPage />} />
+                  <Route path="assignments" element={<StudentAssignmentsPage />} />
+                  <Route path="payments" element={<StudentPaymentsPage />} />
+                  <Route path="notifications" element={<StudentNotificationsPage />} />
+                  <Route path="settings" element={<StudentSettingsPage />} />
+                  
                   <Route path="*" element={<div className="text-center py-10">Student page not implemented yet</div>} />
                 </Route>
               </Route>
