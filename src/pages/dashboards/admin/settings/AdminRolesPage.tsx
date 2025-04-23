@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -260,6 +259,23 @@ const AdminRolesPage: React.FC = () => {
     return acc;
   }, {} as Record<string, Permission[]>);
 
+  // Function to toggle user status - modified to use proper types
+  const handleToggleUserStatus = (user: AdminUser) => {
+    const updatedUsers = adminUsers.map(u => 
+      u.id === user.id
+        ? { ...u, status: u.status === 'active' ? 'inactive' as const : 'active' as const }
+        : u
+    );
+    
+    setAdminUsers(updatedUsers);
+    
+    toast({
+      title: `User ${user.status === 'active' ? 'Deactivated' : 'Activated'}`,
+      description: `${user.name} has been ${user.status === 'active' ? 'deactivated' : 'activated'}.`,
+      duration: 3000,
+    });
+  };
+
   return (
     <div className="space-y-6 animate-fade-in">
       <Tabs defaultValue="roles" className="w-full">
@@ -414,20 +430,7 @@ const AdminRolesPage: React.FC = () => {
                               </DropdownMenuItem>
                               <DropdownMenuItem 
                                 className="flex items-center gap-2 cursor-pointer"
-                                onClick={() => {
-                                  const updatedUsers = adminUsers.map(u => 
-                                    u.id === user.id
-                                      ? { ...u, status: u.status === 'active' ? 'inactive' : 'active' }
-                                      : u
-                                  );
-                                  setAdminUsers(updatedUsers);
-                                  
-                                  toast({
-                                    title: `User ${user.status === 'active' ? 'Deactivated' : 'Activated'}`,
-                                    description: `${user.name} has been ${user.status === 'active' ? 'deactivated' : 'activated'}.`,
-                                    duration: 3000,
-                                  });
-                                }}
+                                onClick={() => handleToggleUserStatus(user)}
                               >
                                 <User className="h-4 w-4" /> 
                                 {user.status === 'active' ? 'Deactivate' : 'Activate'} User
