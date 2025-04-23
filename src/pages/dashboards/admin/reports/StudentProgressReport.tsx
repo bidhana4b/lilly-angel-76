@@ -18,8 +18,8 @@ const StudentProgressReport: React.FC = () => {
   const { toast } = useToast();
   
   const filteredProgress = studentProgress.filter(item => {
-    if (selectedCourse && item.course !== selectedCourse) return false;
-    if (selectedStudent && item.studentId !== selectedStudent) return false;
+    if (selectedCourse && selectedCourse !== "all" && item.course !== selectedCourse) return false;
+    if (selectedStudent && selectedStudent !== "all" && item.studentId !== selectedStudent) return false;
     return true;
   });
   
@@ -85,7 +85,7 @@ const StudentProgressReport: React.FC = () => {
                     <SelectValue placeholder="All Courses" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">All Courses</SelectItem>
+                    <SelectItem value="all">All Courses</SelectItem>
                     {courses.map(course => (
                       <SelectItem key={course} value={course}>{course}</SelectItem>
                     ))}
@@ -100,9 +100,9 @@ const StudentProgressReport: React.FC = () => {
                     <SelectValue placeholder="All Students" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">All Students</SelectItem>
+                    <SelectItem value="all">All Students</SelectItem>
                     {students.map((student, index) => (
-                      <SelectItem key={index} value={studentProgress.find(s => s.studentName === student)?.studentId || ""}>
+                      <SelectItem key={index} value={studentProgress.find(s => s.studentName === student)?.studentId || `student-${index}`}>
                         {student}
                       </SelectItem>
                     ))}
