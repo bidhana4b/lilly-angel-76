@@ -189,7 +189,7 @@ const mockStudentAssignments: StudentAssignment[] = [
 const StudentsPage: React.FC = () => {
   const [students] = useState<Student[]>(mockStudents);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [courseFilter, setCourseFilter] = useState<string>("");
+  const [courseFilter, setCourseFilter] = useState<string>("all"); // Changed from empty string to "all"
   const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
   const [isProfileOpen, setIsProfileOpen] = useState<boolean>(false);
   const [isAttendanceOpen, setIsAttendanceOpen] = useState<boolean>(false);
@@ -199,7 +199,7 @@ const StudentsPage: React.FC = () => {
   const filteredStudents = students.filter(student => {
     const matchesSearch = student.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
                          student.email.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCourse = !courseFilter || student.courses.includes(courseFilter);
+    const matchesCourse = courseFilter === "all" || student.courses.includes(courseFilter); // Updated condition
     return matchesSearch && matchesCourse;
   });
   
@@ -274,7 +274,7 @@ const StudentsPage: React.FC = () => {
                   <SelectValue placeholder="Filter by Course" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All Courses</SelectItem>
+                  <SelectItem value="all">All Courses</SelectItem> {/* Changed from empty string to "all" */}
                   {mockCourses.map(course => (
                     <SelectItem key={course.id} value={course.id}>{course.title}</SelectItem>
                   ))}
