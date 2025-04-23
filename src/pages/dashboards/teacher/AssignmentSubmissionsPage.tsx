@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -204,7 +203,7 @@ export default function AssignmentSubmissionsPage() {
                         </td>
                         <td className="p-2">
                           {sub.status === "pending" && (
-                            <Button variant="success" size="sm" onClick={() => handleGradeSubmit(sub.id)}>
+                            <Button variant="default" size="sm" onClick={() => handleGradeSubmit(sub.id)}>
                               <Check className="h-4 w-4 mr-1" /> Save
                             </Button>
                           )}
