@@ -338,7 +338,7 @@ export default function AssignmentPage() {
                       <SelectValue placeholder="Filter by Course" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">All Courses</SelectItem>
+                      <SelectItem value="all">All Courses</SelectItem>
                       {Array.from(new Set(mockAssignments.map(a => a.course))).map((course) => (
                         <SelectItem key={course} value={course}>
                           {course}
@@ -354,7 +354,7 @@ export default function AssignmentPage() {
                       <SelectValue placeholder="Filter by Teacher" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">All Teachers</SelectItem>
+                      <SelectItem value="all">All Teachers</SelectItem>
                       {Array.from(new Set(mockAssignments.map(a => a.teacher))).map((teacher) => (
                         <SelectItem key={teacher} value={teacher}>
                           {teacher}
