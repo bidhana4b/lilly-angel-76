@@ -96,8 +96,18 @@ const AttendanceReport: React.FC = () => {
                     <Calendar
                       mode="range"
                       selected={dateRange}
-                      onSelect={setDateRange}
+                      onSelect={(range) => {
+                        if (range) {
+                          setDateRange({
+                            from: range.from,
+                            to: range.to || range.from
+                          });
+                        } else {
+                          setDateRange({ from: undefined, to: undefined });
+                        }
+                      }}
                       initialFocus
+                      className="p-3 pointer-events-auto"
                     />
                   </PopoverContent>
                 </Popover>
