@@ -37,11 +37,11 @@ const TransactionsPage: React.FC = () => {
       );
     }
     
-    if (paymentMethod) {
+    if (paymentMethod && paymentMethod !== "all") {
       results = results.filter(item => item.paymentMethod === paymentMethod);
     }
     
-    if (status) {
+    if (status && status !== "all") {
       results = results.filter(item => item.status === status);
     }
     
@@ -160,7 +160,7 @@ const TransactionsPage: React.FC = () => {
                   <SelectValue placeholder="Payment Method" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All Methods</SelectItem>
+                  <SelectItem value="all">All Methods</SelectItem>
                   <SelectItem value="credit_card">Credit Card</SelectItem>
                   <SelectItem value="debit_card">Debit Card</SelectItem>
                   <SelectItem value="bank_transfer">Bank Transfer</SelectItem>
@@ -174,7 +174,7 @@ const TransactionsPage: React.FC = () => {
                   <SelectValue placeholder="Status" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All Statuses</SelectItem>
+                  <SelectItem value="all">All Statuses</SelectItem>
                   <SelectItem value="paid">Paid</SelectItem>
                   <SelectItem value="pending">Pending</SelectItem>
                   <SelectItem value="overdue">Overdue</SelectItem>
