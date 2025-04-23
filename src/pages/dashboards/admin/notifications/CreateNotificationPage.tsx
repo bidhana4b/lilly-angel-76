@@ -226,8 +226,8 @@ const CreateNotificationPage: React.FC = () => {
               <div className="space-y-2">
                 <Label htmlFor="target-id">{getTargetLabel()} <span className="text-red-500">*</span></Label>
                 <Select 
-                  value={form.targetId} 
-                  onValueChange={(value) => handleInputChange("targetId", value)}
+                  value={form.targetId || "select"} 
+                  onValueChange={(value) => handleInputChange("targetId", value === "select" ? undefined : value)}
                 >
                   <SelectTrigger id="target-id">
                     <SelectValue placeholder={`Select ${form.target}`} />

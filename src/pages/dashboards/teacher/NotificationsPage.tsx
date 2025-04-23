@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -284,7 +283,7 @@ const NotificationsPage: React.FC = () => {
                 <div className="space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="filter-course">Filter by Course (Optional)</Label>
-                    <Select value={targetId.startsWith("c") ? targetId : ""} onValueChange={value => {
+                    <Select value={targetId.startsWith("c") ? targetId : "all"} onValueChange={value => {
                       if (value.startsWith("c")) {
                         setTargetId(value);
                       } else {
@@ -295,7 +294,7 @@ const NotificationsPage: React.FC = () => {
                         <SelectValue placeholder="Select a course to filter students" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">All Courses</SelectItem>
+                        <SelectItem value="all">All Courses</SelectItem>
                         {mockCourses.map(course => (
                           <SelectItem key={course.id} value={course.id}>{course.title}</SelectItem>
                         ))}
