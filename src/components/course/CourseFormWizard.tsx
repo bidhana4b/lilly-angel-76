@@ -136,7 +136,7 @@ const CourseFormWizard: React.FC<CourseFormProps> = ({
   
   const [formData, setFormData] = useState<CourseFormData>({
     ...defaultFormData,
-    ...initialData as Partial<CourseFormData>
+    ...(initialData as Partial<CourseFormData>)
   });
 
   const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(

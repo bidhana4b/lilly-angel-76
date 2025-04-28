@@ -20,7 +20,7 @@ import {
 export interface Column<T extends object> {
   header: string;
   accessorKey: keyof T | string;
-  cell?: (row: T) => React.ReactNode;
+  cell?: ({ row }: { row: { original: T } }) => React.ReactNode;
 }
 
 interface DataTableProps<T extends object> {
