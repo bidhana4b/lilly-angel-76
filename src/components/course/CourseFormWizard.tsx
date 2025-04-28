@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -136,11 +137,12 @@ const CourseFormWizard: React.FC<CourseFormProps> = ({
   
   const [formData, setFormData] = useState<CourseFormData>({
     ...defaultFormData,
-    ...(initialData || {})
+    // Fix the spread type error by using a conditional to ensure initialData is an object
+    ...(initialData ? initialData : {})
   });
 
   const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(
-    initialData.thumbnail || null
+    initialData && initialData.thumbnail ? initialData.thumbnail : null
   );
   
   const [showPreview, setShowPreview] = useState(false);
@@ -1006,3 +1008,4 @@ const CourseFormWizard: React.FC<CourseFormProps> = ({
 };
 
 export default CourseFormWizard;
+
