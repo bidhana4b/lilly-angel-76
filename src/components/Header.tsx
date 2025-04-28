@@ -47,12 +47,13 @@ const Header = () => {
             animate="animate"
             whileHover="hover"
             variants={logoVariants}
+            className="h-14 w-auto flex items-center justify-center"
           >
             <OptimizedImage 
               src="/lovable-uploads/507519b0-65b5-480e-bfb3-97b36aec58b4.png" 
               alt="Lilly-Angel Logo" 
-              className="h-14" 
-              aspectRatio="aspect-square" 
+              className="h-14 w-auto object-contain" 
+              aspectRatio="aspect-auto" 
               loading="eager" 
               fetchPriority="high" 
             />
@@ -100,11 +101,30 @@ const Header = () => {
                   Courses
                 </motion.span>
               </NavigationMenuTrigger>
-              <NavigationMenuContent className="bg-white p-4 rounded-lg shadow-lg border border-gray-100 min-w-[200px]">
-                <ul className="grid gap-2">
+              <NavigationMenuContent className="bg-white p-4 rounded-lg shadow-lg border border-gray-100 min-w-[400px]">
+                <ul className="grid gap-4">
                   <li>
-                    <Link to="/courses" className="block p-2 rounded-md hover:bg-orange-100 transition-colors text-gray-700 hover:text-orange-600" onClick={() => setMobileMenuOpen(false)}>
-                      All Courses
+                    <Link to="/courses" className="block p-2 rounded-md hover:bg-orange-100 transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                      <div className="font-medium text-gray-800">All Courses</div>
+                      <div className="text-sm text-gray-500">Browse our complete course catalog</div>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/courses/health-safety" className="block p-2 rounded-md hover:bg-orange-100 transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                      <div className="font-medium text-gray-800">Health & Safety</div>
+                      <div className="text-sm text-gray-500">Courses for health and safety compliance</div>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/courses/security" className="block p-2 rounded-md hover:bg-orange-100 transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                      <div className="font-medium text-gray-800">Security Training</div>
+                      <div className="text-sm text-gray-500">Professional security certification courses</div>
+                    </Link>
+                  </li>
+                  <li className="bg-gray-50 rounded-md">
+                    <Link to="/courses/teaching" className="block p-2 rounded-md hover:bg-orange-100 transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                      <div className="font-medium text-gray-800">Teaching & Academics</div>
+                      <div className="text-sm text-gray-500">Professional development for educators</div>
                     </Link>
                   </li>
                 </ul>
@@ -216,9 +236,23 @@ const Header = () => {
                 </Link>
               </div>
               
-              <Link to="/courses" className={`text-lg font-medium p-2 rounded-md transition-colors ${isActive('/courses') ? 'text-orange-500 bg-orange-50' : 'text-gray-600 hover:text-orange-500 hover:bg-orange-50'}`} onClick={() => setMobileMenuOpen(false)}>
-                Courses
-              </Link>
+              <div className="flex flex-col">
+                <div className={`text-lg font-medium p-2 rounded-md transition-colors ${isActive('/courses') ? 'text-orange-500 bg-orange-50' : 'text-gray-600'}`}>
+                  Courses
+                </div>
+                <Link to="/courses" className="text-md font-medium p-2 pl-6 rounded-md transition-colors text-gray-600 hover:text-orange-500 hover:bg-orange-50" onClick={() => setMobileMenuOpen(false)}>
+                  All Courses
+                </Link>
+                <Link to="/courses/health-safety" className="text-md font-medium p-2 pl-6 rounded-md transition-colors text-gray-600 hover:text-orange-500 hover:bg-orange-50" onClick={() => setMobileMenuOpen(false)}>
+                  Health & Safety
+                </Link>
+                <Link to="/courses/security" className="text-md font-medium p-2 pl-6 rounded-md transition-colors text-gray-600 hover:text-orange-500 hover:bg-orange-50" onClick={() => setMobileMenuOpen(false)}>
+                  Security Training
+                </Link>
+                <Link to="/courses/teaching" className="text-md font-medium p-2 pl-6 rounded-md transition-colors text-gray-600 hover:text-orange-500 hover:bg-orange-50" onClick={() => setMobileMenuOpen(false)}>
+                  Teaching & Academics
+                </Link>
+              </div>
               
               <Link to="/tutors" className={`text-lg font-medium p-2 rounded-md transition-colors ${isActive('/tutors') ? 'text-orange-500 bg-orange-50' : 'text-gray-600 hover:text-orange-500 hover:bg-orange-50'}`} onClick={() => setMobileMenuOpen(false)}>
                 Tutors
