@@ -3,8 +3,11 @@ import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search, Users, Clock, FileText } from "lucide-react";
+import { Search, Users, Clock, FileText, Plus, Edit } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
+import CourseFormWizard from "@/components/course/CourseFormWizard";
 
 interface Course {
   id: string;
@@ -88,15 +91,26 @@ const mockCourses: Course[] = [
   }
 ];
 
-const CourseCard: React.FC<{ course: Course; onClick: () => void }> = ({ course, onClick }) => (
+const CourseCard: React.FC<{ course: Course; onClick: () => void; onEdit: () => void }> = ({ course, onClick, onEdit }) => (
   <Card 
     className="transition-all duration-300 hover:shadow-md cursor-pointer hover:-translate-y-1"
-    onClick={onClick}
   >
     <CardContent className="p-6">
       <div className="flex flex-col gap-4">
         <div>
-          <h3 className="text-xl font-bold">{course.title}</h3>
+          <div className="flex justify-between">
+            <h3 className="text-xl font-bold">{course.title}</h3>
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              onClick={(e) => {
+                e.stopPropagation();
+                onEdit();
+              }}
+            >
+              <Edit className="h-4 w-4" />
+            </Button>
+          </div>
           <p className="text-muted-foreground mt-1">{course.description}</p>
           <span className={`inline-block px-2 py-1 text-xs rounded-full mt-2 ${
             course.level === "Beginner" ? "bg-green-100 text-green-800" : 
@@ -123,7 +137,16 @@ const CourseCard: React.FC<{ course: Course; onClick: () => void }> = ({ course,
         </div>
         
         <div className="flex justify-end">
-          <Button variant="outline" size="sm">View Details</Button>
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={(e) => {
+              e.stopPropagation();
+              onClick();
+            }}
+          >
+            View Details
+          </Button>
         </div>
       </div>
     </CardContent>
@@ -134,6 +157,12 @@ const CoursesPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [showAddCourse, setShowAddCourse] = useState(false);
+  const [showEditCourse, setShowEditCourse] = useState(false);
+  const [courseToEdit, setCourseToEdit] = useState<string | null>(null);
+  
+  const { toast } = useToast();
+  const navigate = useNavigate();
   
   const filteredCourses = mockCourses.filter(
     course => course.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -143,14 +172,122 @@ const CoursesPage: React.FC = () => {
     setSelectedCourse(course);
     setIsDialogOpen(true);
   };
+
+  const handleCreateCourse = (courseData: any) => {
+    console.log("New course created:", courseData);
+    toast({
+      title: "Course Created",
+      description: `${courseData.title} has been created and sent for review.`,
+    });
+    setShowAddCourse(false);
+  };
+
+  const handleEditCourse = (course: Course) => {
+    setCourseToEdit(course.id);
+    setShowEditCourse(true);
+  };
+
+  const handleUpdateCourse = (courseData: any) => {
+    console.log("Course updated:", courseData);
+    toast({
+      title: "Course Updated",
+      description: `${courseData.title} has been updated successfully.`,
+    });
+    setShowEditCourse(false);
+    setCourseToEdit(null);
+  };
   
+  // If we're showing the add course form, render that instead
+  if (showAddCourse) {
+    return (
+      <div>
+        <div className="mb-6 flex items-center justify-between">
+          <Button 
+            variant="ghost" 
+            onClick={() => setShowAddCourse(false)}
+            className="hover:bg-transparent hover:text-blue-600 p-0"
+          >
+            ← Back to Courses
+          </Button>
+        </div>
+        <CourseFormWizard 
+          onSubmit={handleCreateCourse}
+          mode="teacher"
+        />
+      </div>
+    );
+  }
+
+  // If we're showing the edit course form, render that instead
+  if (showEditCourse && courseToEdit) {
+    const course = mockCourses.find(c => c.id === courseToEdit);
+    
+    if (!course) return null;
+    
+    return (
+      <div>
+        <div className="mb-6 flex items-center justify-between">
+          <Button 
+            variant="ghost" 
+            onClick={() => {
+              setShowEditCourse(false);
+              setCourseToEdit(null);
+            }}
+            className="hover:bg-transparent hover:text-blue-600 p-0"
+          >
+            ← Back to Courses
+          </Button>
+        </div>
+        <CourseFormWizard
+          onSubmit={handleUpdateCourse}
+          initialData={{
+            id: course.id,
+            title: course.title,
+            description: course.description,
+            shortDescription: course.description.substring(0, 100),
+            level: course.level.toLowerCase(),
+            duration: course.duration.split(" ")[0],
+            durationUnit: course.duration.split(" ")[1],
+            modules: [
+              {
+                id: "module-1",
+                title: "Introduction",
+                description: "Get started with the basics",
+                expanded: true,
+                lessons: [
+                  { id: "lesson-1", title: "Welcome to the course", duration: "00:10", type: "video" },
+                  { id: "lesson-2", title: "Course overview", duration: "00:15", type: "video" }
+                ]
+              }
+            ],
+            objectives: [
+              { id: "obj-1", text: "Learn the fundamentals" },
+              { id: "obj-2", text: "Build real-world projects" }
+            ],
+            requirements: [
+              { id: "req-1", text: "Basic programming knowledge" }
+            ]
+          }}
+          mode="teacher"
+        />
+      </div>
+    );
+  }
+  
+  // Default view showing the course list
   return (
     <div className="space-y-6 animate-fade-in">
-      <div>
-        <h2 className="text-3xl font-bold tracking-tight">My Courses</h2>
-        <p className="text-muted-foreground">
-          View and manage all courses you are teaching
-        </p>
+      <div className="flex justify-between items-center">
+        <div>
+          <h2 className="text-3xl font-bold tracking-tight">My Courses</h2>
+          <p className="text-muted-foreground">
+            View and manage all courses you are teaching
+          </p>
+        </div>
+        <Button onClick={() => setShowAddCourse(true)}>
+          <Plus className="h-4 w-4 mr-2" />
+          Create Course
+        </Button>
       </div>
       
       <div className="flex items-center">
@@ -171,6 +308,7 @@ const CoursesPage: React.FC = () => {
             key={course.id} 
             course={course}
             onClick={() => handleCourseClick(course)}
+            onEdit={() => handleEditCourse(course)}
           />
         ))}
       </div>

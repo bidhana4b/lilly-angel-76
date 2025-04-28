@@ -18,6 +18,7 @@ interface CourseCardProps {
   isFeatured?: boolean;
   price: string;
   duration: string;
+  level?: 'beginner' | 'intermediate' | 'advanced';
 }
 
 const CourseCard = ({ 
@@ -31,8 +32,22 @@ const CourseCard = ({
   instructorName, 
   isFeatured = false,
   price,
-  duration
+  duration,
+  level = 'beginner'
 }: CourseCardProps) => {
+  const getLevelColor = () => {
+    switch (level) {
+      case 'beginner': return 'bg-green-100 text-green-800';
+      case 'intermediate': return 'bg-blue-100 text-blue-800';
+      case 'advanced': return 'bg-purple-100 text-purple-800';
+      default: return 'bg-green-100 text-green-800';
+    }
+  };
+
+  const getLevelText = () => {
+    return level.charAt(0).toUpperCase() + level.slice(1);
+  };
+
   return (
     <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg card-hover h-full border-none shadow-md">
       <Link to={`/courses/${id}`} className="block">
@@ -61,10 +76,15 @@ const CourseCard = ({
           <Badge variant="outline" className="bg-blue-50 hover:bg-blue-100 text-blue-700 hover:text-blue-800">
             {category}
           </Badge>
-          <div className="flex items-center">
-            <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-            <span className="text-sm font-semibold ml-1">{rating}</span>
-            {reviewCount > 0 && <span className="text-xs text-gray-500 ml-1">({reviewCount})</span>}
+          <div className="flex items-center gap-2">
+            <div className="flex items-center">
+              <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+              <span className="text-sm font-semibold ml-1">{rating}</span>
+              {reviewCount > 0 && <span className="text-xs text-gray-500 ml-1">({reviewCount})</span>}
+            </div>
+            <Badge className={`${getLevelColor()} border-none hover:${getLevelColor()}`}>
+              {getLevelText()}
+            </Badge>
           </div>
         </div>
         
