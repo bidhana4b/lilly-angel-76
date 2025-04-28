@@ -105,7 +105,8 @@ const CourseFormWizard: React.FC<CourseFormProps> = ({
 }) => {
   // Create default data structure with initialData or empty values
   const [activeTab, setActiveTab] = useState("basic");
-  // Fix the spread type error by explicitly typing the default values
+  
+  // Define the default form data
   const defaultFormData: CourseFormData = {
     title: "",
     description: "",
@@ -134,13 +135,12 @@ const CourseFormWizard: React.FC<CourseFormProps> = ({
     }
   };
   
-  // Ensure initialData is treated as a safe object for spreading
-  // Use a more specific type assertion to fix the TypeScript error
-  const safeInitialData = initialData as Partial<CourseFormData>;
-  
-  const [formData, setFormData] = useState<CourseFormData>({
-    ...defaultFormData,
-    ...safeInitialData
+  // Initialize form data with default values first, then merge with initialData
+  const [formData, setFormData] = useState<CourseFormData>(() => {
+    return {
+      ...defaultFormData,
+      ...(initialData as Partial<CourseFormData> || {})
+    };
   });
 
   const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(
