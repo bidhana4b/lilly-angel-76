@@ -24,7 +24,7 @@ const Header = () => {
           y: 0
         }} transition={{
           duration: 0.5
-        }} src="/lovable-uploads/1a43599f-f4e1-4ada-9439-efad90c5a949.png" alt="Lilly-Angel Logo" className="h-14" width="56" height="56" loading="eager" fetchPriority="high" />
+        }} alt="Lilly-Angel Logo" className="h-14" width="56" height="56" loading="eager" fetchPriority="high" src="/lovable-uploads/507519b0-65b5-480e-bfb3-97b36aec58b4.png" />
           
         </Link>
 
