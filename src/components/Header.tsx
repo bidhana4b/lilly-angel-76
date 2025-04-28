@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -8,11 +7,9 @@ import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMe
 import { cn } from "@/lib/utils";
 import OptimizedImage from '@/components/ui/optimized-image';
 import { Menu, ChevronDown } from 'lucide-react';
-
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
-
   const isActive = (path: string) => {
     if (path === '/' && location.pathname === '/') return true;
     if (path !== '/' && location.pathname.startsWith(path)) return true;
@@ -21,42 +18,43 @@ const Header = () => {
 
   // Animation variants for the logo
   const logoVariants = {
-    initial: { opacity: 0, y: -20 },
-    animate: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-    hover: { 
-      scale: 1.05, 
-      transition: { 
-        type: "spring", 
-        stiffness: 400, 
-        damping: 10 
-      } 
+    initial: {
+      opacity: 0,
+      y: -20
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5
+      }
+    },
+    hover: {
+      scale: 1.05,
+      transition: {
+        type: "spring",
+        stiffness: 400,
+        damping: 10
+      }
     }
   };
 
   // Animation variants for menu items
   const menuItemVariants = {
-    hover: { y: -2, transition: { type: "spring", stiffness: 400, damping: 10 } }
+    hover: {
+      y: -2,
+      transition: {
+        type: "spring",
+        stiffness: 400,
+        damping: 10
+      }
+    }
   };
-
-  return (
-    <header className="bg-white shadow-md sticky top-0 z-50">
+  return <header className="bg-white shadow-md sticky top-0 z-50">
       <div className="container mx-auto px-6 flex items-center justify-between py-3">
         <Link to="/" className="flex items-center space-x-2">
-          <motion.div
-            initial="initial"
-            animate="animate"
-            whileHover="hover"
-            variants={logoVariants}
-            className="h-14 w-auto flex items-center justify-center"
-          >
-            <OptimizedImage 
-              src="/lovable-uploads/507519b0-65b5-480e-bfb3-97b36aec58b4.png" 
-              alt="Lilly-Angel Logo" 
-              className="h-14 w-auto object-contain" 
-              aspectRatio="aspect-auto" 
-              loading="eager" 
-              fetchPriority="high" 
-            />
+          <motion.div initial="initial" animate="animate" whileHover="hover" variants={logoVariants} className="h-14 w-auto flex items-center justify-center">
+            <OptimizedImage alt="Lilly-Angel Logo" className="h-14 w-auto object-contain" aspectRatio="aspect-auto" loading="eager" fetchPriority="high" src="/lovable-uploads/578c398f-11da-416f-94b3-9619310d0c14.png" />
           </motion.div>
         </Link>
 
@@ -175,29 +173,27 @@ const Header = () => {
 
         <div className="hidden md:flex items-center space-x-4">
           <Link to="/login">
-            <motion.div 
-              whileHover={{ scale: 1.05 }} 
-              whileTap={{ scale: 0.95 }}
-              className="button-shine"
-            >
+            <motion.div whileHover={{
+            scale: 1.05
+          }} whileTap={{
+            scale: 0.95
+          }} className="button-shine">
               <Button variant="outline" size="sm" className="border-orange-300 hover:border-orange-500 text-gray-700 hover:text-orange-600 font-medium">
                 Log In
               </Button>
             </motion.div>
           </Link>
           <Link to="/login?register=true">
-            <motion.div 
-              whileHover={{ 
-                scale: 1.05, 
-                boxShadow: "0px 0px 8px rgba(255, 87, 51, 0.6)" 
-              }} 
-              whileTap={{ scale: 0.95 }}
-              transition={{ 
-                type: "spring", 
-                stiffness: 400, 
-                damping: 10 
-              }}
-            >
+            <motion.div whileHover={{
+            scale: 1.05,
+            boxShadow: "0px 0px 8px rgba(255, 87, 51, 0.6)"
+          }} whileTap={{
+            scale: 0.95
+          }} transition={{
+            type: "spring",
+            stiffness: 400,
+            damping: 10
+          }}>
               <Button size="sm" className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-medium shadow-md button-shine">
                 Online Registration
               </Button>
@@ -217,12 +213,16 @@ const Header = () => {
             <div className="flex justify-between items-center py-4 border-b border-gray-100">
               <span className="text-lg font-bold text-navy-dark">Menu</span>
             </div>
-            <motion.nav 
-              className="flex flex-col gap-4 mt-6"
-              initial={{ opacity: 0, y: 5 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ staggerChildren: 0.05, delayChildren: 0.2 }}
-            >
+            <motion.nav className="flex flex-col gap-4 mt-6" initial={{
+            opacity: 0,
+            y: 5
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            staggerChildren: 0.05,
+            delayChildren: 0.2
+          }}>
               <Link to="/" className={`text-lg font-medium p-2 rounded-md transition-colors ${isActive('/') ? 'text-orange-500 bg-orange-50' : 'text-gray-600 hover:text-orange-500 hover:bg-orange-50'}`} onClick={() => setMobileMenuOpen(false)}>
                 Home
               </Link>
@@ -286,8 +286,6 @@ const Header = () => {
           </SheetContent>
         </Sheet>
       </div>
-    </header>
-  );
+    </header>;
 };
-
 export default Header;
