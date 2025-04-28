@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -135,10 +134,12 @@ const CourseFormWizard: React.FC<CourseFormProps> = ({
     }
   };
   
+  // Fix the spread type error by using a proper type assertion
+  const initialDataObject = initialData as Record<string, unknown>;
+  
   const [formData, setFormData] = useState<CourseFormData>({
     ...defaultFormData,
-    // Fix the spread type error by using a conditional to ensure initialData is an object
-    ...(initialData ? initialData : {})
+    ...initialDataObject
   });
 
   const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(
@@ -147,6 +148,7 @@ const CourseFormWizard: React.FC<CourseFormProps> = ({
   
   const [showPreview, setShowPreview] = useState(false);
 
+  
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     
@@ -372,15 +374,16 @@ const CourseFormWizard: React.FC<CourseFormProps> = ({
   // Format total duration in hours and minutes
   const formattedTotalDuration = `${Math.floor(totalDuration / 60)}h ${totalDuration % 60}m`;
 
+  
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
           <h2 className="text-2xl font-bold tracking-tight">
-            {initialData.id ? "Edit Course" : "Create New Course"}
+            {initialData?.id ? "Edit Course" : "Create New Course"}
           </h2>
           <p className="text-muted-foreground">
-            Fill in the details to {initialData.id ? "update" : "create"} your course
+            Fill in the details to {initialData?.id ? "update" : "create"} your course
           </p>
         </div>
         <div className="flex gap-2">
@@ -1008,4 +1011,3 @@ const CourseFormWizard: React.FC<CourseFormProps> = ({
 };
 
 export default CourseFormWizard;
-
