@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -106,32 +105,38 @@ const CourseFormWizard: React.FC<CourseFormProps> = ({
 }) => {
   // Create default data structure with initialData or empty values
   const [activeTab, setActiveTab] = useState("basic");
-  const [formData, setFormData] = useState<CourseFormData>({
-    title: initialData.title || "",
-    description: initialData.description || "",
-    shortDescription: initialData.shortDescription || "",
-    category: initialData.category || "",
-    level: initialData.level || "beginner",
-    thumbnail: initialData.thumbnail || "",
-    previewVideo: initialData.previewVideo || "",
-    price: initialData.price || "",
-    discountPrice: initialData.discountPrice || "",
-    duration: initialData.duration || "",
-    durationUnit: initialData.durationUnit || "weeks",
-    enrollmentLimit: initialData.enrollmentLimit || "",
-    startDate: initialData.startDate || "",
-    endDate: initialData.endDate || "",
-    isFeatured: initialData.isFeatured || false,
-    isPublished: initialData.isPublished || false,
-    teachers: initialData.teachers || [],
-    modules: initialData.modules || [],
-    objectives: initialData.objectives || [],
-    requirements: initialData.requirements || [],
-    meta: initialData.meta || {
+  // Fix the spread type error by explicitly typing the default values
+  const defaultFormData: CourseFormData = {
+    title: "",
+    description: "",
+    shortDescription: "",
+    category: "",
+    level: "beginner",
+    thumbnail: "",
+    previewVideo: "",
+    price: "",
+    discountPrice: "",
+    duration: "",
+    durationUnit: "weeks",
+    enrollmentLimit: "",
+    startDate: "",
+    endDate: "",
+    isFeatured: false,
+    isPublished: false,
+    teachers: [],
+    modules: [],
+    objectives: [],
+    requirements: [],
+    meta: {
       seoTitle: "",
       seoDescription: "",
       keywords: ""
     }
+  };
+  
+  const [formData, setFormData] = useState<CourseFormData>({
+    ...defaultFormData,
+    ...initialData as Partial<CourseFormData>
   });
 
   const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(

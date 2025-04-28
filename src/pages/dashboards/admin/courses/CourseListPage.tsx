@@ -8,6 +8,7 @@ import { DataTable } from "@/components/ui/data-table/DataTable";
 import { Plus, BookOpen, Search, Edit, Trash } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Course } from "./CoursesPage";
+import { Column } from "@/components/ui/data-table/DataTable";
 
 // Sample course data
 const mockCourses = [
@@ -69,12 +70,12 @@ export default function CourseListPage() {
     course.category.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Custom columns definition for the data table
-  const columns = [
+  // Fixed the columns type definition to match the DataTable expected format
+  const columns: Column<Course>[] = [
     {
       header: "Course",
       accessorKey: "title",
-      cell: ({ row }: { row: any }) => (
+      cell: ({ row }) => (
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded overflow-hidden">
             <img 
@@ -93,7 +94,7 @@ export default function CourseListPage() {
     {
       header: "Level",
       accessorKey: "level",
-      cell: ({ row }: { row: any }) => (
+      cell: ({ row }) => (
         <Badge variant="outline" className={`
           ${row.original.level === 'beginner' ? 'bg-green-50 text-green-700' : 
             row.original.level === 'intermediate' ? 'bg-blue-50 text-blue-700' : 
@@ -106,7 +107,7 @@ export default function CourseListPage() {
     {
       header: "Price",
       accessorKey: "price",
-      cell: ({ row }: { row: any }) => (
+      cell: ({ row }) => (
         <div className="font-medium">${row.original.price}</div>
       ),
     },
@@ -121,7 +122,7 @@ export default function CourseListPage() {
     {
       header: "Featured",
       accessorKey: "isFeatured",
-      cell: ({ row }: { row: any }) => (
+      cell: ({ row }) => (
         row.original.isFeatured ? (
           <Badge className="bg-gradient-to-r from-orange-400 to-orange-600">
             Featured
@@ -133,7 +134,8 @@ export default function CourseListPage() {
     },
     {
       header: "Actions",
-      cell: ({ row }: { row: any }) => (
+      accessorKey: "id", // Added an accessor key to fix the type issue
+      cell: ({ row }) => (
         <div className="flex items-center gap-2">
           <Link to={`/dashboard/admin/courses/edit/${row.original.id}`}>
             <Button variant="ghost" size="sm">
