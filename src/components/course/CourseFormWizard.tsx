@@ -134,12 +134,13 @@ const CourseFormWizard: React.FC<CourseFormProps> = ({
     }
   };
   
-  // Fix the spread type error by using a proper type assertion
-  const initialDataObject = initialData as Record<string, unknown>;
+  // Ensure initialData is treated as a safe object for spreading
+  // Use a more specific type assertion to fix the TypeScript error
+  const safeInitialData = initialData as Partial<CourseFormData>;
   
   const [formData, setFormData] = useState<CourseFormData>({
     ...defaultFormData,
-    ...initialDataObject
+    ...safeInitialData
   });
 
   const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(
@@ -149,6 +150,7 @@ const CourseFormWizard: React.FC<CourseFormProps> = ({
   const [showPreview, setShowPreview] = useState(false);
 
   
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     
