@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -70,7 +69,6 @@ export default function CourseListPage() {
     course.category.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Fixed the columns type definition to match the DataTable expected format
   const columns: Column<Course>[] = [
     {
       header: "Course",
@@ -134,7 +132,7 @@ export default function CourseListPage() {
     },
     {
       header: "Actions",
-      accessorKey: "id", // Added an accessor key to fix the type issue
+      accessorKey: "id",
       cell: ({ row }) => (
         <div className="flex items-center gap-2">
           <Link to={`/dashboard/admin/courses/edit/${row.original.id}`}>

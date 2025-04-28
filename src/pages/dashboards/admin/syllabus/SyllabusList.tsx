@@ -15,19 +15,19 @@ const syllabusColumns: Column<Syllabus>[] = [
   { 
     header: "Type", 
     accessorKey: "uploadType",
-    cell: (row: Syllabus) => {
+    cell: ({ row }) => {
       const typeLabels = {
         file: "PDF File",
         link: "Drive Link",
         editor: "Rich Text"
       };
-      return typeLabels[row.uploadType];
+      return typeLabels[row.original.uploadType];
     }
   },
   {
     header: "Actions",
     accessorKey: "actions",
-    cell: (row: Syllabus) => (
+    cell: ({ row }) => (
       <div className="flex gap-2">
         <Button variant="outline" size="sm" className="h-8 w-8 p-0">
           <Eye className="h-4 w-4" />

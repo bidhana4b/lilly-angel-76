@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -49,18 +48,18 @@ export function TeacherTable({
     { 
       header: "Teacher", 
       accessorKey: "name",
-      cell: (row) => (
+      cell: ({ row }) => (
         <div className="flex items-center gap-3">
           <div className="h-10 w-10 rounded-full overflow-hidden">
             <img 
-              src={row.profileImage} 
-              alt={row.name} 
+              src={row.original.profileImage} 
+              alt={row.original.name} 
               className="h-full w-full object-cover"
             />
           </div>
           <div>
-            <div className="font-medium">{row.name}</div>
-            <div className="text-sm text-muted-foreground">{row.email}</div>
+            <div className="font-medium">{row.original.name}</div>
+            <div className="text-sm text-muted-foreground">{row.original.email}</div>
           </div>
         </div>
       )
@@ -70,23 +69,23 @@ export function TeacherTable({
     { 
       header: "Status", 
       accessorKey: "status",
-      cell: (row) => (
+      cell: ({ row }) => (
         <Badge 
-          variant={row.status === "active" ? "default" : "destructive"}
+          variant={row.original.status === "active" ? "default" : "destructive"}
         >
-          {row.status}
+          {row.original.status}
         </Badge>
       ),
     },
     {
       header: "Actions",
       accessorKey: "id",
-      cell: (row) => (
+      cell: ({ row }) => (
         <div className="flex items-center gap-2">
           <Button 
             variant="outline" 
             size="sm" 
-            onClick={() => onEdit(row)}
+            onClick={() => onEdit(row.original)}
             className="h-8 w-8 p-0"
           >
             <Edit className="h-4 w-4" />
@@ -95,22 +94,22 @@ export function TeacherTable({
           <Button 
             variant="outline" 
             size="sm" 
-            onClick={() => onToggleStatus(row)}
+            onClick={() => onToggleStatus(row.original)}
             className="h-8 w-8 p-0"
           >
-            {row.status === "active" ? (
+            {row.original.status === "active" ? (
               <UserX className="h-4 w-4" />
             ) : (
               <UserCheck className="h-4 w-4" />
             )}
             <span className="sr-only">
-              {row.status === "active" ? "Block" : "Unblock"}
+              {row.original.status === "active" ? "Block" : "Unblock"}
             </span>
           </Button>
           <Button 
             variant="outline" 
             size="sm" 
-            onClick={() => onAssignCourses(row)}
+            onClick={() => onAssignCourses(row.original)}
             className="h-8 w-8 p-0"
           >
             <Book className="h-4 w-4" />

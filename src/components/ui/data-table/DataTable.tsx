@@ -57,7 +57,7 @@ export function DataTable<T extends object>({
                 {columns.map((column) => (
                   <TableCell key={String(column.accessorKey)}>
                     {column.cell
-                      ? column.cell(row)
+                      ? column.cell({ row: { original: row } })
                       : column.accessorKey in row
                         ? String(row[column.accessorKey as keyof T])
                         : ""}

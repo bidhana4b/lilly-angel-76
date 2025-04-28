@@ -146,17 +146,17 @@ const assignmentColumns: Column<Assignment>[] = [
   { 
     header: "Due Date", 
     accessorKey: "dueDate",
-    cell: (row: Assignment) => format(row.dueDate, "MMM d, yyyy") 
+    cell: ({ row }) => format(row.original.dueDate, "MMM d, yyyy") 
   },
   { 
     header: "Submissions", 
     accessorKey: "submissionCount",
-    cell: (row: Assignment) => `${row.submissionCount}/${row.totalStudents}`
+    cell: ({ row }) => `${row.original.submissionCount}/${row.original.totalStudents}`
   },
   { 
     header: "Status", 
     accessorKey: "status",
-    cell: (row: Assignment) => {
+    cell: ({ row }) => {
       const statusColors = {
         active: "bg-green-100 text-green-800",
         upcoming: "bg-blue-100 text-blue-800",
@@ -169,8 +169,8 @@ const assignmentColumns: Column<Assignment>[] = [
       };
       
       return (
-        <span className={`px-2 py-1 rounded-full text-xs font-medium ${statusColors[row.status]}`}>
-          {statusLabels[row.status]}
+        <span className={`px-2 py-1 rounded-full text-xs font-medium ${statusColors[row.original.status]}`}>
+          {statusLabels[row.original.status]}
         </span>
       );
     }
@@ -178,7 +178,7 @@ const assignmentColumns: Column<Assignment>[] = [
   {
     header: "Actions",
     accessorKey: "actions",
-    cell: (row: Assignment) => (
+    cell: ({ row }) => (
       <Button variant="outline" size="sm">
         View Submissions
       </Button>
@@ -192,12 +192,12 @@ const submissionColumns: Column<Submission>[] = [
   { 
     header: "Submission Date", 
     accessorKey: "submissionDate",
-    cell: (row: Submission) => format(row.submissionDate, "MMM d, yyyy h:mm a") 
+    cell: ({ row }) => format(row.original.submissionDate, "MMM d, yyyy h:mm a") 
   },
   { 
     header: "Status", 
     accessorKey: "gradingStatus",
-    cell: (row: Submission) => {
+    cell: ({ row }) => {
       const statusIcons = {
         graded: <CheckCircle className="h-4 w-4 text-green-500" />,
         pending: <Clock className="h-4 w-4 text-amber-500" />,
@@ -212,10 +212,10 @@ const submissionColumns: Column<Submission>[] = [
       
       return (
         <div className="flex items-center gap-2">
-          {statusIcons[row.gradingStatus]}
-          <span>{statusLabels[row.gradingStatus]}</span>
-          {row.score !== undefined && (
-            <Badge variant="outline" className="ml-2">{row.score}%</Badge>
+          {statusIcons[row.original.gradingStatus]}
+          <span>{statusLabels[row.original.gradingStatus]}</span>
+          {row.original.score !== undefined && (
+            <Badge variant="outline" className="ml-2">{row.original.score}%</Badge>
           )}
         </div>
       );
@@ -224,12 +224,12 @@ const submissionColumns: Column<Submission>[] = [
   {
     header: "Actions",
     accessorKey: "actions",
-    cell: (row: Submission) => (
+    cell: ({ row }) => (
       <div className="flex gap-2">
         <Button variant="outline" size="sm" className="h-8 w-8 p-0">
           <Download className="h-4 w-4" />
         </Button>
-        {row.gradingStatus === "pending" && (
+        {row.original.gradingStatus === "pending" && (
           <Button variant="outline" size="sm">
             Assign Reviewer
           </Button>
@@ -280,8 +280,8 @@ export default function AssignmentPage() {
     col.accessorKey === "actions" 
       ? { 
           ...col, 
-          cell: (row: Assignment) => (
-            <Button variant="outline" size="sm" onClick={() => handleViewSubmissions(row)}>
+          cell: ({ row }: { row: { original: Assignment } }) => (
+            <Button variant="outline" size="sm" onClick={() => handleViewSubmissions(row.original)}>
               View Submissions
             </Button>
           )

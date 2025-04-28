@@ -205,94 +205,100 @@ export default function StudentsPage() {
   });
 
   const studentColumns: Column<Student>[] = [
-    { 
-      header: "Student", 
+    {
+      header: "Student",
       accessorKey: "name",
-      cell: (row) => (
+      cell: ({ row }) => (
         <div className="flex items-center gap-3">
           <div className="h-10 w-10 rounded-full overflow-hidden">
-            <img 
-              src={row.profileImage} 
-              alt={row.name} 
+            <img
+              src={row.original.profileImage}
+              alt={row.original.name}
               className="h-full w-full object-cover"
             />
           </div>
           <div>
-            <div className="font-medium">{row.name}</div>
-            <div className="text-sm text-muted-foreground">{row.email}</div>
+            <div className="font-medium">{row.original.name}</div>
+            <div className="text-sm text-muted-foreground">{row.original.email}</div>
           </div>
         </div>
-      )
-    },
-    { header: "Phone", accessorKey: "phone" },
-    { 
-      header: "Payment", 
-      accessorKey: "paymentStatus",
-      cell: (row) => (
-        <Badge 
-          variant={
-            row.paymentStatus === "paid" 
-              ? "default" 
-              : row.paymentStatus === "pending" 
-                ? "secondary" 
-                : "destructive"
-          }
-        >
-          {row.paymentStatus}
-        </Badge>
       ),
     },
-    { 
-      header: "Courses", 
+    { header: "Phone", accessorKey: "phone" },
+    {
+      header: "Payment",
+      accessorKey: "paymentStatus",
+      cell: ({ row }) => {
+        const statusColors = {
+          paid: "bg-green-100 text-green-800",
+          pending: "bg-yellow-100 text-yellow-800",
+          overdue: "bg-red-100 text-red-800",
+        };
+        return (
+          <span
+            className={`px-2 py-1 rounded-full text-xs font-medium ${
+              statusColors[row.original.paymentStatus]
+            }`}
+          >
+            {row.original.paymentStatus.charAt(0).toUpperCase() +
+              row.original.paymentStatus.slice(1)}
+          </span>
+        );
+      },
+    },
+    {
+      header: "Courses",
       accessorKey: "courses",
-      cell: (row) => (
-        <div className="flex flex-wrap gap-1">
-          {row.courses.map((course) => (
-            <Badge key={course.courseId} variant="outline" className="whitespace-nowrap">
-              {course.courseName}
-            </Badge>
-          ))}
+      cell: ({ row }) => (
+        <div>
+          {row.original.courses.length > 0 ? (
+            <span className="text-sm">
+              {row.original.courses.length}{" "}
+              {row.original.courses.length === 1 ? "course" : "courses"}
+            </span>
+          ) : (
+            <span className="text-xs text-muted-foreground">No courses</span>
+          )}
         </div>
       ),
     },
-    { 
-      header: "Status", 
+    {
+      header: "Status",
       accessorKey: "status",
-      cell: (row) => (
-        <Badge 
-          variant={row.status === "active" ? "default" : "destructive"}
+      cell: ({ row }) => (
+        <Badge
+          variant={row.original.status === "active" ? "default" : "destructive"}
         >
-          {row.status}
+          {row.original.status}
         </Badge>
       ),
     },
     {
       header: "Actions",
       accessorKey: "id",
-      cell: (row) => (
+      cell: ({ row }) => (
         <div className="flex items-center gap-2">
-          <Button 
-            variant="outline" 
-            size="sm" 
-            onClick={() => handleViewProfile(row)}
-            className="h-8 px-2 py-0 text-xs"
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handleViewProfile(row.original)}
+            title="View Profile"
           >
             View Profile
           </Button>
-          <Button 
-            variant="outline" 
-            size="sm" 
-            onClick={() => handleToggleStatus(row)}
-            className="h-8 w-8 p-0"
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handleToggleStatus(row.original)}
+            title={
+              row.original.status === "active" ? "Block Student" : "Unblock Student"
+            }
           >
-            {row.status === "active" ? (
+            {row.original.status === "active" ? (
               <UserX className="h-4 w-4" />
             ) : (
               <UserCheck className="h-4 w-4" />
             )}
-            <span className="sr-only">
-              {row.status === "active" ? "Block" : "Unblock"}
-            </span>
           </Button>
         </div>
       ),
