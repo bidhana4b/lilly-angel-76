@@ -248,6 +248,10 @@ const CoursesPage: React.FC = () => {
             level: course.level.toLowerCase(),
             duration: course.duration.split(" ")[0],
             durationUnit: course.duration.split(" ")[1],
+            category: "",
+            thumbnail: "",
+            price: "",
+            teachers: [],
             modules: [
               {
                 id: "module-1",
