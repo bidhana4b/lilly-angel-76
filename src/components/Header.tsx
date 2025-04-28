@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -5,6 +6,8 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { motion } from 'framer-motion';
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
+import OptimizedImage from './ui/optimized-image';
+
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
@@ -13,19 +16,28 @@ const Header = () => {
     if (path !== '/' && location.pathname.startsWith(path)) return true;
     return false;
   };
+  
   return <header className="bg-white shadow-md sticky top-0 z-50">
       <div className="container mx-auto px-6 flex items-center justify-between py-3">
         <Link to="/" className="flex items-center space-x-2">
-          <motion.img initial={{
-          opacity: 0,
-          y: -20
-        }} animate={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.5
-        }} alt="Lilly-Angel Logo" className="h-14" width="56" height="56" loading="eager" fetchPriority="high" src="/lovable-uploads/507519b0-65b5-480e-bfb3-97b36aec58b4.png" />
-          
+          <motion.div initial={{
+            opacity: 0,
+            y: -20
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.5
+          }}>
+            <OptimizedImage 
+              src="/lovable-uploads/507519b0-65b5-480e-bfb3-97b36aec58b4.png"
+              alt="Lilly-Angel Logo" 
+              className="h-14 w-auto" 
+              aspectRatio="aspect-square"
+              loading="eager" 
+              fetchpriority="high" 
+            />
+          </motion.div>
         </Link>
 
         {/* Desktop Navigation with fancy animation */}
@@ -260,4 +272,5 @@ const Header = () => {
       </div>
     </header>;
 };
+
 export default Header;
