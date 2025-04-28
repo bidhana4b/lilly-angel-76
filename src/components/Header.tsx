@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -53,8 +54,15 @@ const Header = () => {
   return <header className="bg-white shadow-md sticky top-0 z-50">
       <div className="container mx-auto px-6 flex items-center justify-between py-3">
         <Link to="/" className="flex items-center space-x-2">
-          <motion.div initial="initial" animate="animate" whileHover="hover" variants={logoVariants} className="h-14 w-auto flex items-center justify-center">
-            <OptimizedImage alt="Lilly-Angel Logo" className="h-14 w-auto object-contain" aspectRatio="aspect-auto" loading="eager" fetchPriority="high" src="/lovable-uploads/578c398f-11da-416f-94b3-9619310d0c14.png" />
+          <motion.div initial="initial" animate="animate" whileHover="hover" variants={logoVariants} className="h-14 w-40">
+            <OptimizedImage 
+              src="/lovable-uploads/d1ec282c-b572-4a27-b1b5-1bfc82905ae9.png" 
+              alt="Lilly-Angel Logo" 
+              className="h-full w-full" 
+              aspectRatio="aspect-auto" 
+              loading="eager" 
+              fetchPriority="high"
+            />
           </motion.div>
         </Link>
 
