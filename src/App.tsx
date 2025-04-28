@@ -17,6 +17,7 @@ import { StudentSidebar } from "./components/sidebars/StudentSidebar";
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Courses from "./pages/Courses";
+import CourseDetails from "./pages/CourseDetails";
 import About from "./pages/About";
 import TeamPage from "./pages/TeamPage";
 import Contact from "./pages/Contact";
@@ -76,6 +77,7 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/login" element={<Login />} />
               <Route path="/courses" element={<Courses />} />
+              <Route path="/courses/:courseId" element={<CourseDetails />} />
               <Route path="/about" element={<About />} />
               <Route path="/about/team" element={<TeamPage />} />
               <Route path="/contact" element={<Contact />} />

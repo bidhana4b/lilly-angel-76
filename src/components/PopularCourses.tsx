@@ -4,10 +4,11 @@ import CourseCard from './CourseCard';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const PopularCourses = () => {
   const coursesData = [{
-    id: 1,
+    id: "business-management",
     image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
     title: "Business Management & Leadership Skills for 2024",
     category: "Business",
@@ -18,7 +19,7 @@ const PopularCourses = () => {
     duration: "10 weeks",
     isFeatured: true
   }, {
-    id: 2,
+    id: "english-test-b1",
     image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
     title: "B1 ENGLISH TEST INTEGRATED SKILLS (ISE I)",
     category: "English",
@@ -28,7 +29,7 @@ const PopularCourses = () => {
     price: "89.99",
     duration: "8 weeks"
   }, {
-    id: 3,
+    id: "gese-grade-2",
     image: "https://images.unsplash.com/photo-1540563341684-995b61dbb925?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
     title: "A1 SELT | GESE GRADE 2 | ENGLISH TEST FOR FAMILY",
     category: "English",
@@ -38,7 +39,7 @@ const PopularCourses = () => {
     price: "79.99",
     duration: "6 weeks"
   }, {
-    id: 4,
+    id: "life-in-the-uk",
     image: "https://images.unsplash.com/photo-1519677751400-f2aa896a161e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
     title: "LIFE IN THE UK PREPARATION COURSE",
     category: "British Culture",
@@ -48,7 +49,7 @@ const PopularCourses = () => {
     price: "129.99",
     duration: "12 weeks"
   }, {
-    id: 5,
+    id: "english-preparation",
     image: "https://images.unsplash.com/photo-1603354350317-6f7aaa5911c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
     title: "A1, A2, B1 ENGLISH LANGUAGE PREPARATION COURSES",
     category: "English",
@@ -60,7 +61,7 @@ const PopularCourses = () => {
     duration: "15 weeks",
     isFeatured: true
   }, {
-    id: 6,
+    id: "functional-skills",
     image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
     title: "FUNCTIONAL SKILLS IN ENGLISH AND MATH",
     category: "Skills",
@@ -87,9 +88,12 @@ const PopularCourses = () => {
             <Button 
               variant="outline" 
               className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white border-none hover:from-purple-600 hover:to-indigo-700 shadow-md hover:shadow-lg transition-all duration-300 group"
+              asChild
             >
-              VIEW ALL
-              <ArrowRight className="ml-1 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              <Link to="/courses">
+                VIEW ALL
+                <ArrowRight className="ml-1 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
             </Button>
           </motion.div>
         </div>
@@ -110,6 +114,7 @@ const PopularCourses = () => {
               viewport={{ once: true, margin: "-100px" }}
             >
               <CourseCard 
+                id={course.id}
                 image={course.image} 
                 title={course.title} 
                 category={course.category} 
