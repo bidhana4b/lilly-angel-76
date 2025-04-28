@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -5,27 +6,57 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { motion } from 'framer-motion';
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
+import OptimizedImage from '@/components/ui/optimized-image';
+import { Menu, ChevronDown } from 'lucide-react';
+
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+
   const isActive = (path: string) => {
     if (path === '/' && location.pathname === '/') return true;
     if (path !== '/' && location.pathname.startsWith(path)) return true;
     return false;
   };
-  return <header className="bg-white shadow-md sticky top-0 z-50">
+
+  // Animation variants for the logo
+  const logoVariants = {
+    initial: { opacity: 0, y: -20 },
+    animate: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    hover: { 
+      scale: 1.05, 
+      transition: { 
+        type: "spring", 
+        stiffness: 400, 
+        damping: 10 
+      } 
+    }
+  };
+
+  // Animation variants for menu items
+  const menuItemVariants = {
+    hover: { y: -2, transition: { type: "spring", stiffness: 400, damping: 10 } }
+  };
+
+  return (
+    <header className="bg-white shadow-md sticky top-0 z-50">
       <div className="container mx-auto px-6 flex items-center justify-between py-3">
         <Link to="/" className="flex items-center space-x-2">
-          <motion.img initial={{
-          opacity: 0,
-          y: -20
-        }} animate={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.5
-        }} alt="Lilly-Angel Logo" className="h-14" width="56" height="56" loading="eager" fetchPriority="high" src="/lovable-uploads/507519b0-65b5-480e-bfb3-97b36aec58b4.png" />
-          
+          <motion.div
+            initial="initial"
+            animate="animate"
+            whileHover="hover"
+            variants={logoVariants}
+          >
+            <OptimizedImage 
+              src="/lovable-uploads/507519b0-65b5-480e-bfb3-97b36aec58b4.png" 
+              alt="Lilly-Angel Logo" 
+              className="h-14" 
+              aspectRatio="aspect-square" 
+              loading="eager" 
+              fetchPriority="high" 
+            />
+          </motion.div>
         </Link>
 
         {/* Desktop Navigation with fancy animation */}
@@ -34,13 +65,7 @@ const Header = () => {
             <NavigationMenuItem>
               <Link to="/">
                 <NavigationMenuLink className={cn("group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-all hover:bg-gradient-to-r hover:from-orange-400 hover:to-orange-500 hover:text-white hover:shadow-md hover:scale-105", isActive('/') ? "bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-md" : "text-gray-700")}>
-                  <motion.span whileHover={{
-                  y: -2
-                }} transition={{
-                  type: "spring",
-                  stiffness: 400,
-                  damping: 10
-                }}>
+                  <motion.span variants={menuItemVariants} whileHover="hover">
                     Home
                   </motion.span>
                 </NavigationMenuLink>
@@ -49,13 +74,7 @@ const Header = () => {
             
             <NavigationMenuItem>
               <NavigationMenuTrigger className={cn("group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-all hover:bg-gradient-to-r hover:from-orange-400 hover:to-orange-500 hover:text-white hover:shadow-md hover:scale-105", isActive('/about') ? "bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-md" : "text-gray-700")}>
-                <motion.span whileHover={{
-                y: -2
-              }} transition={{
-                type: "spring",
-                stiffness: 400,
-                damping: 10
-              }}>
+                <motion.span variants={menuItemVariants} whileHover="hover">
                   About Us
                 </motion.span>
               </NavigationMenuTrigger>
@@ -77,13 +96,7 @@ const Header = () => {
             
             <NavigationMenuItem>
               <NavigationMenuTrigger className={cn("group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-all hover:bg-gradient-to-r hover:from-orange-400 hover:to-orange-500 hover:text-white hover:shadow-md hover:scale-105", isActive('/courses') ? "bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-md" : "text-gray-700")}>
-                <motion.span whileHover={{
-                y: -2
-              }} transition={{
-                type: "spring",
-                stiffness: 400,
-                damping: 10
-              }}>
+                <motion.span variants={menuItemVariants} whileHover="hover">
                   Courses
                 </motion.span>
               </NavigationMenuTrigger>
@@ -101,13 +114,7 @@ const Header = () => {
             <NavigationMenuItem>
               <Link to="/tutors">
                 <NavigationMenuLink className={cn("group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-all hover:bg-gradient-to-r hover:from-orange-400 hover:to-orange-500 hover:text-white hover:shadow-md hover:scale-105", isActive('/tutors') ? "bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-md" : "text-gray-700")}>
-                  <motion.span whileHover={{
-                  y: -2
-                }} transition={{
-                  type: "spring",
-                  stiffness: 400,
-                  damping: 10
-                }}>
+                  <motion.span variants={menuItemVariants} whileHover="hover">
                     Tutors
                   </motion.span>
                 </NavigationMenuLink>
@@ -117,13 +124,7 @@ const Header = () => {
             <NavigationMenuItem>
               <Link to="/career">
                 <NavigationMenuLink className={cn("group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-all hover:bg-gradient-to-r hover:from-orange-400 hover:to-orange-500 hover:text-white hover:shadow-md hover:scale-105", isActive('/career') ? "bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-md" : "text-gray-700")}>
-                  <motion.span whileHover={{
-                  y: -2
-                }} transition={{
-                  type: "spring",
-                  stiffness: 400,
-                  damping: 10
-                }}>
+                  <motion.span variants={menuItemVariants} whileHover="hover">
                     Career
                   </motion.span>
                 </NavigationMenuLink>
@@ -133,13 +134,7 @@ const Header = () => {
             <NavigationMenuItem>
               <Link to="/social-responsibility">
                 <NavigationMenuLink className={cn("group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-all hover:bg-gradient-to-r hover:from-orange-400 hover:to-orange-500 hover:text-white hover:shadow-md hover:scale-105", isActive('/social-responsibility') ? "bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-md" : "text-gray-700")}>
-                  <motion.span whileHover={{
-                  y: -2
-                }} transition={{
-                  type: "spring",
-                  stiffness: 400,
-                  damping: 10
-                }}>
+                  <motion.span variants={menuItemVariants} whileHover="hover">
                     Social Responsibility
                   </motion.span>
                 </NavigationMenuLink>
@@ -149,13 +144,7 @@ const Header = () => {
             <NavigationMenuItem>
               <Link to="/contact">
                 <NavigationMenuLink className={cn("group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-all hover:bg-gradient-to-r hover:from-orange-400 hover:to-orange-500 hover:text-white hover:shadow-md hover:scale-105", isActive('/contact') ? "bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-md" : "text-gray-700")}>
-                  <motion.span whileHover={{
-                  y: -2
-                }} transition={{
-                  type: "spring",
-                  stiffness: 400,
-                  damping: 10
-                }}>
+                  <motion.span variants={menuItemVariants} whileHover="hover">
                     Contact
                   </motion.span>
                 </NavigationMenuLink>
@@ -166,28 +155,30 @@ const Header = () => {
 
         <div className="hidden md:flex items-center space-x-4">
           <Link to="/login">
-            <motion.div whileHover={{
-            scale: 1.05
-          }} whileTap={{
-            scale: 0.95
-          }}>
+            <motion.div 
+              whileHover={{ scale: 1.05 }} 
+              whileTap={{ scale: 0.95 }}
+              className="button-shine"
+            >
               <Button variant="outline" size="sm" className="border-orange-300 hover:border-orange-500 text-gray-700 hover:text-orange-600 font-medium">
                 Log In
               </Button>
             </motion.div>
           </Link>
           <Link to="/login?register=true">
-            <motion.div whileHover={{
-            scale: 1.05,
-            boxShadow: "0px 0px 8px rgba(255, 87, 51, 0.6)"
-          }} whileTap={{
-            scale: 0.95
-          }} transition={{
-            type: "spring",
-            stiffness: 400,
-            damping: 10
-          }}>
-              <Button size="sm" className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-medium shadow-md">
+            <motion.div 
+              whileHover={{ 
+                scale: 1.05, 
+                boxShadow: "0px 0px 8px rgba(255, 87, 51, 0.6)" 
+              }} 
+              whileTap={{ scale: 0.95 }}
+              transition={{ 
+                type: "spring", 
+                stiffness: 400, 
+                damping: 10 
+              }}
+            >
+              <Button size="sm" className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-medium shadow-md button-shine">
                 Online Registration
               </Button>
             </motion.div>
@@ -197,18 +188,21 @@ const Header = () => {
         {/* Mobile Navigation */}
         <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
           <SheetTrigger asChild className="md:hidden">
-            <Button variant="ghost" size="sm" className="px-2">
+            <Button variant="ghost" size="sm" className="px-2" aria-label="Menu">
+              <Menu className="w-6 h-6" />
               <span className="sr-only">Toggle menu</span>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-              </svg>
             </Button>
           </SheetTrigger>
           <SheetContent side="right" className="w-[300px] bg-gradient-to-b from-white to-orange-50">
             <div className="flex justify-between items-center py-4 border-b border-gray-100">
               <span className="text-lg font-bold text-navy-dark">Menu</span>
             </div>
-            <nav className="flex flex-col gap-4 mt-6">
+            <motion.nav 
+              className="flex flex-col gap-4 mt-6"
+              initial={{ opacity: 0, y: 5 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ staggerChildren: 0.05, delayChildren: 0.2 }}
+            >
               <Link to="/" className={`text-lg font-medium p-2 rounded-md transition-colors ${isActive('/') ? 'text-orange-500 bg-orange-50' : 'text-gray-600 hover:text-orange-500 hover:bg-orange-50'}`} onClick={() => setMobileMenuOpen(false)}>
                 Home
               </Link>
@@ -254,10 +248,12 @@ const Header = () => {
                   </Button>
                 </Link>
               </div>
-            </nav>
+            </motion.nav>
           </SheetContent>
         </Sheet>
       </div>
-    </header>;
+    </header>
+  );
 };
+
 export default Header;
