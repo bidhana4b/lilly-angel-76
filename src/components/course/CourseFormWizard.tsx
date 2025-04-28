@@ -136,13 +136,10 @@ const CourseFormWizard: React.FC<CourseFormProps> = ({
   };
   
   // Initialize form data with default values first, then merge with initialData
-  // Fix: Ensure initialData is treated as an object before spreading
   const [formData, setFormData] = useState<CourseFormData>(() => {
-    // Ensure initialData is a valid object before spreading
-    const safeInitialData = initialData || {};
     return {
       ...defaultFormData,
-      ...(safeInitialData as Partial<CourseFormData>)
+      ...(initialData as Partial<CourseFormData> || {})
     };
   });
 
