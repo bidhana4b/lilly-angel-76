@@ -1,17 +1,22 @@
+
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import HeaderNavItem from './HeaderNavItem';
 
 const DesktopNavigation = () => {
+  const location = useLocation();
+  const currentPath = location.pathname;
+
   return (
     <nav className="hidden md:flex">
       <ul className="flex space-x-8">
-        <HeaderNavItem to="/" label="Home" />
-        <HeaderNavItem to="/about" label="About" />
-        <HeaderNavItem to="/courses" label="Courses" />
-        <HeaderNavItem to="/tutors" label="Tutors" />
-        <HeaderNavItem to="/career" label="Career" />
-        <HeaderNavItem to="/social-responsibility" label="Social Responsibility" />
-        <HeaderNavItem to="/contact" label="Contact" />
+        <HeaderNavItem to="/" label="Home" isActive={currentPath === '/'} />
+        <HeaderNavItem to="/about" label="About" isActive={currentPath === '/about'} />
+        <HeaderNavItem to="/courses" label="Courses" isActive={currentPath === '/courses'} />
+        <HeaderNavItem to="/tutors" label="Tutors" isActive={currentPath === '/tutors'} />
+        <HeaderNavItem to="/career" label="Career" isActive={currentPath === '/career'} />
+        <HeaderNavItem to="/social-responsibility" label="Social Responsibility" isActive={currentPath === '/social-responsibility'} />
+        <HeaderNavItem to="/contact" label="Contact" isActive={currentPath === '/contact'} />
       </ul>
     </nav>
   );

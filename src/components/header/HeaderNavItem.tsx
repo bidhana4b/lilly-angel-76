@@ -13,9 +13,10 @@ import {
 
 interface HeaderNavItemProps {
   to: string;
-  isActive: boolean;
-  children: React.ReactNode;
+  label: string;
+  isActive?: boolean;
   tooltip?: string;
+  onClick?: () => void;
 }
 
 const menuItemVariants = {
@@ -29,10 +30,10 @@ const menuItemVariants = {
   }
 };
 
-const HeaderNavItem: React.FC<HeaderNavItemProps> = ({ to, isActive, children, tooltip }) => {
+const HeaderNavItem: React.FC<HeaderNavItemProps> = ({ to, label, isActive = false, tooltip, onClick }) => {
   if (!tooltip) {
     return (
-      <Link to={to}>
+      <Link to={to} onClick={onClick}>
         <NavigationMenuLink 
           className={cn(
             "group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-all hover:bg-gradient-to-r hover:from-orange-400 hover:to-orange-500 hover:text-white hover:shadow-md hover:scale-105", 
@@ -40,7 +41,7 @@ const HeaderNavItem: React.FC<HeaderNavItemProps> = ({ to, isActive, children, t
           )}
         >
           <motion.span variants={menuItemVariants} whileHover="hover">
-            {children}
+            {label}
           </motion.span>
         </NavigationMenuLink>
       </Link>
@@ -51,7 +52,7 @@ const HeaderNavItem: React.FC<HeaderNavItemProps> = ({ to, isActive, children, t
     <TooltipProvider delayDuration={300}>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Link to={to}>
+          <Link to={to} onClick={onClick}>
             <NavigationMenuLink 
               className={cn(
                 "group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-all hover:bg-gradient-to-r hover:from-orange-400 hover:to-orange-500 hover:text-white hover:shadow-md hover:scale-105", 
@@ -59,7 +60,7 @@ const HeaderNavItem: React.FC<HeaderNavItemProps> = ({ to, isActive, children, t
               )}
             >
               <motion.span variants={menuItemVariants} whileHover="hover">
-                {children}
+                {label}
               </motion.span>
             </NavigationMenuLink>
           </Link>

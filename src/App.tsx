@@ -1,8 +1,9 @@
+
 import React, { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from "sonner";
 import { AuthProvider } from "@/contexts/AuthContext";
-import ProtectedRoute from "@/components/ProtectedRoute";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 
 import Index from "@/pages/Index";
 import About from "@/pages/About";
@@ -23,25 +24,23 @@ import TeacherDashboard from "@/pages/dashboards/TeacherDashboard";
 import StudentDashboard from "@/pages/dashboards/StudentDashboard";
 
 // Admin Pages
-import {
-  NotificationsPage,
-  CreateNotificationPage,
-  NotificationHistoryPage,
-  CoursesPage as AdminCoursesPage,
-  CourseListPage,
-  CourseForm,
-  PaymentsPage,
-  TransactionsPage,
-  DueListPage,
-  PaymentGatewayPage,
-  ReportsPage,
-  StudentProgressReport,
-  AttendanceReport,
-  AssignmentPerformanceReport,
-  SettingsPage,
-  GeneralSettingsPage,
-  AdminRolesPage,
-} from "@/pages/dashboards/admin";
+import NotificationsPage from "@/pages/dashboards/admin/notifications/NotificationsPage";
+import CreateNotificationPage from "@/pages/dashboards/admin/notifications/CreateNotificationPage";
+import NotificationHistoryPage from "@/pages/dashboards/admin/notifications/NotificationHistoryPage";
+import CoursesPage from "@/pages/dashboards/admin/courses/CoursesPage";
+import CourseListPage from "@/pages/dashboards/admin/courses/CourseListPage";
+import CourseForm from "@/pages/dashboards/admin/courses/CourseForm";
+import PaymentsPage from "@/pages/dashboards/admin/payments/PaymentsPage";
+import TransactionsPage from "@/pages/dashboards/admin/payments/TransactionsPage";
+import DueListPage from "@/pages/dashboards/admin/payments/DueListPage";
+import PaymentGatewayPage from "@/pages/dashboards/admin/payments/PaymentGatewayPage";
+import ReportsPage from "@/pages/dashboards/admin/reports/ReportsPage";
+import StudentProgressReport from "@/pages/dashboards/admin/reports/StudentProgressReport";
+import AttendanceReport from "@/pages/dashboards/admin/reports/AttendanceReport";
+import AssignmentPerformanceReport from "@/pages/dashboards/admin/reports/AssignmentPerformanceReport";
+import SettingsPage from "@/pages/dashboards/admin/settings/SettingsPage";
+import GeneralSettingsPage from "@/pages/dashboards/admin/settings/GeneralSettingsPage";
+import AdminRolesPage from "@/pages/dashboards/admin/settings/AdminRolesPage";
 
 import "./App.css";
 
@@ -84,7 +83,7 @@ function App() {
           <Route
             path="/admin"
             element={
-              <ProtectedRoute roles={["admin"]}>
+              <ProtectedRoute allowedRoles={["admin"]}>
                 <AdminDashboard />
               </ProtectedRoute>
             }
@@ -94,7 +93,7 @@ function App() {
             <Route path="notifications/create" element={<CreateNotificationPage />} />
             <Route path="notifications/history" element={<NotificationHistoryPage />} />
 
-            <Route path="courses" element={<AdminCoursesPage />} />
+            <Route path="courses" element={<CoursesPage />} />
             <Route path="courses/list" element={<CourseListPage />} />
             <Route path="courses/create" element={<CourseForm />} />
             <Route path="courses/edit/:courseId" element={<CourseForm />} />
@@ -118,7 +117,7 @@ function App() {
           <Route
             path="/teacher"
             element={
-              <ProtectedRoute roles={["teacher"]}>
+              <ProtectedRoute allowedRoles={["teacher"]}>
                 <TeacherDashboard />
               </ProtectedRoute>
             }
@@ -131,7 +130,7 @@ function App() {
           <Route
             path="/student"
             element={
-              <ProtectedRoute roles={["student"]}>
+              <ProtectedRoute allowedRoles={["student"]}>
                 <StudentDashboard />
               </ProtectedRoute>
             }
