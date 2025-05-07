@@ -5,12 +5,10 @@ import { useAuth, UserRole } from "@/contexts/AuthContext";
 
 interface ProtectedRouteProps {
   allowedRoles: UserRole[];
-  children?: React.ReactNode;
 }
 
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ 
-  allowedRoles,
-  children
+  allowedRoles 
 }) => {
   const { user, isAuthenticated } = useAuth();
 
@@ -23,5 +21,5 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
     return <Navigate to={`/dashboard/${user.role}`} replace />;
   }
 
-  return children ? <>{children}</> : <Outlet />;
+  return <Outlet />;
 };

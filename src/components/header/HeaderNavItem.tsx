@@ -2,10 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { 
-  NavigationMenuItem,
-  NavigationMenuLink 
-} from "@/components/ui/navigation-menu";
+import { NavigationMenuLink } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
 import {
   Tooltip,
@@ -16,10 +13,9 @@ import {
 
 interface HeaderNavItemProps {
   to: string;
-  label: string;
-  isActive?: boolean;
+  isActive: boolean;
+  children: React.ReactNode;
   tooltip?: string;
-  onClick?: () => void;
 }
 
 const menuItemVariants = {
@@ -33,43 +29,46 @@ const menuItemVariants = {
   }
 };
 
-const HeaderNavItem: React.FC<HeaderNavItemProps> = ({ to, label, isActive = false, tooltip, onClick }) => {
-  const renderLink = (
-    <Link to={to} onClick={onClick}>
-      <NavigationMenuLink 
-        className={cn(
-          "group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-all hover:bg-gradient-to-r hover:from-orange-400 hover:to-orange-500 hover:text-white hover:shadow-md hover:scale-105", 
-          isActive ? "bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-md" : "text-gray-700"
-        )}
-      >
-        <motion.span variants={menuItemVariants} whileHover="hover">
-          {label}
-        </motion.span>
-      </NavigationMenuLink>
-    </Link>
-  );
-
+const HeaderNavItem: React.FC<HeaderNavItemProps> = ({ to, isActive, children, tooltip }) => {
   if (!tooltip) {
     return (
-      <NavigationMenuItem>
-        {renderLink}
-      </NavigationMenuItem>
+      <Link to={to}>
+        <NavigationMenuLink 
+          className={cn(
+            "group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-all hover:bg-gradient-to-r hover:from-orange-400 hover:to-orange-500 hover:text-white hover:shadow-md hover:scale-105", 
+            isActive ? "bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-md" : "text-gray-700"
+          )}
+        >
+          <motion.span variants={menuItemVariants} whileHover="hover">
+            {children}
+          </motion.span>
+        </NavigationMenuLink>
+      </Link>
     );
   }
 
   return (
-    <NavigationMenuItem>
-      <TooltipProvider delayDuration={300}>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            {renderLink}
-          </TooltipTrigger>
-          <TooltipContent className="bg-white text-gray-800 border border-gray-200 shadow-md animate-in fade-in duration-300">
-            {tooltip}
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
-    </NavigationMenuItem>
+    <TooltipProvider delayDuration={300}>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Link to={to}>
+            <NavigationMenuLink 
+              className={cn(
+                "group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-all hover:bg-gradient-to-r hover:from-orange-400 hover:to-orange-500 hover:text-white hover:shadow-md hover:scale-105", 
+                isActive ? "bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-md" : "text-gray-700"
+              )}
+            >
+              <motion.span variants={menuItemVariants} whileHover="hover">
+                {children}
+              </motion.span>
+            </NavigationMenuLink>
+          </Link>
+        </TooltipTrigger>
+        <TooltipContent className="bg-white text-gray-800 border border-gray-200 shadow-md animate-in fade-in duration-300">
+          {tooltip}
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
 };
 
