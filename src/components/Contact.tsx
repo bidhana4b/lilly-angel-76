@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Phone, Mail, MapPin, Clock, Calendar } from 'lucide-react';
 import { Input } from '@/components/ui/input';
@@ -54,8 +55,19 @@ const Contact = () => {
           once: true
         }} className="bg-navy-light/30 p-6 rounded-lg backdrop-blur-sm border border-white/10 shadow-lg">
             <h3 className="text-xl font-bold mb-6 text-white text-center">Proudly Member</h3>
-            
-            
+            <div className="flex justify-center">
+              <motion.div 
+                whileHover={{ scale: 1.05 }} 
+                transition={{ duration: 0.3 }}
+                className="max-w-full"
+              >
+                <img 
+                  src="/lovable-uploads/bbd6870b-dc62-4a60-9b89-a5daca6d50b0.png" 
+                  alt="Bonny Downs Community Association" 
+                  className="max-h-56 object-contain mx-auto"
+                />
+              </motion.div>
+            </div>
           </motion.div>
           
           {/* Column 2: Quick Links */}
