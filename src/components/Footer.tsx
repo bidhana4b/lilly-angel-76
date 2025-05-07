@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Facebook, Twitter, Instagram, Linkedin, Youtube } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -63,6 +64,24 @@ const Footer = () => {
                 <li><Link to="/cookies" className="text-gray-300 hover:text-white transition-colors">Cookie Policy</Link></li>
                 <li><Link to="/accessibility" className="text-gray-300 hover:text-white transition-colors">Accessibility</Link></li>
               </ul>
+            </div>
+          </div>
+          
+          {/* Membership Section */}
+          <div className="border-t border-gray-700 mt-8 pt-8">
+            <h3 className="text-xl font-semibold mb-4 text-center">Proudly Member</h3>
+            <div className="flex justify-center">
+              <motion.div 
+                whileHover={{ scale: 1.05 }} 
+                transition={{ duration: 0.3 }}
+                className="max-w-xs"
+              >
+                <img 
+                  src="/lovable-uploads/efac2701-9bf8-473c-8780-3837a666664d.png" 
+                  alt="Bonny Downs Community Association" 
+                  className="max-h-36 object-contain"
+                />
+              </motion.div>
             </div>
           </div>
           
