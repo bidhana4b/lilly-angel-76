@@ -1,10 +1,19 @@
-import React from "react";
+
+import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { DataTable, Column } from "@/components/ui/data-table/DataTable";
 import { Badge } from "@/components/ui/badge";
-import { Edit, UserCheck, UserX, Book } from "lucide-react";
+import { Edit, UserCheck, UserX, Book, Search } from "lucide-react";
 import { Teacher } from "./teachersData";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
 
 interface TeacherTableProps {
   teachers: Teacher[];
@@ -31,7 +40,10 @@ export function TeacherTable({
   onToggleStatus,
   onAssignCourses,
 }: TeacherTableProps) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(5);
 
+  // Apply filters
   const filteredTeachers = teachers.filter(teacher => {
     const matchesSearch = 
       searchQuery === "" ||
@@ -43,6 +55,11 @@ export function TeacherTable({
       !statusFilter || teacher.status === statusFilter;
     return matchesSearch && matchesSubject && matchesStatus;
   });
+
+  // Get paginated data
+  const startIndex = (currentPage - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+  const paginatedTeachers = filteredTeachers.slice(startIndex, endIndex);
 
   const teacherColumns: Column<Teacher>[] = [
     { 
@@ -120,45 +137,72 @@ export function TeacherTable({
     },
   ];
 
+  // Get unique subjects for the filter dropdown
+  const subjects = Array.from(new Set(teachers.map(teacher => teacher.subject)));
+
   return (
     <Card>
-      <CardHeader className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <CardTitle className="text-xl font-semibold">All Teachers</CardTitle>
-        <div className="flex flex-wrap gap-2 w-full sm:w-auto">
-          <input
-            type="text"
-            placeholder="Search teachers..."
-            value={searchQuery}
-            onChange={(e) => onSearchChange(e.target.value)}
-            className="px-3 py-1 text-sm border rounded-md w-full sm:w-auto"
-          />
-          <select
-            value={subjectFilter || ""}
-            onChange={(e) => onSubjectFilter(e.target.value || null)}
-            className="px-3 py-1 text-sm border rounded-md"
-          >
-            <option value="">All Subjects</option>
-            <option value="Mathematics">Mathematics</option>
-            <option value="English Literature">English Literature</option>
-            <option value="Physics">Physics</option>
-          </select>
-          <select
-            value={statusFilter || ""}
-            onChange={(e) => onStatusFilter(e.target.value || null)}
-            className="px-3 py-1 text-sm border rounded-md"
-          >
-            <option value="">All Status</option>
-            <option value="active">Active</option>
-            <option value="inactive">Inactive</option>
-            <option value="blocked">Blocked</option>
-          </select>
+      <CardHeader className="flex flex-col space-y-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <CardTitle className="text-xl font-semibold">All Teachers</CardTitle>
+          
+          <div className="relative w-full sm:w-64">
+            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+            <Input
+              type="text"
+              placeholder="Search teachers..."
+              value={searchQuery}
+              onChange={(e) => onSearchChange(e.target.value)}
+              className="pl-8 w-full"
+            />
+          </div>
+        </div>
+        
+        <div className="flex flex-col sm:flex-row gap-3">
+          <div className="w-full sm:w-auto">
+            <Select
+              value={subjectFilter || ""}
+              onValueChange={(value) => onSubjectFilter(value === "" ? null : value)}
+            >
+              <SelectTrigger className="w-full sm:w-[180px]">
+                <SelectValue placeholder="All Subjects" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="">All Subjects</SelectItem>
+                {subjects.map((subject) => (
+                  <SelectItem key={subject} value={subject}>{subject}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          
+          <div className="w-full sm:w-auto">
+            <Select
+              value={statusFilter || ""}
+              onValueChange={(value) => onStatusFilter(value === "" ? null : value)}
+            >
+              <SelectTrigger className="w-full sm:w-[180px]">
+                <SelectValue placeholder="All Status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="">All Status</SelectItem>
+                <SelectItem value="active">Active</SelectItem>
+                <SelectItem value="inactive">Inactive</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
       </CardHeader>
+      
       <CardContent>
         <DataTable
-          data={filteredTeachers}
+          data={paginatedTeachers}
           columns={teacherColumns}
-          pageSize={5}
+          pageSize={pageSize}
+          currentPage={currentPage}
+          onPageChange={setCurrentPage}
+          onPageSizeChange={setPageSize}
+          pageSizeOptions={[5, 10, 20, 50, 100]}
         />
       </CardContent>
     </Card>
