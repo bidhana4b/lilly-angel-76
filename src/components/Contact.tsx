@@ -53,14 +53,9 @@ const Contact = () => {
         }} viewport={{
           once: true
         }} className="bg-navy-light/30 p-6 rounded-lg backdrop-blur-sm border border-white/10 shadow-lg">
-            <h3 className="text-xl font-bold mb-6 text-white">About Us</h3>
-            <p className="text-gray-300 mb-6">
-              Lilly-Angel is a premier education provider committed to delivering high-quality training and development services. Our expert instructors bring years of experience to help you achieve your learning goals.
-            </p>
-            <div className="flex flex-col space-y-4 bg-zinc-50">
-              <a href="#courses" className="text-orange-DEFAULT hover:text-orange-light transition-colors">Learn more about our approach →</a>
-              <a href="#team" className="text-orange-DEFAULT hover:text-orange-light transition-colors">Meet our expert team →</a>
-            </div>
+            <h3 className="text-xl font-bold mb-6 text-white text-center">Proudly Member</h3>
+            
+            
           </motion.div>
           
           {/* Column 2: Quick Links */}
