@@ -54,6 +54,11 @@ function App() {
     }, 1000);
   }, []);
 
+  const handleCourseSubmit = (data: any) => {
+    console.log("Course form submitted:", data);
+    // Handle the form submission
+  };
+
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -95,8 +100,8 @@ function App() {
 
             <Route path="courses" element={<CoursesPage />} />
             <Route path="courses/list" element={<CourseListPage />} />
-            <Route path="courses/create" element={<CourseForm />} />
-            <Route path="courses/edit/:courseId" element={<CourseForm />} />
+            <Route path="courses/create" element={<CourseForm onSubmit={handleCourseSubmit} mode="create" />} />
+            <Route path="courses/edit/:courseId" element={<CourseForm onSubmit={handleCourseSubmit} mode="edit" />} />
 
             <Route path="payments" element={<PaymentsPage />} />
             <Route path="payments/transactions" element={<TransactionsPage />} />
